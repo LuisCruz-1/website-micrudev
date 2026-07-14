@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Micrudev - Tecnología que simplifica." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="theme-void">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		
+		<!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+		
+		<title>{title}</title>
+	</head>
+	<body class="bg-void text-foreground antialiased selection:bg-blue-primary/30 selection:text-white">
+		<div class="bg-grid-pattern"></div>
+		<!-- Ambient Radial Blurs -->
+		<div class="fixed top-0 left-0 w-[800px] h-[800px] bg-blue-primary opacity-[0.07] blur-[120px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2 z-[-1]"></div>
+		<div class="fixed bottom-0 right-0 w-[600px] h-[600px] bg-blue-tertiary opacity-[0.05] blur-[150px] rounded-full pointer-events-none translate-x-1/3 translate-y-1/3 z-[-1]"></div>
+		
+		<slot />
+	</body>
+</html>

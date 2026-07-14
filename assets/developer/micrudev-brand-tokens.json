@@ -1,0 +1,102 @@
+{
+  "brand": "Micrudev",
+  "version": "1.0",
+  "tagline": "Tecnología que simplifica.",
+  "colors": {
+    "navy": {
+      "hex": "#06132F",
+      "rgb": [
+        6,
+        19,
+        47
+      ],
+      "cmyk": [
+        87,
+        60,
+        0,
+        82
+      ]
+    },
+    "blue": {
+      "hex": "#0253FD",
+      "rgb": [
+        2,
+        83,
+        253
+      ],
+      "cmyk": [
+        99,
+        67,
+        0,
+        1
+      ]
+    },
+    "blue700": {
+      "hex": "#003DCC",
+      "rgb": [
+        0,
+        61,
+        204
+      ]
+    },
+    "blue400": {
+      "hex": "#4C84FF",
+      "rgb": [
+        76,
+        132,
+        255
+      ]
+    },
+    "blue100": {
+      "hex": "#E7EFFF",
+      "rgb": [
+        231,
+        239,
+        255
+      ]
+    },
+    "surface": {
+      "hex": "#F6F8FC",
+      "rgb": [
+        246,
+        248,
+        252
+      ]
+    },
+    "ink": {
+      "hex": "#0F1B37",
+      "rgb": [
+        15,
+        27,
+        55
+      ]
+    },
+    "muted": {
+      "hex": "#637089",
+      "rgb": [
+        99,
+        112,
+        137
+      ]
+    }
+  },
+  "typography": {
+    "primary": "Inter",
+    "fallback": "Arial, sans-serif",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ]
+  },
+  "radius": {
+    "sm": 10,
+    "md": 16,
+    "lg": 24,
+    "pill": 999
+  },
+  "spacing_base": 8,
+  "logo_min_width_px": 140,
+  "icon_min_size_px": 24
+}

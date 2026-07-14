@@ -1,0 +1,32 @@
+---
+import Button from './Button.astro';
+---
+
+<section class="py-24 md:py-32" id="contacto">
+  <div class="container">
+    <div class="relative bg-surface border border-white/10 rounded-2xl p-8 md:p-16 overflow-hidden text-center max-w-4xl mx-auto shadow-elevation">
+      <!-- Glow -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-primary opacity-20 blur-[100px] rounded-full pointer-events-none mix-blend-screen"></div>
+      
+      <!-- Content -->
+      <div class="relative z-10 flex flex-col items-center gap-6">
+        <div class="inline-flex items-center gap-2 bg-blue-primary/10 border border-blue-primary/30 rounded-full px-4 py-2 w-fit animate-pulse">
+          <div class="w-2 h-2 rounded-full bg-blue-primary"></div>
+          <span class="font-mono text-xs text-blue-primary tracking-widest uppercase">Red Disponible</span>
+        </div>
+        
+        <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(2,83,253,0.5)]">
+          Inicia tu <span class="text-gradient">Proyecto</span>
+        </h2>
+        
+        <p class="text-lg text-muted max-w-xl mx-auto mb-4">
+          Conecta con nuestro equipo de ingenieros para escalar tu producto al siguiente nivel. Transparencia, rendimiento y código limpio.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
+          <Button text="AGENDAR LLAMADA" variant="primary" icon={true} href="mailto:hola@micrudev.com" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,87 @@
+---
+const faqs = [
+  {
+    q: "¿Qué incluye el proceso de desarrollo?",
+    a: "Nuestro proceso es end-to-end: desde el descubrimiento y diseño UX/UI, hasta el desarrollo front/back, pruebas rigurosas y despliegue final. Te acompañamos en cada paso."
+  },
+  {
+    q: "¿Cuánto tiempo toma desarrollar un proyecto promedio?",
+    a: "Depende de la complejidad. Un sitio corporativo puede tomar entre 3 a 6 semanas, mientras que una plataforma a medida o aplicación móvil puede requerir de 2 a 4 meses."
+  },
+  {
+    q: "¿Utilizan plantillas o código a medida?",
+    a: "Todo nuestro código es hecho a medida. No usamos plantillas genéricas. Construimos arquitecturas escalables (como el sistema 'DeFi' de este sitio) para garantizar rendimiento y exclusividad."
+  },
+  {
+    q: "¿Ofrecen soporte después del lanzamiento?",
+    a: "Sí, todos nuestros proyectos incluyen un periodo de garantía técnica y ofrecemos planes de mantenimiento y evolución continua."
+  }
+];
+---
+
+<section class="py-24 md:py-32" id="faq">
+  <div class="container">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
+      
+      <div class="lg:col-span-4 flex flex-col gap-6">
+        <div class="inline-flex items-center gap-2">
+          <div class="w-1 h-1 bg-blue-primary"></div>
+          <span class="font-mono text-xs text-blue-primary tracking-widest uppercase">Base de Conocimiento</span>
+        </div>
+        <h2 class="font-heading text-4xl md:text-5xl font-bold">Preguntas <br/>Frecuentes</h2>
+        <p class="text-muted leading-relaxed">
+          Protocolos y respuestas estándar sobre nuestra metodología de trabajo y desarrollo técnico.
+        </p>
+      </div>
+
+      <div class="lg:col-span-8 flex flex-col gap-4">
+        {faqs.map((faq, index) => (
+          <div class="bg-surface border border-white/10 rounded-xl overflow-hidden group hover:border-blue-primary/30 transition-colors">
+            <button class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-transparent border-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-primary" aria-expanded="false" aria-controls={`faq-content-${index}`}>
+              <span class="font-heading text-lg font-medium text-white pr-4">{faq.q}</span>
+              <span class="faq-icon shrink-0 text-blue-primary transition-transform duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+              </span>
+            </button>
+            <div class="faq-content grid grid-rows-[0fr] transition-[grid-template-rows] duration-300" id={`faq-content-${index}`}>
+              <div class="overflow-hidden">
+                <div class="p-6 pt-0 text-muted text-sm leading-relaxed">
+                  <p>{faq.a}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Active State */
+  .faq-trigger[aria-expanded="true"] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-trigger[aria-expanded="true"] + .faq-content {
+    grid-template-rows: 1fr;
+  }
+</style>
+
+<script>
+  const triggers = document.querySelectorAll('.faq-trigger');
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      
+      // Close all others
+      triggers.forEach(t => t.setAttribute('aria-expanded', 'false'));
+      
+      if (!isExpanded) {
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

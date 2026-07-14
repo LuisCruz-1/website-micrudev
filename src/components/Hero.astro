@@ -1,0 +1,86 @@
+---
+import Button from './Button.astro';
+---
+
+<section class="relative min-h-screen flex items-center pt-32 pb-24 overflow-hidden" id="inicio">
+  <div class="container relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      
+      <!-- Text Content -->
+      <div class="flex flex-col gap-8 max-w-2xl">
+        <div class="inline-flex items-center gap-2 bg-blue-primary/10 border border-blue-primary/30 rounded-full px-4 py-2 w-fit animate-pulse">
+          <div class="w-2 h-2 rounded-full bg-blue-primary"></div>
+          <span class="font-mono text-xs text-blue-primary tracking-widest uppercase">Sistema Operativo</span>
+        </div>
+        
+        <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.05] tracking-tight">
+          Tecnología <br />
+          que <span class="text-gradient">simplifica.</span>
+        </h1>
+        
+        <p class="text-lg md:text-xl text-muted leading-relaxed max-w-lg">
+          Arquitectura digital de alta precisión. Construimos productos web que escalan, rinden y dominan en el ecosistema actual.
+        </p>
+        
+        <div class="flex flex-wrap gap-4 pt-4">
+          <Button text="INICIAR PROYECTO" variant="primary" icon={true} href="#contacto" />
+          <Button text="VER INFRAESTRUCTURA" variant="outline" href="#servicios" />
+        </div>
+        
+        <div class="flex items-center gap-6 pt-8 border-t border-white/10 mt-4">
+          <div class="flex flex-col">
+            <span class="font-mono text-xl text-white font-medium">99.9%</span>
+            <span class="text-xs text-muted font-mono tracking-widest uppercase">Uptime</span>
+          </div>
+          <div class="w-px h-8 bg-white/10"></div>
+          <div class="flex flex-col">
+            <span class="font-mono text-xl text-white font-medium">&lt;100ms</span>
+            <span class="text-xs text-muted font-mono tracking-widest uppercase">Latencia</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Graphic (Spinning Orbitals) -->
+      <div class="relative hidden lg:flex justify-center items-center h-[500px]">
+        <!-- Central Glow -->
+        <div class="absolute w-40 h-40 bg-blue-primary rounded-full blur-[60px] opacity-60"></div>
+        
+        <!-- Outer Ring -->
+        <div class="absolute w-[400px] h-[400px] rounded-full border border-blue-primary/20 border-dashed animate-[spin_20s_linear_infinite]"></div>
+        
+        <!-- Middle Ring -->
+        <div class="absolute w-[300px] h-[300px] rounded-full border-2 border-t-blue-primary border-r-blue-tertiary border-b-transparent border-l-transparent animate-[spin_15s_linear_infinite_reverse]"></div>
+        
+        <!-- Inner Ring -->
+        <div class="absolute w-[200px] h-[200px] rounded-full border border-white/10 animate-[spin_10s_linear_infinite]">
+          <div class="absolute -top-2 left-1/2 w-4 h-4 bg-white rounded-full shadow-glow-tertiary"></div>
+        </div>
+
+        <!-- Floating Data Card -->
+        <div class="absolute top-10 right-0 glass-card p-4 rounded-xl animate-float border-corner-tl hover-expand-corners">
+          <div class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-primary"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <div class="flex flex-col">
+              <span class="font-mono text-xs text-muted">RENDIMIENTO</span>
+              <span class="font-mono text-sm text-white font-bold">ÓPTIMO</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Data Card 2 -->
+        <div class="absolute bottom-20 left-0 glass-card p-4 rounded-xl animate-float" style="animation-delay: -4s;">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-blue-primary/20 flex items-center justify-center border border-blue-primary/50">
+              <div class="w-2 h-2 bg-blue-primary rounded-full animate-ping"></div>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-mono text-xs text-muted">ESTADO</span>
+              <span class="font-mono text-sm text-white font-bold text-gradient">EN LÍNEA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+---
+import Button from './Button.astro';
+---
+
+<header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 backdrop-blur-lg bg-black/40 border-b border-white/10">
+  <div class="container mx-auto h-20 flex items-center justify-between">
+    <a href="/" class="flex items-center">
+      <img src="/logos/Micrudev_Logo_Primary_White_BG.png" alt="Micrudev Logo" class="h-8 brightness-0 invert" />
+    </a>
+    
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#servicios" class="font-mono text-sm text-muted hover:text-foreground transition-colors duration-200 tracking-wider">01. SERVICIOS</a>
+      <a href="#nosotros" class="font-mono text-sm text-muted hover:text-foreground transition-colors duration-200 tracking-wider">02. NOSOTROS</a>
+      <a href="#faq" class="font-mono text-sm text-muted hover:text-foreground transition-colors duration-200 tracking-wider">03. FAQ</a>
+    </nav>
+
+    <div class="hidden md:block">
+      <Button text="INICIAR SISTEMA" variant="primary" href="#contacto" />
+    </div>
+
+    <button class="md:hidden text-foreground p-2 focus:outline-none" aria-label="Menu" id="mobile-menu-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="fixed inset-0 bg-void/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300" id="mobile-menu">
+  <a href="#servicios" class="font-mono text-xl text-muted hover:text-foreground transition-colors duration-200 tracking-wider">01. SERVICIOS</a>
+  <a href="#nosotros" class="font-mono text-xl text-muted hover:text-foreground transition-colors duration-200 tracking-wider">02. NOSOTROS</a>
+  <a href="#faq" class="font-mono text-xl text-muted hover:text-foreground transition-colors duration-200 tracking-wider">03. FAQ</a>
+  <Button text="INICIAR SISTEMA" variant="primary" href="#contacto" class="mt-8" />
+</div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const isExpanded = menu.classList.contains('opacity-100');
+      if (isExpanded) {
+        menu.classList.remove('opacity-100', 'pointer-events-auto');
+        menu.classList.add('opacity-0', 'pointer-events-none');
+      } else {
+        menu.classList.remove('opacity-0', 'pointer-events-none');
+        menu.classList.add('opacity-100', 'pointer-events-auto');
+      }
+    });
+
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('opacity-100', 'pointer-events-auto');
+        menu.classList.add('opacity-0', 'pointer-events-none');
+      });
+    });
+  }
+</script>

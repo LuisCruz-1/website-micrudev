@@ -1,0 +1,26 @@
+:root {
+  --micrudev-navy: #06132F;
+  --micrudev-blue: #0253FD;
+  --micrudev-blue-700: #003DCC;
+  --micrudev-blue-400: #4C84FF;
+  --micrudev-blue-100: #E7EFFF;
+  --micrudev-surface: #F6F8FC;
+  --micrudev-ink: #0F1B37;
+  --micrudev-muted: #637089;
+  --micrudev-white: #FFFFFF;
+
+  --micrudev-radius-sm: 10px;
+  --micrudev-radius-md: 16px;
+  --micrudev-radius-lg: 24px;
+  --micrudev-radius-pill: 999px;
+
+  --micrudev-space-1: 8px;
+  --micrudev-space-2: 16px;
+  --micrudev-space-3: 24px;
+  --micrudev-space-4: 32px;
+  --micrudev-space-5: 48px;
+  --micrudev-space-6: 64px;
+
+  --micrudev-font: Inter, Arial, sans-serif;
+  --micrudev-shadow: 0 12px 32px rgba(6, 19, 47, .10);
+}
