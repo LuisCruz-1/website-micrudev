@@ -1,0 +1,70 @@
+---
+const plans = [
+  {
+    name: "Landing Page",
+    price: "$800",
+    desc: "Perfecto para validación de ideas y campañas de marketing.",
+    features: ["Diseño UX/UI personalizado", "Desarrollo en Astro/React", "Optimización SEO On-Page", "Formulario de contacto", "Alojamiento y dominio 1 año"],
+    highlight: false
+  },
+  {
+    name: "Sitio Corporativo",
+    price: "$1,500",
+    desc: "Presencia digital robusta para empresas establecidas.",
+    features: ["Hasta 8 páginas internas", "CMS autogestionable", "Blog de noticias", "Integración con CRM/Email", "Animaciones avanzadas"],
+    highlight: true
+  },
+  {
+    name: "E-commerce",
+    price: "$2,800",
+    desc: "Tiendas online preparadas para escalar y vender 24/7.",
+    features: ["Catálogo de productos ilimitado", "Pasarelas de pago integradas", "Gestión de inventario", "Carritos abandonados", "Panel de analíticas"],
+    highlight: false
+  }
+];
+---
+
+<section id="precios" class="py-24 relative z-10 border-t border-white/5">
+  <div class="container mx-auto px-6 max-w-[1200px]">
+    
+    <div class="mb-16 text-center">
+      <h2 class="text-3xl md:text-4xl font-[600] text-white tracking-tight mb-4">
+        Planes de <span class="text-warm-gradient">Desarrollo Web</span>
+      </h2>
+      <p class="text-[var(--color-muted)] text-lg max-w-[600px] mx-auto">
+        Precios transparentes para proyectos web estándar. Para aplicaciones y sistemas a medida, realizamos cotizaciones personalizadas.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {plans.map((plan) => (
+        <div class={`command-bar-mockup p-8 flex flex-col transition-transform ${plan.highlight ? 'border-[var(--color-coral)]/50 shadow-[0_0_40px_rgba(2,83,253,0.15)] md:-translate-y-4' : 'hover:-translate-y-1 hover:border-[var(--color-coral)]/30'}`}>
+          {plan.highlight && (
+            <div class="mb-6">
+              <span class="bg-[var(--color-coral)]/20 text-[var(--color-coral)] text-[10px] font-mono uppercase px-3 py-1 rounded-full border border-[var(--color-coral)]/30">
+                Más popular
+              </span>
+            </div>
+          )}
+          <h3 class="text-2xl font-semibold text-white mb-2">{plan.name}</h3>
+          <p class="text-[var(--color-muted)] text-sm mb-6">{plan.desc}</p>
+          <div class="mb-8">
+            <span class="text-4xl font-bold text-white tracking-tight">Desde {plan.price}</span>
+            <span class="text-[var(--color-muted)] text-sm"> /proyecto</span>
+          </div>
+          <ul class="space-y-4 mb-8 flex-grow">
+            {plan.features.map((feature) => (
+              <li class="flex items-start gap-3 text-[15px] text-[var(--color-muted)]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+          <button class="keycap-btn w-full justify-center">
+            Comenzar proyecto
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -2,30 +2,28 @@
 import Button from './Button.astro';
 ---
 
-<section class="py-24 md:py-32" id="contacto">
-  <div class="container">
-    <div class="relative bg-surface border border-white/10 rounded-2xl p-8 md:p-16 overflow-hidden text-center max-w-4xl mx-auto shadow-elevation">
-      <!-- Glow -->
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-primary opacity-20 blur-[100px] rounded-full pointer-events-none mix-blend-screen"></div>
+<section class="py-32 relative z-10 overflow-hidden" id="contacto">
+  <!-- Giant Background Glow for CTA -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] max-w-[800px] aspect-square rounded-full bg-[var(--color-blue)]/20 blur-[150px] pointer-events-none"></div>
+
+  <div class="container relative z-10">
+    <div class="max-w-4xl mx-auto text-center glass-card rounded-[3rem] p-12 md:p-24 border border-[var(--color-blue-light)]/20">
+      <div class="inline-flex items-center gap-2 mb-8 glass-panel px-4 py-2 rounded-full">
+        <span class="w-2 h-2 rounded-full bg-[var(--color-blue-light)] animate-pulse"></span>
+        <span class="text-system text-[10px] text-[var(--color-blue-light)]">INIT_SEQUENCE</span>
+      </div>
       
-      <!-- Content -->
-      <div class="relative z-10 flex flex-col items-center gap-6">
-        <div class="inline-flex items-center gap-2 bg-blue-primary/10 border border-blue-primary/30 rounded-full px-4 py-2 w-fit animate-pulse">
-          <div class="w-2 h-2 rounded-full bg-blue-primary"></div>
-          <span class="font-mono text-xs text-blue-primary tracking-widest uppercase">Red Disponible</span>
-        </div>
-        
-        <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(2,83,253,0.5)]">
-          Inicia tu <span class="text-gradient">Proyecto</span>
-        </h2>
-        
-        <p class="text-lg text-muted max-w-xl mx-auto mb-4">
-          Conecta con nuestro equipo de ingenieros para escalar tu producto al siguiente nivel. Transparencia, rendimiento y código limpio.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
-          <Button text="AGENDAR LLAMADA" variant="primary" icon={true} href="mailto:hola@micrudev.com" />
-        </div>
+      <h2 class="text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tighter text-white mb-8">
+        ¿Listo para <span class="text-gradient">empezar?</span>
+      </h2>
+      
+      <p class="text-xl text-[var(--color-muted)] leading-relaxed max-w-2xl mx-auto mb-12">
+        Cuéntanos tu idea. Te respondemos en menos de 24 horas con una propuesta técnica clara y sin compromiso.
+      </p>
+      
+      <div class="flex flex-wrap gap-4 justify-center">
+        <Button text="Iniciar proyecto" variant="primary" href="mailto:hola@micrudev.com" class="!text-lg !px-10 !py-4" icon={true} />
+        <Button text="hola@micrudev.com" variant="ghost" href="mailto:hola@micrudev.com" class="!text-lg" />
       </div>
     </div>
   </div>

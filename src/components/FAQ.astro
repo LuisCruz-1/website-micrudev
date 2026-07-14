@@ -2,52 +2,51 @@
 const faqs = [
   {
     q: "¿Qué incluye el proceso de desarrollo?",
-    a: "Nuestro proceso es end-to-end: desde el descubrimiento y diseño UX/UI, hasta el desarrollo front/back, pruebas rigurosas y despliegue final. Te acompañamos en cada paso."
+    a: "Nuestro proceso es end-to-end: descubrimiento, diseño UX/UI, desarrollo front/back, pruebas y despliegue. Te acompañamos en cada paso."
   },
   {
-    q: "¿Cuánto tiempo toma desarrollar un proyecto promedio?",
-    a: "Depende de la complejidad. Un sitio corporativo puede tomar entre 3 a 6 semanas, mientras que una plataforma a medida o aplicación móvil puede requerir de 2 a 4 meses."
+    q: "¿Cuánto tiempo toma un proyecto promedio?",
+    a: "Un sitio corporativo toma entre 3 a 6 semanas. Una plataforma a medida o aplicación móvil puede requerir de 2 a 4 meses."
   },
   {
     q: "¿Utilizan plantillas o código a medida?",
-    a: "Todo nuestro código es hecho a medida. No usamos plantillas genéricas. Construimos arquitecturas escalables (como el sistema 'DeFi' de este sitio) para garantizar rendimiento y exclusividad."
+    a: "Todo nuestro código es hecho a medida. Construimos arquitecturas escalables para garantizar rendimiento y exclusividad."
   },
   {
     q: "¿Ofrecen soporte después del lanzamiento?",
-    a: "Sí, todos nuestros proyectos incluyen un periodo de garantía técnica y ofrecemos planes de mantenimiento y evolución continua."
+    a: "Sí, todos los proyectos incluyen garantía técnica y planes opcionales de mantenimiento y evolución continua."
   }
 ];
 ---
 
-<section class="py-24 md:py-32" id="faq">
+<section class="py-24 md:py-32 relative z-10" id="faq">
   <div class="container">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
       
-      <div class="lg:col-span-4 flex flex-col gap-6">
-        <div class="inline-flex items-center gap-2">
-          <div class="w-1 h-1 bg-blue-primary"></div>
-          <span class="font-mono text-xs text-blue-primary tracking-widest uppercase">Base de Conocimiento</span>
+      <div class="lg:col-span-4">
+        <div class="inline-flex items-center gap-2 mb-6">
+          <span class="text-system text-[10px] text-[var(--color-blue-light)]">/ FAQ</span>
         </div>
-        <h2 class="font-heading text-4xl md:text-5xl font-bold">Preguntas <br/>Frecuentes</h2>
-        <p class="text-muted leading-relaxed">
-          Protocolos y respuestas estándar sobre nuestra metodología de trabajo y desarrollo técnico.
+        <h2 class="text-4xl md:text-5xl font-heading font-bold leading-tight tracking-tight text-white mt-4">
+          Preguntas <span class="text-gradient">frecuentes</span>
+        </h2>
+        <p class="text-[var(--color-muted)] leading-relaxed mt-6 text-lg">
+          Respuestas técnicas sobre nuestra metodología y proceso de trabajo.
         </p>
       </div>
 
       <div class="lg:col-span-8 flex flex-col gap-4">
         {faqs.map((faq, index) => (
-          <div class="bg-surface border border-white/10 rounded-xl overflow-hidden group hover:border-blue-primary/30 transition-colors">
-            <button class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-transparent border-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-primary" aria-expanded="false" aria-controls={`faq-content-${index}`}>
-              <span class="font-heading text-lg font-medium text-white pr-4">{faq.q}</span>
-              <span class="faq-icon shrink-0 text-blue-primary transition-transform duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+          <div class="glass-panel rounded-2xl overflow-hidden border-l-2 border-l-transparent transition-all duration-300 hover:border-l-[var(--color-blue-light)] faq-item">
+            <button class="faq-trigger w-full flex items-center justify-between p-6 md:p-8 text-left bg-transparent border-none cursor-pointer" aria-expanded="false" aria-controls={`faq-content-${index}`}>
+              <span class="text-lg md:text-xl font-heading font-bold text-white pr-4">{faq.q}</span>
+              <span class="faq-icon shrink-0 w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
               </span>
             </button>
             <div class="faq-content grid grid-rows-[0fr] transition-[grid-template-rows] duration-300" id={`faq-content-${index}`}>
               <div class="overflow-hidden">
-                <div class="p-6 pt-0 text-muted text-sm leading-relaxed">
-                  <p>{faq.a}</p>
-                </div>
+                <p class="px-6 md:px-8 pb-8 text-[var(--color-muted)] leading-relaxed text-lg">{faq.a}</p>
               </div>
             </div>
           </div>
@@ -59,26 +58,27 @@ const faqs = [
 </section>
 
 <style>
-  /* Active State */
   .faq-trigger[aria-expanded="true"] .faq-icon {
     transform: rotate(45deg);
+    background-color: var(--color-blue);
+    border-color: var(--color-blue);
+    box-shadow: 0 0 20px rgba(2, 83, 253, 0.4);
   }
-
   .faq-trigger[aria-expanded="true"] + .faq-content {
     grid-template-rows: 1fr;
+  }
+  .faq-item:has(.faq-trigger[aria-expanded="true"]) {
+    border-left-color: var(--color-blue);
+    background: rgba(255, 255, 255, 0.05);
   }
 </style>
 
 <script>
   const triggers = document.querySelectorAll('.faq-trigger');
-
   triggers.forEach(trigger => {
     trigger.addEventListener('click', () => {
       const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
-      
-      // Close all others
       triggers.forEach(t => t.setAttribute('aria-expanded', 'false'));
-      
       if (!isExpanded) {
         trigger.setAttribute('aria-expanded', 'true');
       }

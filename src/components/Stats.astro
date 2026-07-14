@@ -1,34 +1,23 @@
 ---
+const stats = [
+  { value: "99%", label: "Satisfacción de clientes" },
+  { value: "50+", label: "Proyectos entregados" },
+  { value: "2x", label: "Velocidad promedio" }
+];
 ---
 
-<section class="py-24 md:py-32 border-y border-white/10 relative overflow-hidden bg-void/50">
-  <div class="container relative z-10">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 text-center">
-      
-      <div class="group relative flex flex-col items-center">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-blue-primary blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity duration-500 rounded-full pointer-events-none"></div>
-        <div class="font-heading text-6xl md:text-7xl font-bold text-white mb-2 tracking-tight">
-          99<span class="text-blue-primary">%</span>
+<section class="py-20 border-y border-white/10 bg-[var(--color-navy)]/30 backdrop-blur-md relative z-10">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+      {stats.map((stat) => (
+        <div class="flex flex-col relative group">
+          <div class="absolute -inset-4 bg-[var(--color-blue-light)]/0 group-hover:bg-[var(--color-blue-light)]/5 rounded-2xl transition-colors duration-300"></div>
+          <div class="text-5xl md:text-6xl font-mono font-bold text-white tracking-tight mb-3 group-hover:text-gradient transition-all duration-300">
+            {stat.value}
+          </div>
+          <p class="text-[var(--color-muted)] text-sm font-heading uppercase tracking-wider">{stat.label}</p>
         </div>
-        <p class="font-mono text-sm tracking-widest text-muted uppercase">Satisfacción Cliente</p>
-      </div>
-      
-      <div class="group relative flex flex-col items-center">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-blue-tertiary blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity duration-500 rounded-full pointer-events-none"></div>
-        <div class="font-heading text-6xl md:text-7xl font-bold text-white mb-2 tracking-tight flex items-start justify-center">
-          <span class="text-blue-tertiary text-4xl mt-2">+</span>50
-        </div>
-        <p class="font-mono text-sm tracking-widest text-muted uppercase">Nodos Desplegados</p>
-      </div>
-      
-      <div class="group relative flex flex-col items-center">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-blue-secondary blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity duration-500 rounded-full pointer-events-none"></div>
-        <div class="font-heading text-6xl md:text-7xl font-bold text-white mb-2 tracking-tight">
-          2<span class="text-blue-secondary">x</span>
-        </div>
-        <p class="font-mono text-sm tracking-widest text-muted uppercase">Velocidad Promedio</p>
-      </div>
-      
+      ))}
     </div>
   </div>
 </section>

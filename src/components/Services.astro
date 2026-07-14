@@ -1,0 +1,65 @@
+---
+const services = [
+  {
+    id: "01",
+    title: "Desarrollo Web",
+    desc: "Sitios web rápidos, modernos y optimizados para SEO. Arquitectura escalable que convierte visitantes en clientes.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>`,
+    action: "Ver planes"
+  },
+  {
+    id: "02",
+    title: "Aplicaciones Web",
+    desc: "Sistemas a medida, CRMs y plataformas interactivas complejas diseñadas para tu operativa diaria.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 15h18"/><path d="M15 3v18"/></svg>`,
+    action: "Solicitar presupuesto"
+  },
+  {
+    id: "03",
+    title: "Automatizaciones",
+    desc: "Optimización de procesos mediante la conexión de herramientas empresariales. Elimina tareas repetitivas.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 7 3 5-3 5"/><path d="m19 7-3 5 3 5"/></svg>`,
+    action: "Solicitar presupuesto"
+  },
+  {
+    id: "04",
+    title: "Soluciones a Medida",
+    desc: "Integración de IA, chatbots y desarrollos específicos para necesidades únicas de tu negocio.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>`,
+    action: "Solicitar presupuesto"
+  }
+];
+---
+
+<section id="servicios" class="py-24 relative z-10">
+  <div class="container mx-auto px-6 max-w-[1000px]">
+    
+    <div class="mb-16 text-center">
+      <h2 class="text-3xl md:text-4xl font-[600] text-white tracking-tight mb-4">
+        Arquitectura para <span class="text-warm-gradient">escalar.</span>
+      </h2>
+      <p class="text-[var(--color-muted)] text-lg max-w-[600px] mx-auto">
+        Nuestro stack tecnológico y experiencia cubren todo el ciclo de vida de tu producto.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {services.map((s) => (
+        <div class="command-bar-mockup p-8 flex flex-col hover:border-[var(--color-coral)]/30 transition-colors group">
+          <div class="flex items-center justify-between mb-6">
+            <div class="w-12 h-12 rounded-lg bg-[var(--color-canvas)] border border-white/10 flex items-center justify-center text-[var(--color-amber)] group-hover:text-[var(--color-coral)] transition-colors">
+              <Fragment set:html={s.icon} />
+            </div>
+            <span class="font-mono text-xs text-[var(--color-muted)] opacity-50">{s.id} // SYS</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">{s.title}</h3>
+          <p class="text-[var(--color-muted)] leading-relaxed flex-grow mb-8">{s.desc}</p>
+          <a href={s.id === "01" ? "#precios" : "#contacto"} class="inline-flex items-center gap-2 font-mono text-[13px] text-[var(--color-muted)] hover:text-white transition-colors">
+            {s.action}
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

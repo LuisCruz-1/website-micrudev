@@ -2,33 +2,46 @@
 import Button from './Button.astro';
 ---
 
-<header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 backdrop-blur-lg bg-black/40 border-b border-white/10">
-  <div class="container mx-auto h-20 flex items-center justify-between">
-    <a href="/" class="flex items-center">
-      <img src="/logos/Micrudev_Logo_Primary_White_BG.png" alt="Micrudev Logo" class="h-8 brightness-0 invert" />
+<header class="fixed top-0 left-0 w-full z-50 pt-6 px-6">
+  <div class="max-w-[1280px] mx-auto flex items-center justify-between">
+    
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3 shrink-0 group">
+      <div class="w-10 h-10 rounded-2xl bg-[var(--color-blue)] flex items-center justify-center glow-shadow transition-transform duration-300 group-hover:scale-105">
+        <span class="font-heading font-bold text-white text-lg">M</span>
+      </div>
+      <span class="font-heading font-bold text-white text-xl tracking-tight">Micrudev</span>
     </a>
     
-    <nav class="hidden md:flex items-center gap-8">
-      <a href="#servicios" class="font-mono text-sm text-muted hover:text-foreground transition-colors duration-200 tracking-wider">01. SERVICIOS</a>
-      <a href="#nosotros" class="font-mono text-sm text-muted hover:text-foreground transition-colors duration-200 tracking-wider">02. NOSOTROS</a>
-      <a href="#faq" class="font-mono text-sm text-muted hover:text-foreground transition-colors duration-200 tracking-wider">03. FAQ</a>
+    <!-- Center Navigation (Pill) -->
+    <nav class="hidden md:flex items-center gap-8 px-8 py-3 glass-panel rounded-full">
+      <a href="#servicios" class="text-sm font-medium text-white/70 hover:text-white transition-colors">Servicios</a>
+      <a href="#nosotros" class="text-sm font-medium text-white/70 hover:text-white transition-colors">Nosotros</a>
+      <a href="#faq" class="text-sm font-medium text-white/70 hover:text-white transition-colors">FAQ</a>
     </nav>
 
-    <div class="hidden md:block">
-      <Button text="INICIAR SISTEMA" variant="primary" href="#contacto" />
+    <!-- Right Actions -->
+    <div class="hidden md:flex items-center gap-6">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[var(--color-blue-light)] animate-pulse"></span>
+        <span class="text-system text-[10px] text-[var(--color-blue-light)]">SYS.ONLINE</span>
+      </div>
+      <Button text="Contactar" variant="primary" href="#contacto" class="!px-6 !py-2.5" />
     </div>
 
-    <button class="md:hidden text-foreground p-2 focus:outline-none" aria-label="Menu" id="mobile-menu-btn">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+    <!-- Mobile Menu Button -->
+    <button class="md:hidden text-white p-2" aria-label="Menú" id="mobile-menu-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
     </button>
   </div>
 </header>
 
-<div class="fixed inset-0 bg-void/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300" id="mobile-menu">
-  <a href="#servicios" class="font-mono text-xl text-muted hover:text-foreground transition-colors duration-200 tracking-wider">01. SERVICIOS</a>
-  <a href="#nosotros" class="font-mono text-xl text-muted hover:text-foreground transition-colors duration-200 tracking-wider">02. NOSOTROS</a>
-  <a href="#faq" class="font-mono text-xl text-muted hover:text-foreground transition-colors duration-200 tracking-wider">03. FAQ</a>
-  <Button text="INICIAR SISTEMA" variant="primary" href="#contacto" class="mt-8" />
+<!-- Mobile Menu Overlay -->
+<div class="fixed inset-0 bg-[var(--color-void)]/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300" id="mobile-menu">
+  <a href="#servicios" class="text-3xl font-heading font-bold text-white">Servicios</a>
+  <a href="#nosotros" class="text-3xl font-heading font-bold text-white">Nosotros</a>
+  <a href="#faq" class="text-3xl font-heading font-bold text-white">FAQ</a>
+  <Button text="Contactar" variant="primary" href="#contacto" class="mt-8" />
 </div>
 
 <script>
@@ -37,8 +50,8 @@ import Button from './Button.astro';
 
   if (btn && menu) {
     btn.addEventListener('click', () => {
-      const isExpanded = menu.classList.contains('opacity-100');
-      if (isExpanded) {
+      const isOpen = menu.classList.contains('opacity-100');
+      if (isOpen) {
         menu.classList.remove('opacity-100', 'pointer-events-auto');
         menu.classList.add('opacity-0', 'pointer-events-none');
       } else {
