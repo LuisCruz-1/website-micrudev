@@ -58,7 +58,7 @@ const services = [
           </div>
           <h3 class="text-xl font-semibold text-white mb-3">{s.title}</h3>
           <p class="text-[var(--color-muted)] leading-relaxed flex-grow mb-8">{s.desc}</p>
-          <a href={s.id === "01" ? "#precios" : "#contacto"} class="inline-flex items-center gap-2 font-mono text-[13px] text-[var(--color-muted)] hover:text-white transition-colors">
+          <a href={s.id === "01" ? "#precios" : "https://wa.me/593998081684"} target={s.id === "01" ? "_self" : "_blank"} rel="noopener noreferrer" class="inline-flex items-center gap-2 font-mono text-[13px] text-[var(--color-muted)] hover:text-white transition-colors">
             {s.action}
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>

@@ -1,199 +1,120 @@
-# Micrudev Design System
+# Micrudev Design System & Prompt Style Guide
 
-> Sistema de diseño minimalista elegante para la marca Micrudev. Basado en principios suizos: grilla estricta, aire generoso, jerarquía tipográfica fuerte y sobriedad.
-
----
-
-## Filosofía
-
-Minimalismo elegante que transmite **sofisticación y simplicidad funcional**. Cada elemento tiene un propósito claro. Nada es decorativo sin razón.
+> **Estética: "Premium Dark Developer-Tool" & "Cinematic Warm Aurora"**
+> Esta guía documenta el sistema de diseño iterado para Micrudev. Está diseñada para servir como un "prompt maestro" que permite a cualquier desarrollador o IA replicar exactamente el mismo estilo visual y componentes sin ambigüedades.
 
 ---
 
-## Paleta de Colores
+## 1. Filosofía de Diseño
 
-### Colores primarios (únicos autorizados)
+El diseño encarna el ADN visual de las herramientas para desarrolladores de primer nivel (estilo Vercel, Linear, Stripe). Combina la precisión técnica del diseño suizo con profundidad tridimensional táctil y una iluminación cinematográfica.
 
-| Token | Valor | Uso |
-|-------|-------|-----|
-| `navy` | `#06132F` | Modo oscuro, CTA, contraste |
-| `blue` | `#0253FD` | Acento principal, links, CTAs |
-| `blue-700` | `#003DCC` | Hover de elementos azules |
-| `blue-400` | `#4C84FF` | Acento claro, anillos de foco |
-| `blue-100` | `#E7EFFF` | Fondos suaves, badges, selección |
-
-### Colores neutros
-
-| Token | Valor | Uso |
-|-------|-------|-----|
-| `surface` | `#F6F8FC` | Fondo principal (light mode) |
-| `ink` | `#0F1B37` | Texto principal, titulares |
-| `muted` | `#637089` | Texto secundario, descripciones |
-| `white` | `#FFFFFF` | Texto sobre fondos oscuros |
+- **Iluminación Cinematográfica (Living Aurora):** El fondo no es un color plano; es un ecosistema vivo de luz difuminada y texturizada.
+- **Profundidad Táctil (Keycaps & Glassmorphism):** Los botones principales simulan teclas físicas de teclado mecánico, mientras que los contenedores secundarios flotan como paneles de cristal esmerilado.
+- **Precisión Matemática:** Tipografías monoespaciadas para metadatos, ausencia total de cursivas y alineación estricta.
+- **Polaridad Dinámica (Dark/Light):** Un sistema basado en tokens (variables CSS) donde los colores invierten su polaridad, manteniendo la misma estructura de clases HTML para que el sitio soporte Modo Claro y Oscuro de forma impecable.
 
 ---
 
-## Tipografía
+## 2. Sistema de Color (Tokens)
 
-**Familia única:** Inter (400, 500, 600, 700)
+Todo el sitio utiliza variables nativas inyectadas en `@theme` de Tailwind CSS v4. **No se usan colores crudos en el HTML** (como `bg-black` o `text-white`), siempre se recurre a las variables mapeadas.
 
-### Escala tipográfica
+### Paleta Base (Definida en `:root` y `:root.dark`)
+| Token | Modo Oscuro (`.dark`) | Modo Claro | Rol |
+|-------|----------------------|------------|-----|
+| `--color-canvas` | `#06132F` (Near Navy Black) | `#F6F8FC` (Soft Gray) | Fondo base del viewport |
+| `--color-white` | `#ffffff` | `#06132F` | Texto principal, iconos, títulos |
+| `--color-black` | `#000000` | `#ffffff` | Sombras, fondos inversos |
+| `--color-muted` | `#8B9BB4` | `#637089` | Texto secundario, subtítulos |
 
-| Nivel | Tamaño | Peso | Uso |
-|-------|--------|------|-----|
-| Display | `clamp(3rem, 6vw, 5.5rem)` | 700 | H1, hero |
-| H2 | `clamp(2.25rem, 4vw, 3.5rem)` | 700 | Títulos de sección |
-| H3 | `1.5rem` (24px) | 600 | Títulos de card |
-| Body Large | `1.25rem` (20px) | 400 | Descripciones destacadas |
-| Body | `1rem` (16px) | 400 | Texto general |
-| Small | `0.875rem` (14px) | 400 | Metadata, links |
-| Eyebrow | `0.75rem` (12px) | 600 | Etiquetas de sección (uppercase, tracking-wider) |
-
-### Reglas
-
-- `tracking-tight` en titulares
-- `leading-relaxed` en cuerpo
-- `tracking-wider` en eyebrows (uppercase)
+### Aurora Accent Colors
+- `--color-crimson`: `#003DCC`
+- `--color-coral`: `#0253FD`
+- `--color-amber`: `#4C84FF`
+*(Nota: Estrictamente basados en la paleta azul corporativa de Micrudev, utilizados en gradientes vivos y acentos visuales).*
 
 ---
 
-## Espaciado (escala base 8px)
+## 3. Tipografía y Jerarquía
 
-| Token | Valor |
-|-------|-------|
-| `space-1` | 8px |
-| `space-2` | 16px |
-| `space-3` | 24px |
-| `space-4` | 32px |
-| `space-5` | 48px |
-| `space-6` | 64px |
-| `space-8` | 96px |
-| `space-10` | 128px |
+**Familias Tipográficas:**
+1. **Inter** (`font-body`): Para títulos (H1-H6), párrafos, botones y UI general.
+2. **Geist Mono** o JetBrains Mono (`font-mono`): EXCLUSIVAMENTE para etiquetas técnicas, comandos CLI, "eyebrows", atajos de teclado y pie de página.
 
-### Secciones
-
-- Padding vertical: `py-24` (96px) móvil, `py-32` (128px) desktop
-- Margen entre header de sección y contenido: `mb-20` (80px)
+**Reglas Estrictas:**
+- 🚫 **PROHIBIDO EL USO DE CURSIVAS:** Ninguna palabra, span o título debe usar la clase `italic`.
+- **Títulos de Sección:** Uniformes en todo el sitio. Deben usar: `text-4xl md:text-5xl font-[600] tracking-tight`.
+- **Subtítulos de Sección:** `text-lg font-[400] text-[var(--color-muted)] max-w-[640px] leading-relaxed`.
 
 ---
 
-## Radios (sistema de marca)
+## 4. Componentes Insignia (Signature Elements)
 
-| Token | Valor | Uso |
-|-------|-------|-----|
-| `sm` | 10px | Inputs pequeños |
-| `md` | 16px (rounded-2xl) | Cards, inputs |
-| `lg` | 24px (rounded-3xl) | Paneles, modales |
-| `pill` | 9999px (rounded-full) | Botones, badges, nav |
+### A. The Living Aurora Background
+El fondo interactivo de todo el sitio. Nunca es plano.
+- **Estructura:** Un contenedor absoluto (`.aurora-container`) posicionado en `z-0`.
+- **Blades:** 3 divs (`.aurora-blade`) con grandes dimensiones (`60vw`), `filter: blur(100px)`, gradientes lineales y animaciones CSS de traslación/rotación (`drift`) en bucles infinitos y desfasados (15s, 18s, 22s).
+- **Textura:** Una capa SVG superpuesta con `feTurbulence` (ruido/grano) configurada con `mix-blend-overlay`.
+- **Blend Modes Estrictos:** El contenedor de la aurora usa `mix-blend-screen` en modo oscuro y `mix-blend-multiply` en modo claro para fusionarse correctamente con el fondo base.
 
-**Regla:** Coherencia total, sin esquinas vivas.
+### B. Standardized Eyebrows (Etiquetas Superiores)
+Toda sección principal debe estar precedida por un "Eyebrow" sobre el título principal.
+- **Estructura Base:** `inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 mb-8`.
+- **Indicador Visual:** Un punto azul pulsante a la izquierda: `<span class="w-2 h-2 rounded-full bg-[var(--color-blue-400)] animate-pulse"></span>`.
+- **Tipografía:** `font-mono text-[11px] text-[var(--color-white)] uppercase tracking-wider`.
+- **Efecto (Especial Hero):** En cabeceras destacadas, se incluye un pseudo-elemento con máscara de gradiente absoluto y animación `@keyframes shimmer`.
 
----
+### C. Tactile Keycap Buttons (Botones Principales)
+Los botones de acción primaria simulan teclas físicas de un teclado mecánico.
+- **Clase principal:** `.keycap-btn`.
+- **Sombras (El Secreto):** Utilizan una pila compleja de sombras CSS que varían según el tema (`--theme-keycap-shadow`), incluyendo un anillo oscuro exterior, un resplandor exterior suave y brillos interiores (inset) superiores e inferiores para crear relieve físico.
+- **Interacción:** Al hacer clic (`:active`), se hunden físicamente (`translateY(2px)`) y la sombra se comprime.
 
-## Sombras
+### D. Command-Bar Mockup (Glassmorphism)
+Paneles translúcidos de estética UI macOS/Raycast. Usados en vistas previas o en el Hero.
+- **Contenedor:** Fuerte desenfoque de fondo (`backdrop-blur(24px)`), bordes sutiles de 1px y sombras tintadas. Todo administrado vía variables CSS (`--theme-cmd-bg`).
+- **Estados Activos:** Las filas seleccionadas llevan borde izquierdo marcado (`border-l-2`) y fondo teñido.
+- **Metadatos:** Uso intensivo de pequeñas píldoras con fuente monoespaciada para atajos de teclado (ej. `Cmd+K`).
 
-```css
---shadow-sm: 0 1px 2px rgba(6, 19, 47, 0.05);
---shadow-md: 0 4px 12px rgba(6, 19, 47, 0.08);
---shadow-lg: 0 12px 32px rgba(6, 19, 47, 0.10);
-```
-
-En hover de cards: `hover:-translate-y-1` + intensificación sutil de sombra.
-
----
-
-## Componentes
-
-### Botones
-
-| Variante | Estilo | Uso |
-|----------|--------|-----|
-| `primary` | `bg-blue text-white` | Acción principal |
-| `outline` | `border-ink/15 text-ink` | Acción secundaria |
-| `ghost` | `text-ink` sin fondo | Acción terciaria |
-
-**Estados:**
-- Hover primary: `bg-blue-700` + `translate-y-0.5`
-- Hover outline: `border-blue text-blue`
-- Foco: `ring-blue-400` (2px)
-
-### Cards (glass minimalista)
-
-```
-bg-white/70 backdrop-blur-md
-border border-ink/8 rounded-2xl
-hover:border-blue/30 hover:-translate-y-1
-transition-all duration-300
-```
-
-### Navbar
-
-- Logo (icono 36px + texto)
-- Nav central en píldora glass: `bg-white/70 backdrop-blur-md rounded-full`
-- CTA a la derecha
-
-### Footer
-
-- Una sola línea en desktop
-- Logo + links + copyright
-- Sin columnas múltiples
+### E. Infinite Tech Marquee (Carrusel de Stack)
+Presentación de tecnologías sin bordes rígidos.
+- **Estructura:** Contenedor ancho con filas que se desplazan infinitamente (`animate-marquee`).
+- **Máscara de Difuminado:** Uso de `mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent)` para que los elementos se desvanezcan hacia los extremos izquierdo y derecho.
+- **Interacción:** Hover pausa el contenedor (`group-hover:[animation-play-state:paused]`) e ilumina los iconos.
 
 ---
 
-## Animaciones
+## 5. Espaciado y Layout Uniforme
 
-| Tipo | Duración | Curva |
-|------|----------|-------|
-| Hover | 200ms | ease |
-| Transición general | 300ms | ease |
-| Acordeón FAQ | 300ms | ease |
-
-**Regla:** Animaciones sutiles. Nada rebota, nada gira, nada pulsa constantemente. Solo lo necesario.
+Para mantener la rigurosidad suiza en la estructura:
+- **Separación de Secciones:** TODA sección del sitio debe iniciar con una línea divisoria superior sutil: `border-t border-white/5` (aplicada al contenedor principal de la sección).
+- **Padding Vertical:** Se usa rigurosamente `py-24` (96px) en cada `<section>`.
+- **Contenedores:** `container mx-auto px-6 max-w-[1200px]`. El contenido nunca debe estar apretado contra los bordes laterales del viewport.
+- **Separación Título/Grid:** Un margen constante de `mb-16` entre la cabecera de la sección (Eyebrow + Título + Subtítulo) y las tarjetas de contenido inferior.
 
 ---
 
-## Layout
+## 6. Configuración Técnica Clave (Tailwind CSS v4)
 
-### Contenedor
-
-- Max-width: `1200px`
-- Padding lateral: `1.5rem` móvil, `2rem` desktop
-
-### Grillas
-
-- Bento servicios: `grid-cols-3` con cards `col-span-2` para destacados
-- Stats: `grid-cols-3`
-- FAQ: `grid-cols-12` con header `col-span-4` y lista `col-span-8`
+La magia técnica para la escalabilidad del tema reside en Tailwind v4:
+1. **Inversión Mapeada:** No se usa `dark:bg-black bg-white`. Se usa `bg-[var(--color-canvas)]` y CSS puro se encarga de reasignar los HEX dentro de `:root` y `:root.dark`.
+2. **Fijación del Tema:** Para que el botón interruptor del Navbar controle todo sin interferencia del sistema operativo, el modificador `dark:` está reescrito en `global.css` mediante:
+   ```css
+   @custom-variant dark (&:where(.dark, .dark *));
+   ```
+3. **Imágenes en Tema Claro:** Cualquier logo o imagen que sea blanco por defecto, debe llevar la clase `.invert-on-light` (declarada en CSS global) para que automáticamente aplique `filter: invert(1)` cuando el `.dark` sea removido del HTML.
 
 ---
 
-## Responsive
+## 7. Checklist de Construcción para la IA (Prompt Verification)
 
-| Breakpoint | Comportamiento |
-|------------|----------------|
-| `< 768px` | 1 columna, padding reducido |
-| `>= 768px` | Grillas activan, espaciado generoso |
-| `>= 1024px` | Layout completo |
+Si estás generando una nueva página, componente o sección basada en esta guía, DEBES cumplir obligatoriamente lo siguiente:
 
----
-
-## Principios de uso
-
-1. **Menos es más.** Si un elemento no aporta, se elimina.
-2. **Aire generoso.** El espacio negativo es tan importante como el contenido.
-3. **Jerarquía clara.** Máximo 3 niveles tipográficos por vista.
-4. **Color con propósito.** El azul solo para acciones y acentos clave.
-5. **Consistencia.** Los mismos radios, los mismos espacios, los mismos pesos.
-6. **Sin decoración gratuita.** Nada de ruido, nada de texturas innecesarias, nada de brillos exagerados.
-
----
-
-## No hacer
-
-- No usar más de 2 colores de acento por vista
-- No usar gradientes (excepto en casos muy puntuales)
-- No usar sombras pesadas
-- No usar animaciones de más de 400ms
-- No usar texto centrado para descripciones (preferir izquierda)
-- No usar mayúsculas excepto en eyebrows
-- No usar emojis en la interfaz
+- [ ] ¿Tiene el Eyebrow estándar con su punto pulsante azul y fuente monoespaciada mayúscula?
+- [ ] ¿El título es `text-4xl md:text-5xl font-[600]` y está **totalmente libre de cursivas (`italic`)**?
+- [ ] ¿El contenedor principal tiene `py-24` y la línea divisoria superior `border-t border-white/5`?
+- [ ] ¿El espacio entre el texto introductorio y la primera fila de tarjetas es de al menos `mt-16` o `mb-16`?
+- [ ] ¿Los botones principales de llamada a la acción (CTA) usan la clase `.keycap-btn` o, de ser secundarios, `.ghost-pill`?
+- [ ] ¿El componente respeta las variables del tema (`var(--color-white)`, `var(--color-canvas)`) y evita codificar colores crudos (`text-white`, `bg-black`)?
+- [ ] ¿El código no contiene clases sobrantes, genéricas o estilos bootstrap? Mantenlo elegante, oscuro y técnico.
