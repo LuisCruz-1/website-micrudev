@@ -1,0 +1,89 @@
+---
+import projectsData from '../data/projects.json';
+
+// Tomamos solo los 3 primeros proyectos para la vista previa
+const featuredProjects = projectsData.slice(0, 3);
+---
+
+<section id="projects-preview" class="py-24 relative z-10 border-t border-white/5">
+  <div class="container mx-auto px-6 max-w-[1200px]">
+    
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 mb-6">
+        <span class="w-2 h-2 rounded-full bg-[var(--color-blue-400)] animate-pulse"></span>
+        <span class="font-mono text-[11px] text-[var(--color-muted)] uppercase tracking-wider">Casos de Éxito</span>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-[600] text-white tracking-tight">
+        Proyectos <span class="text-warm-gradient">Destacados.</span>
+      </h2>
+    </div>
+
+    <!-- Grid de Proyectos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      {featuredProjects.map((project) => (
+        <a 
+          href={`/proyectos`} 
+          class="group relative flex flex-col bg-[var(--color-canvas)] border border-white/10 rounded-2xl overflow-hidden hover:border-[var(--color-blue-400)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_30px_-10px_rgba(2,83,253,0.3)]"
+        >
+          <!-- Hover Glow (similar al Tech Stack) -->
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,var(--color-blue-700)_0%,transparent_70%)] opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-0"></div>
+          
+          <!-- Contenedor de Imagen -->
+          <div class="relative h-48 md:h-56 overflow-hidden border-b border-white/5 z-10">
+            <div class="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+            <img 
+              src={project.image} 
+              alt={project.title} 
+              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+              loading="lazy"
+            />
+            <!-- Etiqueta de Tipo (ej. SaaS, App Móvil) -->
+            <div class="absolute top-4 left-4 z-20 flex items-center gap-2">
+              <span class="px-2 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-md font-mono text-[10px] text-white uppercase tracking-wider">
+                {project.type}
+              </span>
+            </div>
+          </div>
+          
+          <!-- Contenido de la Tarjeta -->
+          <div class="p-6 flex flex-col flex-grow z-10 relative">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-[600] text-white group-hover:text-[var(--color-blue-100)] transition-colors">
+                {project.title}
+              </h3>
+              <span class="font-mono text-[10px] text-[var(--color-muted)] mt-1">{project.date}</span>
+            </div>
+            
+            <p class="text-[var(--color-muted)] text-sm mb-6 line-clamp-2 leading-relaxed">
+              {project.subtitle}
+            </p>
+            
+            <!-- Tags de Tecnologías -->
+            <div class="mt-auto flex flex-wrap gap-2 pt-4 border-t border-white/5">
+              {project.tech.map((t) => (
+                <span class="font-mono text-[9px] text-[var(--color-muted)] px-2 py-1 rounded bg-white/5 border border-white/5 uppercase tracking-wider group-hover:border-[var(--color-blue-400)]/30 group-hover:text-white/80 transition-colors">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Botón Ghost para "Ver más" -->
+    <div class="flex justify-center">
+      <a 
+        href="/proyectos" 
+        class="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-transparent border border-white/20 text-white font-[500] text-sm hover:bg-white/5 hover:border-white/40 transition-all duration-300"
+      >
+        <span>Ver todos los proyectos</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform group-hover:translate-x-1 transition-transform">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</section>

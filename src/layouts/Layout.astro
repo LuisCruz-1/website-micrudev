@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
 
 interface Props {
 	title: string;
@@ -24,6 +25,25 @@ const { title, description = "Micrudev - Everything you build, one keystroke awa
 		<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 		
 		<title>{title}</title>
+
+		<!-- Theme Init Script para evitar parpadeos -->
+		<script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+		
+			if (theme === 'light') {
+				document.documentElement.classList.remove('dark');
+			} else {
+				document.documentElement.classList.add('dark');
+			}
+		</script>
 	</head>
 	<body class="bg-[var(--color-canvas)] text-white antialiased relative min-h-screen">
 		<!-- SVG Noise Filter Definition -->
@@ -34,7 +54,7 @@ const { title, description = "Micrudev - Everything you build, one keystroke awa
 		</svg>
 
 		<!-- Aurora Background Container -->
-		<div class="absolute inset-0 overflow-hidden pointer-events-none z-0 mix-blend-screen">
+		<div class="absolute inset-0 overflow-hidden pointer-events-none z-0 mix-blend-screen dark:mix-blend-screen mix-blend-multiply aurora-container">
 			<div class="aurora-blade blade-1"></div>
 			<div class="aurora-blade blade-2"></div>
 			<div class="aurora-blade blade-3"></div>
@@ -42,12 +62,19 @@ const { title, description = "Micrudev - Everything you build, one keystroke awa
 			<!-- Vignette Overlay -->
 			<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-canvas)_100%)] opacity-80"></div>
 			<!-- SVG Grain Overlay -->
-			<div class="absolute inset-0 opacity-[0.15] mix-blend-overlay" style="filter: url(#noiseFilter);"></div>
+			<div class="absolute inset-0 mix-blend-overlay opacity-[0.4] dark:opacity-[0.15]" style="filter: url(#noiseFilter);"></div>
 		</div>
+
+		<Navbar />
 
 		<!-- Main Content -->
 		<div class="relative z-10">
 			<slot />
 		</div>
+		<style is:global>
+			@keyframes shimmer {
+				100% { transform: translateX(100%); }
+			}
+		</style>
 	</body>
 </html>

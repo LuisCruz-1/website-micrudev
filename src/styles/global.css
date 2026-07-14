@@ -1,23 +1,75 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'Geist Mono', monospace;
 
-  /* Strict Neutral + Brand Palette */
-  --color-canvas: #06132F;
-  --color-white: #ffffff;
-  --color-muted: #8B9BB4; /* slightly lighter than #637089 for better contrast on navy */
+  /* Mapeo de colores a variables de tema */
+  --color-canvas: var(--theme-canvas);
+  --color-white: var(--theme-white);
+  --color-black: var(--theme-black);
+  --color-muted: var(--theme-muted);
   
-  --color-crimson: #003DCC;
-  --color-coral: #0253FD;
-  --color-amber: #4C84FF;
+  --color-crimson: var(--theme-crimson);
+  --color-coral: var(--theme-coral);
+  --color-amber: var(--theme-amber);
   
-  --color-keycap-bg: #E7EFFF;
-  --color-keycap-text: #0F1B37;
+  --color-keycap-bg: var(--theme-keycap-bg);
+  --color-keycap-text: var(--theme-keycap-text);
 }
 
 @layer base {
+  :root {
+    /* Modo Claro */
+    --theme-canvas: #F6F8FC;
+    --theme-white: #06132F; /* Invierte blanco a texto oscuro */
+    --theme-black: #ffffff; /* Invierte negro a blanco */
+    --theme-muted: #637089;
+    
+    --theme-crimson: #003DCC;
+    --theme-coral: #0253FD;
+    --theme-amber: #4C84FF;
+    
+    --theme-keycap-bg: #ffffff;
+    --theme-keycap-text: #06132F;
+    --theme-keycap-shadow: 0 0 0 2px rgba(6, 19, 47, 0.1), 0 4px 14px rgba(6, 19, 47, 0.05), inset 0 -2px 1px rgba(6, 19, 47, 0.05);
+    --theme-keycap-shadow-active: 0 0 0 2px rgba(6, 19, 47, 0.1), 0 2px 6px rgba(6, 19, 47, 0.05), inset 0 -1px 1px rgba(6, 19, 47, 0.1);
+
+    --theme-nav-bg: rgba(255, 255, 255, 0.8);
+    --theme-nav-border: rgba(6, 19, 47, 0.1);
+    --theme-nav-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 10px 30px rgba(6, 19, 47, 0.05);
+
+    --theme-cmd-bg: rgba(255, 255, 255, 0.85);
+    --theme-cmd-border: rgba(6, 19, 47, 0.08);
+    --theme-cmd-shadow: 0 30px 60px rgba(2, 83, 253, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+  :root.dark {
+    /* Modo Oscuro */
+    --theme-canvas: #06132F;
+    --theme-white: #ffffff;
+    --theme-black: #000000;
+    --theme-muted: #8B9BB4;
+    
+    --theme-crimson: #003DCC;
+    --theme-coral: #0253FD;
+    --theme-amber: #4C84FF;
+    
+    --theme-keycap-bg: #E7EFFF;
+    --theme-keycap-text: #0F1B37;
+    --theme-keycap-shadow: 0 0 0 2px #000, 0 0 14px rgba(255, 255, 255, 0.19), inset 0 1px 1px rgba(255, 255, 255, 1), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+    --theme-keycap-shadow-active: 0 0 0 2px #000, 0 0 6px rgba(255, 255, 255, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.4);
+
+    --theme-nav-bg: rgba(7, 8, 10, 0.6);
+    --theme-nav-border: rgba(255, 255, 255, 0.1);
+    --theme-nav-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 30px rgba(0, 0, 0, 0.5);
+
+    --theme-cmd-bg: rgba(15, 16, 18, 0.65);
+    --theme-cmd-border: rgba(255, 255, 255, 0.08);
+    --theme-cmd-shadow: 0 30px 60px rgba(255, 47, 58, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -44,11 +96,11 @@
   }
 
   .nav-pill {
-    background: rgba(7, 8, 10, 0.6);
+    background: var(--theme-nav-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--theme-nav-border);
+    box-shadow: var(--theme-nav-shadow);
   }
 
   .keycap-btn {
@@ -62,35 +114,27 @@
     align-items: center;
     gap: 10px;
     padding: 12px 20px;
-    box-shadow: 
-      0 0 0 2px #000, 
-      0 0 14px rgba(255, 255, 255, 0.19), 
-      inset 0 1px 1px rgba(255, 255, 255, 1), 
-      inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--theme-keycap-shadow);
     transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .keycap-btn:active {
     transform: translateY(2px);
-    box-shadow: 
-      0 0 0 2px #000, 
-      0 0 6px rgba(255, 255, 255, 0.1), 
-      inset 0 1px 1px rgba(255, 255, 255, 0.5), 
-      inset 0 -1px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--theme-keycap-shadow-active);
   }
 
   .command-bar-mockup {
-    background: rgba(15, 16, 18, 0.65);
+    background: var(--theme-cmd-bg);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--theme-cmd-border);
     border-radius: 14px;
-    box-shadow: 0 30px 60px rgba(255, 47, 58, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: var(--theme-cmd-shadow);
   }
 
   .ghost-pill {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(var(--color-white), 0.15);
     color: var(--color-muted);
     border-radius: 9999px;
     padding: 8px 16px;
@@ -101,8 +145,13 @@
     transition: all 0.2s;
   }
   .ghost-pill:hover {
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(var(--color-white), 0.3);
     color: var(--color-white);
+  }
+
+  /* Utilidad para invertir logos/imágenes en modo claro */
+  html:not(.dark) .invert-on-light {
+    filter: invert(1) hue-rotate(180deg);
   }
 
   /* Aurora Animations */

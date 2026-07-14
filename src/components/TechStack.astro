@@ -1,0 +1,132 @@
+---
+export const stackData = [
+  { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg", gridArea: "1 / 1" },
+  { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg", gridArea: "1 / 2" },
+  { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg", gridArea: "1 / 3" },
+  { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg", gridArea: "1 / 4" },
+  { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg", gridArea: "1 / 5" },
+  { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg", gridArea: "1 / 6" },
+  { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg", gridArea: "1 / 7" },
+  { name: "jQuery", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jquery/jquery-original.svg", gridArea: "1 / 8" },
+  { name: "Supabase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg", gridArea: "1 / 9" },
+  { name: "Automate", icon: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_Power_Automate.svg", gridArea: "1 / 10" },
+  { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg", gridArea: "1 / 11" },
+  { name: "WordPress", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-plain.svg", gridArea: "2 / 1" },
+  { name: "FlutterFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg", gridArea: "2 / 2 / span 1 / span 2", isWide: true },
+  { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg", gridArea: "2 / 4" },
+  { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg", gridArea: "2 / 5" },
+  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg", gridArea: "2 / 6" },
+  { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg", gridArea: "2 / 7" },
+  { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg", gridArea: "2 / 8" },
+  { name: "Photoshop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg", gridArea: "2 / 9" },
+  { name: "Illustrator", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/illustrator/illustrator-original.svg", gridArea: "2 / 10" },
+  { name: "n8n", icon: "https://devicons.io/devicons/icons/n8n-icon.svg", gridArea: "2 / 11" }
+];
+
+const row1 = stackData.slice(0, 11);
+const row2 = stackData.slice(11);
+---
+
+<section id="stack" class="py-24 relative z-10 overflow-hidden border-t border-white/5">
+  <div class="container mx-auto px-6 mb-16 text-center">
+    <div class="inline-flex items-center gap-2 mb-6">
+      <span class="w-2 h-2 rounded-full bg-[var(--color-blue-400)] animate-pulse"></span>
+      <span class="font-mono text-[11px] text-[var(--color-muted)] uppercase tracking-wider">Tech Stack</span>
+    </div>
+    <h2 class="text-4xl md:text-5xl font-[600] text-white tracking-tight">
+      Tecnologías que <span class="text-warm-gradient">dominamos.</span>
+    </h2>
+  </div>
+
+  <div class="container mx-auto px-6 max-w-[1200px]">
+    
+    <!-- Unified Motherboard Marquee Grid -->
+    <div class="flex flex-col gap-[1px] bg-white/10 border-y border-white/5 overflow-hidden shadow-2xl shadow-black/50 mx-auto w-full [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+      
+      <!-- Row 1 -->
+      <div class="flex w-max gap-[1px] animate-marquee hover:[animation-play-state:paused]">
+        {[...row1, ...row1, ...row1].map((tech) => (
+          <div 
+            class={`group relative bg-[var(--color-canvas)] flex flex-col items-center justify-center h-[100px] md:h-[120px] shrink-0 transition-all duration-300 hover:bg-white/[0.03] hover:z-10 cursor-crosshair overflow-hidden ${tech.isWide ? 'w-[201px] md:w-[241px]' : 'w-[100px] md:w-[120px]'}`}
+          >
+            <!-- Internal Glow Effect -->
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--color-blue-700)_0%,transparent_70%)] opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+            
+            <!-- Top Accent Line -->
+            <div class="absolute top-0 left-0 w-full h-[2px] bg-[var(--color-blue-400)] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
+            
+            <!-- Icon -->
+            <img 
+              src={tech.icon} 
+              alt={`${tech.name} icon`} 
+              class={`object-contain filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 ease-out group-hover:-translate-y-3 group-hover:scale-110 ${tech.isWide ? 'h-8 md:h-10' : 'h-6 w-6 md:h-8 md:w-8'}`}
+              loading="lazy"
+            />
+            
+            <!-- Text Label -->
+            <span class="absolute bottom-2 md:bottom-3 font-mono text-[9px] md:text-[10px] text-[var(--color-muted)] group-hover:text-white transition-all duration-500 uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 w-full text-center px-2">
+              {tech.name}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Row 2 -->
+      <div class="flex w-max gap-[1px] animate-marquee-reverse hover:[animation-play-state:paused]">
+        {[...row2, ...row2, ...row2].map((tech) => (
+          <div 
+            class={`group relative bg-[var(--color-canvas)] flex flex-col items-center justify-center h-[100px] md:h-[120px] shrink-0 transition-all duration-300 hover:bg-white/[0.03] hover:z-10 cursor-crosshair overflow-hidden ${tech.isWide ? 'w-[201px] md:w-[241px]' : 'w-[100px] md:w-[120px]'}`}
+          >
+            <!-- Internal Glow Effect -->
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--color-blue-700)_0%,transparent_70%)] opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+            
+            <!-- Top Accent Line -->
+            <div class="absolute top-0 left-0 w-full h-[2px] bg-[var(--color-blue-400)] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
+            
+            <!-- Icon -->
+            <img 
+              src={tech.icon} 
+              alt={`${tech.name} icon`} 
+              class={`object-contain filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 ease-out group-hover:-translate-y-3 group-hover:scale-110 ${tech.isWide ? 'h-8 md:h-10' : 'h-6 w-6 md:h-8 md:w-8'}`}
+              loading="lazy"
+            />
+            
+            <!-- Text Label -->
+            <span class="absolute bottom-2 md:bottom-3 font-mono text-[9px] md:text-[10px] text-[var(--color-muted)] group-hover:text-white transition-all duration-500 uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 w-full text-center px-2">
+              {tech.name}
+            </span>
+          </div>
+        ))}
+      </div>
+
+    </div>
+    
+    <!-- Decorative Legend -->
+    <div class="flex justify-between items-center mt-4 px-4 font-mono text-[9px] md:text-[10px] text-[var(--color-muted)] uppercase tracking-widest">
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-blue-400)]"></span>
+        <span class="hidden sm:inline">Interactive Nodes: {stackData.length}</span>
+        <span class="sm:hidden">Nodes: {stackData.length}</span>
+      </div>
+      <div>System Architecture Grid v1.0</div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.333333%); }
+  }
+  @keyframes marquee-reverse {
+    0% { transform: translateX(-33.333333%); }
+    100% { transform: translateX(0); }
+  }
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+  .animate-marquee-reverse {
+    animation: marquee-reverse 30s linear infinite;
+  }
+</style>
