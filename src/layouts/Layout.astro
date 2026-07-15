@@ -72,10 +72,10 @@ const { title, description = "Micrudev - Everything you build, one keystroke awa
 
 			<!-- Layer 4: Vignette Overlay (subtle edge darkening) -->
 			<div class="deep-space-vignette absolute inset-0"></div>
-
-			<!-- Layer 5: Top Edge Highlight (Cinematic letterbox) -->
-			<div class="deep-space-letterbox absolute top-0 left-0 right-0"></div>
 		</div>
+
+		<!-- Layer 5: Top Edge Highlight (Cinematic letterbox) - Fixed to viewport (sibling of background) -->
+		<div class="deep-space-letterbox fixed top-0 left-0 right-0 z-[60] pointer-events-none"></div>
 
 		<Navbar />
 
