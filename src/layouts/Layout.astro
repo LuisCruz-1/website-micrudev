@@ -46,23 +46,35 @@ const { title, description = "Micrudev - Everything you build, one keystroke awa
 		</script>
 	</head>
 	<body class="bg-[var(--color-canvas)] text-white antialiased relative min-h-screen">
-		<!-- SVG Noise Filter Definition -->
-		<svg class="hidden" xmlns="http://www.w3.org/2000/svg">
-			<filter id="noiseFilter">
-				<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
-			</filter>
-		</svg>
+		<!-- Deep Space Background System -->
+		<div class="deep-space-bg absolute inset-0 overflow-hidden pointer-events-none z-0" style="isolation: isolate;">
+			<!-- Layer 1: Base Canvas with radial depth gradients -->
+			<div class="deep-space-base absolute inset-0"></div>
 
-		<!-- Aurora Background Container -->
-		<div class="absolute inset-0 overflow-hidden pointer-events-none z-0 mix-blend-screen dark:mix-blend-screen mix-blend-multiply aurora-container">
-			<div class="aurora-blade blade-1"></div>
-			<div class="aurora-blade blade-2"></div>
-			<div class="aurora-blade blade-3"></div>
-			
-			<!-- Vignette Overlay -->
-			<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-canvas)_100%)] opacity-80"></div>
-			<!-- SVG Grain Overlay -->
-			<div class="absolute inset-0 mix-blend-overlay opacity-[0.4] dark:opacity-[0.15]" style="filter: url(#noiseFilter);"></div>
+			<!-- Layer 2: Aurora Blades (5 layered light sources) -->
+			<div class="absolute inset-0">
+				<div class="aurora-blade blade-1"></div>
+				<div class="aurora-blade blade-2"></div>
+				<div class="aurora-blade blade-3"></div>
+				<div class="aurora-blade blade-4"></div>
+				<div class="aurora-blade blade-5"></div>
+			</div>
+
+			<!-- Layer 3: Subtle Grid Overlay (Swiss precision) - Inline SVG -->
+			<svg class="deep-space-grid absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+				<defs>
+					<pattern id="microGrid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+						<path d="M 60 0 L 0 0 0 60" fill="none" stroke="#4C84FF" stroke-width="0.5"/>
+					</pattern>
+				</defs>
+				<rect width="100%" height="100%" fill="url(#microGrid)"/>
+			</svg>
+
+			<!-- Layer 4: Vignette Overlay (subtle edge darkening) -->
+			<div class="deep-space-vignette absolute inset-0"></div>
+
+			<!-- Layer 5: Top Edge Highlight (Cinematic letterbox) -->
+			<div class="deep-space-letterbox absolute top-0 left-0 right-0"></div>
 		</div>
 
 		<Navbar />
@@ -74,6 +86,37 @@ const { title, description = "Micrudev - Everything you build, one keystroke awa
 		<style is:global>
 			@keyframes shimmer {
 				100% { transform: translateX(100%); }
+			}
+
+			/* Deep Space Background System */
+			.deep-space-base {
+				background:
+					radial-gradient(ellipse 80% 60% at 50% 0%, rgba(2, 83, 253, 0.4), transparent 60%),
+					radial-gradient(ellipse 60% 50% at 100% 100%, rgba(76, 132, 255, 0.3), transparent 60%),
+					radial-gradient(ellipse 50% 50% at 0% 80%, rgba(0, 26, 102, 0.5), transparent 60%),
+					var(--color-canvas);
+			}
+
+			.deep-space-grid {
+				opacity: 0.6;
+				mask-image: radial-gradient(ellipse 80% 80% at 50% 30%, #000 0%, transparent 75%);
+				-webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 30%, #000 0%, transparent 75%);
+			}
+
+			html:not(.dark) .deep-space-grid {
+				opacity: 0.4;
+			}
+
+			.deep-space-vignette {
+				background: radial-gradient(circle at center, transparent 0%, var(--color-canvas) 100%);
+				opacity: 0.7;
+			}
+
+			.deep-space-letterbox {
+				height: 3px;
+				background: linear-gradient(to right, transparent 0%, var(--theme-aurora-1) 50%, transparent 100%);
+				opacity: 1;
+				box-shadow: 0 0 20px var(--theme-aurora-1), 0 0 40px var(--theme-aurora-1), 0 0 80px var(--theme-aurora-1);
 			}
 		</style>
 	</body>

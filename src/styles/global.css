@@ -26,11 +26,18 @@
     --theme-white: #06132F; /* Invierte blanco a texto oscuro */
     --theme-black: #ffffff; /* Invierte negro a blanco */
     --theme-muted: #637089;
-    
+
     --theme-crimson: #003DCC;
     --theme-coral: #0253FD;
     --theme-amber: #4C84FF;
-    
+
+    --theme-aurora-1: #0253FD;
+    --theme-aurora-2: #4C84FF;
+    --theme-aurora-3: #001A66;
+    --theme-aurora-4: #003DCC;
+    --theme-aurora-5: #6B9DFF;
+    --theme-aurora-glow: rgba(2, 83, 253, 0.18);
+
     --theme-keycap-bg: #ffffff;
     --theme-keycap-text: #06132F;
     --theme-keycap-shadow: 0 0 0 2px rgba(6, 19, 47, 0.1), 0 4px 14px rgba(6, 19, 47, 0.05), inset 0 -2px 1px rgba(6, 19, 47, 0.05);
@@ -47,27 +54,34 @@
 
   :root.dark {
     /* Modo Oscuro */
-    --theme-canvas: #06132F;
+    --theme-canvas: #040B1F;
     --theme-white: #ffffff;
     --theme-black: #000000;
     --theme-muted: #8B9BB4;
-    
+
     --theme-crimson: #003DCC;
     --theme-coral: #0253FD;
     --theme-amber: #4C84FF;
-    
+
+    --theme-aurora-1: #0253FD;
+    --theme-aurora-2: #4C84FF;
+    --theme-aurora-3: #001A66;
+    --theme-aurora-4: #003DCC;
+    --theme-aurora-5: #6B9DFF;
+    --theme-aurora-glow: rgba(2, 83, 253, 0.22);
+
     --theme-keycap-bg: #E7EFFF;
     --theme-keycap-text: #0F1B37;
     --theme-keycap-shadow: 0 0 0 2px #000, 0 0 14px rgba(255, 255, 255, 0.19), inset 0 1px 1px rgba(255, 255, 255, 1), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
     --theme-keycap-shadow-active: 0 0 0 2px #000, 0 0 6px rgba(255, 255, 255, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.4);
 
-    --theme-nav-bg: rgba(7, 8, 10, 0.6);
+    --theme-nav-bg: rgba(4, 11, 31, 0.7);
     --theme-nav-border: rgba(255, 255, 255, 0.1);
     --theme-nav-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 30px rgba(0, 0, 0, 0.5);
 
-    --theme-cmd-bg: rgba(15, 16, 18, 0.65);
+    --theme-cmd-bg: rgba(7, 12, 28, 0.7);
     --theme-cmd-border: rgba(255, 255, 255, 0.08);
-    --theme-cmd-shadow: 0 30px 60px rgba(255, 47, 58, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    --theme-cmd-shadow: 0 30px 60px rgba(2, 83, 253, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
   html {
@@ -155,47 +169,103 @@
   }
 
   /* Aurora Animations */
+  .aurora-container {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(2, 83, 253, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 100%, rgba(76, 132, 255, 0.08), transparent 60%),
+      var(--color-canvas);
+  }
+
   .aurora-blade {
     position: absolute;
     filter: blur(100px);
     border-radius: 50%;
     will-change: transform, opacity;
+    contain: layout style paint;
+    pointer-events: none;
   }
 
   .blade-1 {
-    background: linear-gradient(to right, var(--color-crimson), var(--color-coral));
-    width: 60vw; height: 30vw;
-    top: -10%; left: 0;
+    background: radial-gradient(circle, var(--theme-aurora-1) 0%, transparent 70%);
+    width: 55vw; height: 55vw;
+    top: -15%; left: -10%;
     transform: rotate(-15deg);
-    animation: drift-1 18s infinite alternate ease-in-out;
+    animation: drift-1 24s infinite alternate ease-in-out;
+    opacity: 1;
   }
-  
+
   .blade-2 {
-    background: linear-gradient(to left, var(--color-coral), var(--color-amber));
-    width: 70vw; height: 25vw;
-    top: 40%; right: -10%;
+    background: radial-gradient(circle, var(--theme-aurora-2) 0%, transparent 70%);
+    width: 50vw; height: 50vw;
+    top: 25%; right: -15%;
     transform: rotate(20deg);
-    animation: drift-2 22s infinite alternate ease-in-out;
+    animation: drift-2 30s infinite alternate ease-in-out;
+    opacity: 0.95;
   }
 
   .blade-3 {
-    background: linear-gradient(to right, var(--color-crimson), var(--color-amber));
-    width: 50vw; height: 40vw;
-    bottom: -20%; left: 20%;
+    background: radial-gradient(circle, var(--theme-aurora-3) 0%, transparent 70%);
+    width: 60vw; height: 60vw;
+    bottom: -20%; left: 15%;
     transform: rotate(-5deg);
-    animation: drift-3 15s infinite alternate ease-in-out;
+    animation: drift-3 20s infinite alternate ease-in-out;
+    opacity: 1;
+  }
+
+  .blade-4 {
+    background: radial-gradient(circle, var(--theme-aurora-4) 0%, transparent 70%);
+    width: 35vw; height: 35vw;
+    top: 50%; left: 40%;
+    transform: rotate(10deg);
+    animation: drift-4 35s infinite alternate ease-in-out;
+    opacity: 0.9;
+  }
+
+  .blade-5 {
+    background: radial-gradient(circle, var(--theme-aurora-5) 0%, transparent 70%);
+    width: 40vw; height: 40vw;
+    top: 5%; right: 20%;
+    transform: rotate(-25deg);
+    animation: drift-5 28s infinite alternate ease-in-out;
+    opacity: 0.95;
   }
 
   @keyframes drift-1 {
-    0% { transform: translate(0, 0) rotate(-15deg) scale(1.1); opacity: 0.85; }
-    100% { transform: translate(5%, 5%) rotate(-10deg) scale(0.9); opacity: 0.6; }
+    0% { transform: translate(0, 0) rotate(-15deg) scale(1); opacity: 0.55; }
+    100% { transform: translate(8%, 6%) rotate(-8deg) scale(1.15); opacity: 0.7; }
   }
   @keyframes drift-2 {
-    0% { transform: translate(0, 0) rotate(20deg) scale(1); opacity: 0.7; }
-    100% { transform: translate(-5%, 8%) rotate(25deg) scale(1.15); opacity: 0.85; }
+    0% { transform: translate(0, 0) rotate(20deg) scale(1); opacity: 0.45; }
+    100% { transform: translate(-7%, 10%) rotate(28deg) scale(1.2); opacity: 0.6; }
   }
   @keyframes drift-3 {
-    0% { transform: translate(0, 0) rotate(-5deg) scale(1.05); opacity: 0.8; }
-    100% { transform: translate(8%, -5%) rotate(0deg) scale(0.95); opacity: 0.65; }
+    0% { transform: translate(0, 0) rotate(-5deg) scale(1); opacity: 0.65; }
+    100% { transform: translate(10%, -8%) rotate(2deg) scale(0.9); opacity: 0.5; }
+  }
+  @keyframes drift-4 {
+    0% { transform: translate(0, 0) rotate(10deg) scale(1); opacity: 0.35; }
+    50% { transform: translate(5%, -5%) rotate(15deg) scale(1.1); opacity: 0.45; }
+    100% { transform: translate(-5%, 8%) rotate(5deg) scale(0.95); opacity: 0.3; }
+  }
+  @keyframes drift-5 {
+    0% { transform: translate(0, 0) rotate(-25deg) scale(1); opacity: 0.4; }
+    100% { transform: translate(-10%, 12%) rotate(-15deg) scale(1.25); opacity: 0.55; }
+  }
+
+  @media (max-width: 768px) {
+    .aurora-blade {
+      filter: blur(70px);
+    }
+    .blade-1 { width: 80vw; height: 80vw; }
+    .blade-2 { width: 70vw; height: 70vw; }
+    .blade-3 { width: 85vw; height: 85vw; }
+    .blade-4 { width: 50vw; height: 50vw; }
+    .blade-5 { width: 55vw; height: 55vw; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aurora-blade {
+      animation: none !important;
+    }
   }
 }
