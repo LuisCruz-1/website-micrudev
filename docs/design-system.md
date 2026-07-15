@@ -1,15 +1,15 @@
 # Micrudev Design System & Prompt Style Guide
 
-> **Estética: "Premium Dark Developer-Tool" & "Cinematic Warm Aurora"**
+> **Estética: "Premium Dark Developer-Tool" & "Cinematic Deep Space Aurora"**
 > Esta guía documenta el sistema de diseño iterado para Micrudev. Está diseñada para servir como un "prompt maestro" que permite a cualquier desarrollador o IA replicar exactamente el mismo estilo visual y componentes sin ambigüedades.
 
 ---
 
 ## 1. Filosofía de Diseño
 
-El diseño encarna el ADN visual de las herramientas para desarrolladores de primer nivel (estilo Vercel, Linear, Stripe). Combina la precisión técnica del diseño suizo con profundidad tridimensional táctil y una iluminación cinematográfica.
+El diseño encarna el ADN visual de las herramientas para desarrolladores de primer nivel (estilo Vercel, Linear, Stripe). Combina la precisión técnica del diseño suizo con profundidad tridimensional táctil y una iluminación cinematográfica profunda tipo "espacio exterior".
 
-- **Iluminación Cinematográfica (Living Aurora):** El fondo no es un color plano; es un ecosistema vivo de luz difuminada y texturizada.
+- **Espacio Profundo Cinematográfico (Deep Space):** El fondo no es un color plano; es un universo con un canvas base azul muy oscuro, luces de aurora flotantes, una cuadrícula técnica sutil y un halo de luz superior.
 - **Profundidad Táctil (Keycaps & Glassmorphism):** Los botones principales simulan teclas físicas de teclado mecánico, mientras que los contenedores secundarios flotan como paneles de cristal esmerilado.
 - **Precisión Matemática:** Tipografías monoespaciadas para metadatos, ausencia total de cursivas y alineación estricta.
 - **Polaridad Dinámica (Dark/Light):** Un sistema basado en tokens (variables CSS) donde los colores invierten su polaridad, manteniendo la misma estructura de clases HTML para que el sitio soporte Modo Claro y Oscuro de forma impecable.
@@ -23,16 +23,22 @@ Todo el sitio utiliza variables nativas inyectadas en `@theme` de Tailwind CSS v
 ### Paleta Base (Definida en `:root` y `:root.dark`)
 | Token | Modo Oscuro (`.dark`) | Modo Claro | Rol |
 |-------|----------------------|------------|-----|
-| `--color-canvas` | `#06132F` (Near Navy Black) | `#F6F8FC` (Soft Gray) | Fondo base del viewport |
+| `--color-canvas` | `#040B1F` (Deep Space Navy) | `#F6F8FC` (Soft Gray) | Fondo base del viewport |
 | `--color-white` | `#ffffff` | `#06132F` | Texto principal, iconos, títulos |
 | `--color-black` | `#000000` | `#ffffff` | Sombras, fondos inversos |
 | `--color-muted` | `#8B9BB4` | `#637089` | Texto secundario, subtítulos |
 
-### Aurora Accent Colors
-- `--color-crimson`: `#003DCC`
-- `--color-coral`: `#0253FD`
-- `--color-amber`: `#4C84FF`
-*(Nota: Estrictamente basados en la paleta azul corporativa de Micrudev, utilizados en gradientes vivos y acentos visuales).*
+### Aurora Accent Colors (Paleta Corporativa)
+- `--color-crimson`: `#003DCC` (Azul corporativo profundo)
+- `--color-coral`: `#0253FD` (Azul brillante principal)
+- `--color-amber`: `#4C84FF` (Azul claro cristalino)
+
+### Aurora Blade Tokens (Para el fondo Deep Space)
+- `--theme-aurora-1`: `#0253FD`
+- `--theme-aurora-2`: `#4C84FF`
+- `--theme-aurora-3`: `#001A66` (Azul espacial casi negro)
+- `--theme-aurora-4`: `#003DCC`
+- `--theme-aurora-5`: `#6B9DFF`
 
 ---
 
@@ -51,12 +57,37 @@ Todo el sitio utiliza variables nativas inyectadas en `@theme` de Tailwind CSS v
 
 ## 4. Componentes Insignia (Signature Elements)
 
-### A. The Living Aurora Background
-El fondo interactivo de todo el sitio. Nunca es plano.
-- **Estructura:** Un contenedor absoluto (`.aurora-container`) posicionado en `z-0`.
-- **Blades:** 3 divs (`.aurora-blade`) con grandes dimensiones (`60vw`), `filter: blur(100px)`, gradientes lineales y animaciones CSS de traslación/rotación (`drift`) en bucles infinitos y desfasados (15s, 18s, 22s).
-- **Textura:** Una capa SVG superpuesta con `feTurbulence` (ruido/grano) configurada con `mix-blend-overlay`.
-- **Blend Modes Estrictos:** El contenedor de la aurora usa `mix-blend-screen` en modo oscuro y `mix-blend-multiply` en modo claro para fusionarse correctamente con el fondo base.
+### A. The Deep Space Aurora Background (Sistema Completo)
+El fondo del sitio es un ecosistema de 6 capas apiladas con aislamiento propio (`isolation: isolate`). Todas las capas son `position: absolute inset-0 pointer-events-none`.
+
+**Orden estricto de la pila (de fondo a frente):**
+
+| # | Capa | Descripción |
+|---|------|-------------|
+| 1 | `.deep-space-base` | Canvas base con 3 gradientes radiales elípticos (azul superior, azul claro inferior derecho, azul espacial inferior izquierdo) sobre el color canvas. |
+| 2 | `.aurora-blade` × 5 | Luces radiales difuminadas con `filter: blur(100px)`, animaciones de traslación/rotación desfasadas. |
+| 3 | `.deep-space-grid` | Cuadrícula técnica SVG de 60x60px con `mask-image` radial que la difumina hacia los bordes. |
+| 4 | `.deep-space-vignette` | Viñeta radial sutil que oscurece los bordes. |
+| 5 | `.deep-space-letterbox` | Línea de luz superior (3px) con triple `box-shadow` de resplandor. |
+
+**Especificaciones de las 5 Aurora Blades:**
+- Posicionamiento absoluto con dimensiones en `vw` (responsive).
+- Cada una con su propio color, posición, rotación y velocidad de animación.
+- Animaciones: `drift-1` (24s), `drift-2` (30s), `drift-3` (20s), `drift-4` (35s), `drift-5` (28s).
+- Todas usan `infinite alternate ease-in-out` con `will-change: transform, opacity`.
+- En móvil (`max-width: 768px`): se reduce el blur a 70px y se ajustan las dimensiones.
+- En `prefers-reduced-motion: reduce`: se desactivan todas las animaciones.
+
+**Micro-Grid (Capas 3) - Adaptación por tema:**
+- **Modo Oscuro:** Stroke `#4C84FF`, opacidad `0.6`.
+- **Modo Claro:** Stroke `#003DCC`, opacidad `0.8`.
+- Se controla mediante clase `.grid-stroke` con selectores `html.dark` y `html:not(.dark)`.
+
+**Letterbox Superior (Capa 5):**
+- Altura: `3px`.
+- Gradiente: `linear-gradient(to right, transparent, var(--theme-aurora-1), transparent)`.
+- Triple resplandor: `box-shadow: 0 0 20px, 0 0 40px, 0 0 80px`.
+- Opacidad: `1`.
 
 ### B. Standardized Eyebrows (Etiquetas Superiores)
 Toda sección principal debe estar precedida por un "Eyebrow" sobre el título principal.
@@ -83,6 +114,11 @@ Presentación de tecnologías sin bordes rígidos.
 - **Máscara de Difuminado:** Uso de `mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent)` para que los elementos se desvanezcan hacia los extremos izquierdo y derecho.
 - **Interacción:** Hover pausa el contenedor (`group-hover:[animation-play-state:paused]`) e ilumina los iconos.
 
+### F. Mobile Menu Overlay (Menú Desplegable)
+- Botón hamburguesa visible solo en `md:hidden` con icono dinámico (menú ↔ X).
+- Overlay full-width con `backdrop-blur-2xl` y animación de `translate-y` con `duration-300 ease-in-out`.
+- **Cierre automático:** Al hacer clic fuera del menú, al hacer clic en un enlace, o al presionar la tecla `Escape`.
+
 ---
 
 ## 5. Espaciado y Layout Uniforme
@@ -103,7 +139,13 @@ La magia técnica para la escalabilidad del tema reside en Tailwind v4:
    ```css
    @custom-variant dark (&:where(.dark, .dark *));
    ```
-3. **Imágenes en Tema Claro:** Cualquier logo o imagen que sea blanco por defecto, debe llevar la clase `.invert-on-light` (declarada en CSS global) para que automáticamente aplique `filter: invert(1)` cuando el `.dark` sea removido del HTML.
+3. **Identidad Dual de Logos:** El sitio tiene dos juegos de logos (`Micrudev_Logo_Monochrome_White.svg` para oscuro y `Micrudev_Logo_Primary.svg` para claro) que se renderizan con clases condicionales:
+   ```html
+   <img src="...Monochrome_White.svg" class="hidden dark:block" />
+   <img src="...Primary.svg" class="block dark:hidden" />
+   ```
+4. **Favicon Dinámico:** El favicon (`public/favicon.svg`) usa `Micrudev_Icon_Monochrome_Navy.svg` con CSS interno que adapta el color mediante `@media (prefers-color-scheme: dark)`.
+5. **WhatsApp Universal:** Todos los botones de contacto (`href`) apuntan a `https://wa.me/593998081684` con `target="_blank" rel="noopener noreferrer"`.
 
 ---
 
@@ -117,4 +159,7 @@ Si estás generando una nueva página, componente o sección basada en esta guí
 - [ ] ¿El espacio entre el texto introductorio y la primera fila de tarjetas es de al menos `mt-16` o `mb-16`?
 - [ ] ¿Los botones principales de llamada a la acción (CTA) usan la clase `.keycap-btn` o, de ser secundarios, `.ghost-pill`?
 - [ ] ¿El componente respeta las variables del tema (`var(--color-white)`, `var(--color-canvas)`) y evita codificar colores crudos (`text-white`, `bg-black`)?
+- [ ] ¿Los logos implementan la lógica dual con `hidden dark:block` y `block dark:hidden`?
+- [ ] ¿Los enlaces de contacto apuntan a `https://wa.me/593998081684` con `target="_blank"`?
 - [ ] ¿El código no contiene clases sobrantes, genéricas o estilos bootstrap? Mantenlo elegante, oscuro y técnico.
+- [ ] ¿El fondo Deep Space se mantiene visible con sus 5 capas (base, blades, grid, vignette, letterbox)?

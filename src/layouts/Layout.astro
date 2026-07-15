@@ -64,7 +64,7 @@ const { title, description = "Micrudev - Everything you build, one keystroke awa
 			<svg class="deep-space-grid absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
 				<defs>
 					<pattern id="microGrid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-						<path d="M 60 0 L 0 0 0 60" fill="none" stroke="#4C84FF" stroke-width="0.5"/>
+						<path d="M 60 0 L 0 0 0 60" fill="none" stroke="#003DCC" stroke-width="0.6" class="grid-stroke"/>
 					</pattern>
 				</defs>
 				<rect width="100%" height="100%" fill="url(#microGrid)"/>
@@ -104,7 +104,15 @@ const { title, description = "Micrudev - Everything you build, one keystroke awa
 			}
 
 			html:not(.dark) .deep-space-grid {
-				opacity: 0.4;
+				opacity: 0.6;
+			}
+
+			html:not(.dark) .grid-stroke {
+				stroke: #003DCC;
+			}
+
+			html.dark .grid-stroke {
+				stroke: #4C84FF;
 			}
 
 			.deep-space-vignette {
