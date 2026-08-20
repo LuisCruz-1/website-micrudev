@@ -9,7 +9,7 @@ client: "HBL Babygoods"
 image: "https://images.unsplash.com/photo-1491897554428-130a60dd4757?w=1200&q=85"
 imageAlt: "Imagen representativa de productos para bebé"
 tech: ["Next.js", "Stripe", "Tailwind CSS", "Vercel"]
-featured: false
+featured: true
 ---
 
 La plataforma de comercio electrónico de HBL Babygoods fue planteada como una solución completa y escalable para una empresa especializada en productos para bebés.

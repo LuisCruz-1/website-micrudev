@@ -9,7 +9,7 @@ client: "Colegio ANAVI"
 image: "https://images.unsplash.com/photo-1555421689-491a97ff2040?w=1200&q=85"
 imageAlt: "Imagen representativa de una aplicación móvil de gestión"
 tech: ["React Native", "Firebase", "Node.js"]
-featured: true
+featured: false
 ---
 
 Attendance APP es una aplicación móvil diseñada para optimizar y agilizar el proceso de toma de asistencia diaria en el Colegio ANAVI.

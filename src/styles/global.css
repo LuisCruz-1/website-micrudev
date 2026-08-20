@@ -154,7 +154,7 @@
 
   .ghost-pill {
     background: transparent;
-    border: 1px solid rgba(var(--color-white), 0.15);
+    border: 1px solid color-mix(in srgb, var(--color-white) 15%, transparent);
     color: var(--color-muted);
     border-radius: 9999px;
     padding: 8px 16px;
@@ -165,7 +165,7 @@
     transition: all 0.2s;
   }
   .ghost-pill:hover {
-    border-color: rgba(var(--color-white), 0.3);
+    border-color: color-mix(in srgb, var(--color-white) 30%, transparent);
     color: var(--color-white);
   }
 
@@ -270,6 +270,19 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
     .aurora-blade {
       animation: none !important;
     }

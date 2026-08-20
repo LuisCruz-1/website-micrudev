@@ -32,6 +32,7 @@ const sharedConditions = [
       {plans.map((plan) => {
         const { data } = plan;
         const levelNumber = String(data.order).padStart(2, '0');
+        const renewalPrice = data.hostingRenewal.split(',')[0].replace(/\.$/, '');
 
         return (
           <article class={`plan-card command-bar-mockup relative flex flex-col overflow-hidden p-7 md:p-8 ${data.featured ? 'plan-card--featured' : ''}`}>
@@ -50,14 +51,16 @@ const sharedConditions = [
               )}
             </div>
 
-            <h3 class="mb-3 text-2xl font-semibold tracking-tight text-white">{data.name}</h3>
+            <h3 class="mb-2 text-2xl font-semibold tracking-tight text-white">{data.name}</h3>
+            <p class="mb-4 font-mono text-[9px] uppercase tracking-[0.13em] text-[var(--color-coral)]">{data.modality}</p>
             <p class="mb-7 min-h-[66px] text-[15px] leading-relaxed text-[var(--color-muted)]">{data.description}</p>
 
             <div class="mb-2 flex items-end gap-2">
               <span class="pb-1.5 font-mono text-[11px] uppercase tracking-wider text-[var(--color-muted)]">USD</span>
               <span class="text-[44px] font-semibold leading-none tracking-[-0.04em] text-white">{data.price}</span>
             </div>
-            <p class="mb-7 text-xs text-[var(--color-muted)]">Pago único por desarrollo · dominio no incluido</p>
+            <p class="mb-1 text-xs text-[var(--color-muted)]">Desarrollo + hospedaje durante 12 meses</p>
+            <p class="mb-7 text-[11px] leading-relaxed text-[var(--color-muted)]">Renovación: {renewalPrice} · dominio aparte</p>
 
             <dl class="mb-7 grid grid-cols-2 border-y border-white/8 py-4">
               <div class="border-r border-white/8 pr-4">
@@ -107,7 +110,7 @@ const sharedConditions = [
         <svg class="text-[var(--color-coral)]" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m15 8 4 4-4 4" /></svg>
       </div>
 
-      <div class="overflow-x-auto">
+      <div class="overflow-x-auto focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--color-amber)]" role="region" aria-label="Tabla comparativa de planes" tabindex="0">
         <table class="w-full min-w-[780px] border-collapse text-left">
           <caption class="sr-only">Comparación de los planes de desarrollo web de Micrudev</caption>
           <thead>

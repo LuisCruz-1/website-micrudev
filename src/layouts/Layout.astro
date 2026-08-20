@@ -7,7 +7,7 @@ interface Props {
 	description?: string;
 }
 
-const { title, description = "Micrudev - Everything you build, one keystroke away." } = Astro.props;
+const { title, description = "Micrudev desarrolla sitios web, aplicaciones, automatizaciones e integraciones de inteligencia artificial." } = Astro.props;
 ---
 
 <!doctype html>
@@ -46,6 +46,9 @@ const { title, description = "Micrudev - Everything you build, one keystroke awa
 		</script>
 	</head>
 	<body class="bg-[var(--color-canvas)] text-white antialiased relative min-h-screen">
+		<a href="#contenido-principal" class="fixed left-4 top-4 z-[100] -translate-y-20 rounded-lg bg-[var(--color-white)] px-4 py-3 text-sm font-semibold text-[var(--color-canvas)] shadow-xl transition-transform focus:translate-y-0">
+			Saltar al contenido
+		</a>
 		<!-- Deep Space Background System -->
 		<div class="deep-space-bg absolute inset-0 overflow-hidden pointer-events-none z-0" style="isolation: isolate;">
 			<!-- Layer 1: Base Canvas with radial depth gradients -->
@@ -80,7 +83,7 @@ const { title, description = "Micrudev - Everything you build, one keystroke awa
 		<Navbar />
 
 		<!-- Main Content -->
-		<div class="relative z-10">
+		<div id="contenido-principal" class="relative z-10" tabindex="-1">
 			<slot />
 		</div>
 		<style is:global>
