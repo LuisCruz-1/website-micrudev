@@ -1,0 +1,233 @@
+{
+  "order": 3,
+  "level": "Nivel 3",
+  "name": "Tienda en Línea",
+  "title": "Tienda en línea con WooCommerce",
+  "modality": "WordPress + WooCommerce + template",
+  "duration": "10 a 15 días laborables",
+  "validity": "15 días calendario",
+  "price": 400,
+  "featured": false,
+  "description": "Una tienda lista para vender, administrar productos, controlar inventario y procesar pedidos.",
+  "scope": "Hasta 20 productos · 5 categorías",
+  "revisions": "3 rondas",
+  "support": "30 días",
+  "introduction": [
+    "Este plan contempla el desarrollo de una tienda en línea en WordPress y WooCommerce, utilizando una plantilla profesional seleccionada previamente por el cliente.",
+    "Micrudev enviará un catálogo de templates especializados en comercio electrónico para escoger la alternativa que mejor se adapte al estilo y características del negocio.",
+    "Una vez seleccionada, la plantilla será configurada y adaptada con el logotipo, colores, textos, imágenes, productos e información de la empresa."
+  ],
+  "highlights": [
+    "Carga inicial de hasta 20 productos",
+    "Carrito, pedidos e inventario",
+    "Una pasarela de pago compatible",
+    "Envíos, cupones y correos automáticos",
+    "Hospedaje incluido durante el primer año"
+  ],
+  "includes": [
+    "Desarrollo completo de la tienda en WordPress.",
+    "Instalación y configuración de WooCommerce.",
+    "Catálogo de templates profesionales para elección del cliente.",
+    "Instalación y configuración del template seleccionado.",
+    "Adaptación de colores, logotipo, tipografías, imágenes y contenidos del cliente.",
+    "Adaptación para computadoras, tablets y dispositivos móviles.",
+    "Página principal de la tienda.",
+    "Catálogo administrable de productos.",
+    "Páginas de categorías.",
+    "Página individual para cada producto.",
+    "Carrito de compras.",
+    "Proceso de finalización de compra.",
+    "Área de cuenta para clientes.",
+    "Gestión administrativa de pedidos.",
+    "Gestión de inventario.",
+    "Gestión de precios y ofertas.",
+    "Configuración inicial de categorías de productos.",
+    "Configuración de productos simples y variables.",
+    "Carga inicial de hasta 20 productos.",
+    "Hasta 5 categorías de productos.",
+    "Hasta 3 atributos generales, como talla, color o presentación.",
+    "Sistema de cupones de descuento.",
+    "Configuración básica de métodos de envío.",
+    "Configuración de retiro en establecimiento cuando corresponda.",
+    "Configuración de transferencia bancaria como método de pago.",
+    "Integración de una pasarela de pago compatible con WooCommerce.",
+    "Configuración de correos automáticos relacionados con pedidos.",
+    "Formularios para recepción de consultas.",
+    "Botón flotante de contacto mediante WhatsApp.",
+    "Configuración básica para posicionamiento en buscadores.",
+    "Integración con Google Analytics y Google Search Console.",
+    "Configuración básica de medición de comercio electrónico.",
+    "Optimización básica de velocidad, imágenes y rendimiento.",
+    "Configuración inicial de seguridad.",
+    "Instalación y configuración del certificado SSL.",
+    "Panel administrable para gestionar productos, clientes y pedidos.",
+    "Capacitación para la administración básica de la tienda.",
+    "Capacitación para crear productos, modificar precios, gestionar inventario y revisar pedidos.",
+    "Hasta tres rondas de ajustes durante el desarrollo.",
+    "Soporte técnico correctivo durante 30 días después de la publicación.",
+    "Hospedaje de la tienda incluido durante el primer año."
+  ],
+  "investmentDescription": "El valor incluye la construcción de la tienda en WordPress y WooCommerce, la configuración del template seleccionado, su adaptación al negocio, la configuración inicial de comercio electrónico y el hospedaje durante los primeros 12 meses.",
+  "hostingRenewal": "USD 50 anuales, sujeto al consumo de recursos del sitio.",
+  "hostingNotes": [
+    "El valor estándar de hospedaje se mantendrá mientras la tienda permanezca dentro de los recursos asignados al servicio contratado.",
+    "Si el crecimiento del sitio, tráfico, almacenamiento, cantidad de productos u operaciones requiere mayores recursos, Micrudev presentará previamente las alternativas de infraestructura y sus respectivos valores."
+  ],
+  "paymentFinalLabel": "50 % antes de publicar la tienda",
+  "externalServices": true,
+  "timelineInputs": [
+    "Pago inicial.",
+    "Template seleccionado.",
+    "Logotipo.",
+    "Textos definitivos.",
+    "Fotografías.",
+    "Catálogo de productos.",
+    "Nombres de productos.",
+    "Descripciones.",
+    "Precios.",
+    "Categorías.",
+    "Inventario.",
+    "Variaciones.",
+    "Información de métodos de pago.",
+    "Información de métodos de envío.",
+    "Datos necesarios para configurar la tienda."
+  ],
+  "timelineWaitingNote": "Los días durante los cuales Micrudev se encuentre esperando información, credenciales, revisiones o aprobaciones del cliente no se contabilizan dentro del tiempo de desarrollo.",
+  "detailSections": [
+    {
+      "id": "informacion-productos",
+      "eyebrow": "Catálogo inicial",
+      "title": "Información de productos",
+      "paragraphs": [
+        "Para realizar la carga inicial de hasta 20 productos, el cliente deberá proporcionar la información correspondiente de manera organizada.",
+        "Según las características del producto, esta información podrá incluir los siguientes datos."
+      ],
+      "items": [
+        "Nombre.",
+        "Descripción.",
+        "Precio.",
+        "Categoría.",
+        "Fotografías.",
+        "Stock.",
+        "Talla.",
+        "Color.",
+        "Presentación.",
+        "Variaciones.",
+        "Peso.",
+        "Dimensiones.",
+        "Otra información comercial necesaria."
+      ],
+      "note": "La investigación de productos, redacción profesional de descripciones, creación de fotografías y carga de productos adicionales al límite establecido no están incluidas en el plan."
+    },
+    {
+      "id": "pasarela-pago",
+      "eyebrow": "Pagos",
+      "title": "Pasarela de pago",
+      "paragraphs": [
+        "El plan contempla la configuración e integración técnica de una pasarela de pago compatible con WooCommerce.",
+        "La disponibilidad de una determinada pasarela dependerá de que el proveedor correspondiente permita técnicamente su integración.",
+        "Los siguientes valores o procesos no se encuentran incluidos dentro del desarrollo."
+      ],
+      "items": [
+        "Comisiones por transacción.",
+        "Costos de activación.",
+        "Mensualidades cobradas por proveedores.",
+        "Requisitos bancarios.",
+        "Procesos de verificación.",
+        "Contratación del servicio.",
+        "Retenciones o cargos realizados por la plataforma de pagos."
+      ],
+      "note": "Estos valores y condiciones corresponden directamente al cliente y al proveedor de la pasarela seleccionada."
+    },
+    {
+      "id": "consideraciones-diseno",
+      "eyebrow": "Diseño y alcance",
+      "title": "Consideraciones sobre el diseño",
+      "paragraphs": [
+        "La propuesta corresponde a un desarrollo basado en templates especializados en comercio electrónico. El cliente escogerá una plantilla de entre las opciones presentadas por Micrudev.",
+        "La estructura general y distribución visual estarán determinadas por el template seleccionado, el cual será adaptado con la información, productos y elementos gráficos de la empresa.",
+        "El servicio corresponde a la adaptación profesional de un template y no contempla un diseño de tienda desarrollado completamente desde cero.",
+        "Cualquier requerimiento adicional será revisado y cotizado por separado antes de su implementación. Esto incluye, entre otros:"
+      ],
+      "items": [
+        "Facturación electrónica.",
+        "Integraciones con sistemas contables.",
+        "Integraciones con ERP o CRM.",
+        "Sincronización con inventarios externos.",
+        "Integraciones especiales con empresas de transporte.",
+        "Automatizaciones personalizadas.",
+        "Funcionalidades especiales.",
+        "Desarrollo de plugins.",
+        "Sistemas de membresías.",
+        "Marketplace con múltiples vendedores."
+      ]
+    },
+    {
+      "id": "revisiones",
+      "eyebrow": "Ajustes",
+      "title": "Revisiones",
+      "paragraphs": [
+        "La propuesta incluye hasta tres rondas de ajustes. Cada ronda corresponde a una lista única y consolidada de cambios solicitados por el cliente.",
+        "Los ajustes deberán respetar la estructura y funcionalidades originalmente establecidas.",
+        "La creación de nuevas páginas, módulos, funcionalidades, integraciones o modificaciones que cambien el alcance inicial no se considerará una revisión y podrá generar un valor adicional.",
+        "Una vez aprobada una etapa del proyecto, modificaciones importantes sobre elementos previamente aprobados podrán considerarse trabajo adicional."
+      ]
+    },
+    {
+      "id": "soporte-posterior",
+      "eyebrow": "Garantía técnica",
+      "title": "Soporte posterior",
+      "paragraphs": [
+        "El soporte técnico incluido durante los primeros 30 días cubre errores relacionados con el desarrollo y configuración original de la tienda."
+      ],
+      "listTitle": "No contempla",
+      "items": [
+        "Creación de nuevos productos.",
+        "Carga permanente de productos.",
+        "Actualización constante de precios.",
+        "Gestión diaria de inventario.",
+        "Administración de pedidos.",
+        "Nuevas páginas.",
+        "Cambios posteriores de diseño.",
+        "Nuevas funcionalidades.",
+        "Nuevas integraciones.",
+        "Problemas ocasionados por modificaciones realizadas por terceros.",
+        "Mantenimiento mensual permanente."
+      ]
+    },
+    {
+      "id": "propiedad-accesos",
+      "eyebrow": "Titularidad",
+      "title": "Propiedad y accesos",
+      "paragraphs": [
+        "Una vez completado el pago total, el cliente recibirá los accesos administrativos correspondientes y tendrá control sobre su tienda y contenido.",
+        "El dominio se registrará preferiblemente utilizando los datos proporcionados por el cliente, para que la empresa conste como su titular.",
+        "Las cuentas pertenecientes a pasarelas de pago, bancos y otros proveedores externos deberán registrarse preferiblemente directamente a nombre del cliente."
+      ]
+    },
+    {
+      "id": "contenido-cliente",
+      "eyebrow": "Requisitos",
+      "title": "Contenido proporcionado por el cliente",
+      "paragraphs": [
+        "El cliente deberá proporcionar toda la información necesaria para construir y configurar la tienda."
+      ],
+      "items": [
+        "Logotipo.",
+        "Información empresarial.",
+        "Textos definitivos.",
+        "Fotografías.",
+        "Catálogo de productos.",
+        "Precios.",
+        "Inventario.",
+        "Categorías.",
+        "Variaciones.",
+        "Información de envío.",
+        "Información relacionada con pagos.",
+        "Políticas comerciales proporcionadas por la empresa.",
+        "Cualquier otro contenido necesario para completar el proyecto."
+      ],
+      "note": "La creación profesional de textos, fotografías, videos, identidad visual o material comercial no se encuentra incluida, salvo contratación expresa."
+    }
+  ]
+}

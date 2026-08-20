@@ -1,0 +1,139 @@
+{
+  "order": 1,
+  "level": "Nivel 1",
+  "name": "Landing Page",
+  "title": "Landing Page profesional",
+  "modality": "WordPress + template",
+  "duration": "3 a 5 días laborables",
+  "validity": "15 días calendario",
+  "price": 120,
+  "featured": false,
+  "description": "Una página enfocada en presentar tu propuesta de valor y convertir visitas en consultas.",
+  "scope": "1 página · hasta 8 secciones",
+  "revisions": "2 rondas",
+  "support": "15 días",
+  "introduction": [
+    "Este plan contempla el desarrollo de una Landing Page profesional en WordPress, utilizando una plantilla seleccionada previamente por el cliente.",
+    "Micrudev enviará un catálogo de templates disponibles para escoger la alternativa que mejor se adapte al estilo que desea proyectar el negocio. Una vez seleccionada, la plantilla será configurada y adaptada con el logotipo, colores, textos, imágenes, servicios e información de la empresa.",
+    "La Landing Page estará enfocada en presentar de manera clara la propuesta de valor del negocio, sus principales servicios o productos y facilitar el contacto de potenciales clientes."
+  ],
+  "highlights": [
+    "Hasta 8 secciones de contenido",
+    "Formulario y botón de WhatsApp",
+    "SEO, Analytics y Search Console",
+    "Diseño adaptable a todos los dispositivos",
+    "Hospedaje incluido durante el primer año"
+  ],
+  "includes": [
+    "Desarrollo completo de la Landing Page en WordPress.",
+    "Catálogo de templates profesionales para elección del cliente.",
+    "Instalación y configuración del template seleccionado.",
+    "Adaptación de colores, logotipo, tipografías, imágenes y contenidos del cliente.",
+    "Desarrollo de una página de navegación vertical.",
+    "Hasta 8 secciones de contenido.",
+    "Adaptación para computadoras, tablets y dispositivos móviles.",
+    "Sección principal o Hero.",
+    "Presentación de la empresa, producto o servicio.",
+    "Secciones de beneficios, características o diferenciadores.",
+    "Llamados a la acción.",
+    "Sección de contacto.",
+    "Formulario para recepción de consultas.",
+    "Botón flotante de contacto mediante WhatsApp.",
+    "Configuración básica para posicionamiento en buscadores.",
+    "Integración con Google Analytics y Google Search Console.",
+    "Optimización básica de velocidad, imágenes y rendimiento.",
+    "Configuración inicial de seguridad.",
+    "Instalación y configuración del certificado SSL.",
+    "Panel administrable en WordPress.",
+    "Capacitación para el uso básico del sitio web.",
+    "Hasta dos rondas de ajustes durante el desarrollo.",
+    "Soporte técnico correctivo durante 15 días después de la publicación.",
+    "Hospedaje del sitio web incluido durante el primer año."
+  ],
+  "investmentDescription": "El valor incluye la construcción de la Landing Page en WordPress, la configuración del template seleccionado, su adaptación al negocio y el hospedaje web durante los primeros 12 meses.",
+  "hostingRenewal": "USD 50 anuales.",
+  "hostingNotes": [],
+  "paymentFinalLabel": "50 % antes de publicar el sitio web",
+  "externalServices": false,
+  "timelineInputs": [
+    "Pago inicial.",
+    "Template seleccionado.",
+    "Logotipo.",
+    "Textos definitivos.",
+    "Fotografías e imágenes.",
+    "Información de los productos o servicios.",
+    "Información de contacto.",
+    "Datos necesarios para el sitio."
+  ],
+  "timelineWaitingNote": "Los días durante los cuales Micrudev se encuentre esperando información, revisiones o aprobaciones del cliente no se contabilizan dentro del tiempo de desarrollo.",
+  "detailSections": [
+    {
+      "id": "consideraciones-diseno",
+      "eyebrow": "Diseño",
+      "title": "Consideraciones sobre el diseño",
+      "paragraphs": [
+        "La propuesta corresponde a un desarrollo basado en templates. El cliente escogerá una plantilla de entre las opciones presentadas por Micrudev.",
+        "La estructura general y distribución visual estarán determinadas por el template seleccionado, el cual será adaptado con la información y elementos gráficos de la empresa.",
+        "El plan contempla una Landing Page de hasta 8 secciones. El servicio corresponde a la adaptación profesional de un template y no contempla el desarrollo de un diseño completamente personalizado desde cero."
+      ],
+      "note": "Cualquier requerimiento adicional será revisado y cotizado por separado antes de su implementación."
+    },
+    {
+      "id": "revisiones",
+      "eyebrow": "Ajustes",
+      "title": "Revisiones",
+      "paragraphs": [
+        "La propuesta incluye hasta dos rondas de ajustes. Cada ronda corresponde a una lista única y consolidada de cambios solicitados por el cliente.",
+        "Los ajustes deberán respetar la estructura y funcionalidades del template seleccionado.",
+        "La creación de nuevas secciones, páginas, funcionalidades o integraciones no se considerará una revisión y podrá generar un valor adicional.",
+        "Una vez aprobada una etapa del proyecto, modificaciones importantes sobre elementos previamente aprobados podrán considerarse trabajo adicional."
+      ]
+    },
+    {
+      "id": "soporte-posterior",
+      "eyebrow": "Garantía técnica",
+      "title": "Soporte posterior",
+      "paragraphs": [
+        "El soporte técnico incluido durante los primeros 15 días cubre errores relacionados con el desarrollo y configuración original del sitio."
+      ],
+      "listTitle": "No contempla",
+      "items": [
+        "Nuevas páginas.",
+        "Nuevas secciones.",
+        "Cambios posteriores de diseño.",
+        "Carga constante de contenido.",
+        "Nuevas funcionalidades.",
+        "Nuevas integraciones.",
+        "Problemas ocasionados por cambios realizados por terceros.",
+        "Mantenimiento mensual permanente."
+      ]
+    },
+    {
+      "id": "propiedad-accesos",
+      "eyebrow": "Titularidad",
+      "title": "Propiedad y accesos",
+      "paragraphs": [
+        "Una vez completado el pago total, el cliente recibirá los accesos administrativos correspondientes y tendrá control sobre el contenido de su sitio web.",
+        "El dominio se registrará preferiblemente utilizando los datos proporcionados por el cliente, para que la empresa o titular correspondiente conste como propietario del dominio."
+      ]
+    },
+    {
+      "id": "contenido-cliente",
+      "eyebrow": "Requisitos",
+      "title": "Contenido proporcionado por el cliente",
+      "paragraphs": [
+        "Para realizar el proyecto, el cliente deberá proporcionar el material necesario para completar el sitio."
+      ],
+      "items": [
+        "Logotipo.",
+        "Textos definitivos.",
+        "Fotografías e imágenes.",
+        "Información de productos o servicios.",
+        "Información de contacto.",
+        "Información necesaria para formularios.",
+        "Cualquier otro contenido necesario para completar el sitio."
+      ],
+      "note": "La creación profesional de textos, fotografías, videos, logotipos o identidad visual no se encuentra incluida dentro del valor del proyecto, salvo que se especifique expresamente."
+    }
+  ]
+}

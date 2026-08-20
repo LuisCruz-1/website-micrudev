@@ -1,0 +1,30 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Footer from '../../components/Footer.astro';
+import PlanDetail from '../../components/PlanDetail.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getPlans, type Plan } from '../../lib/plans';
+
+export const getStaticPaths = (async () => {
+  const plans = await getPlans();
+
+  return plans.map((plan) => ({
+    params: { plan: plan.id },
+    props: { plan },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  plan: Plan;
+}
+
+const { plan } = Astro.props;
+---
+
+<Layout
+  title={`${plan.data.name} por ${plan.data.price} USD | Micrudev`}
+  description={`${plan.data.description} Incluye hospedaje durante el primer año. Conoce el alcance, tiempos y condiciones del plan.`}
+>
+  <PlanDetail plan={plan} />
+  <Footer />
+</Layout>

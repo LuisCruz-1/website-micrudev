@@ -1,0 +1,439 @@
+---
+import type { Plan } from '../lib/plans';
+import { formatUsd, getPlanInquiryUrl, getPlans } from '../lib/plans';
+
+interface Props {
+  plan: Plan;
+}
+
+const { plan } = Astro.props;
+const { data } = plan;
+const initialPayment = data.price / 2;
+const inquiryUrl = getPlanInquiryUrl(data.name, data.price);
+const otherPlans = (await getPlans()).filter((entry) => entry.id !== plan.id);
+
+const navigationSections = [
+  { id: 'incluye', label: 'Qué incluye' },
+  { id: 'inversion', label: 'Inversión' },
+  { id: 'dominio', label: 'Dominio' },
+  { id: 'renovaciones', label: 'Renovaciones' },
+  { id: 'forma-pago', label: 'Forma de pago' },
+  { id: 'tiempo-estimado', label: 'Tiempo estimado' },
+  ...data.detailSections.map((section) => ({ id: section.id, label: section.title })),
+  { id: 'validez', label: 'Validez' },
+];
+---
+
+<main class="relative z-10 min-h-screen pb-24 pt-36 md:pt-40">
+  <div class="container mx-auto max-w-[1200px] px-6">
+    <a href="/#precios" class="mb-8 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-amber)]">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+      Volver a todos los planes
+    </a>
+
+    <header class="command-bar-mockup relative mb-12 overflow-hidden p-7 md:p-10 lg:p-12">
+      <div class="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-[var(--color-coral)]/15 blur-[90px]"></div>
+      <div class="relative grid gap-10 lg:grid-cols-[minmax(0,1fr)_330px] lg:items-end">
+        <div>
+          <div class="mb-6 flex flex-wrap items-center gap-3">
+            <span class="rounded-full border border-[var(--color-coral)]/25 bg-[var(--color-coral)]/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-amber)]">{data.level}</span>
+            <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-muted)]">{data.modality}</span>
+          </div>
+          <h1 class="mb-5 max-w-[720px] text-[40px] font-semibold leading-[1.05] tracking-[-0.035em] text-white md:text-[58px]">{data.title}</h1>
+          <p class="max-w-[680px] text-lg leading-relaxed text-[var(--color-muted)]">{data.description}</p>
+        </div>
+
+        <div class="rounded-xl border border-white/10 bg-[var(--color-canvas)]/55 p-6 backdrop-blur-md">
+          <span class="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-muted)]">Inversión total</span>
+          <div class="mb-5 flex items-end gap-2">
+            <span class="pb-1.5 font-mono text-xs text-[var(--color-amber)]">USD</span>
+            <span class="text-5xl font-semibold leading-none tracking-[-0.04em] text-white">{data.price}</span>
+          </div>
+          <dl class="mb-6 grid grid-cols-2 gap-x-5 gap-y-4 border-y border-white/8 py-5">
+            <div>
+              <dt class="mb-1 font-mono text-[9px] uppercase tracking-wider text-[var(--color-muted)]">Entrega</dt>
+              <dd class="text-sm font-medium text-white">{data.duration}</dd>
+            </div>
+            <div>
+              <dt class="mb-1 font-mono text-[9px] uppercase tracking-wider text-[var(--color-muted)]">Soporte</dt>
+              <dd class="text-sm font-medium text-white">{data.support}</dd>
+            </div>
+            <div>
+              <dt class="mb-1 font-mono text-[9px] uppercase tracking-wider text-[var(--color-muted)]">Revisiones</dt>
+              <dd class="text-sm font-medium text-white">{data.revisions}</dd>
+            </div>
+            <div>
+              <dt class="mb-1 font-mono text-[9px] uppercase tracking-wider text-[var(--color-muted)]">Validez</dt>
+              <dd class="text-sm font-medium text-white">{data.validity}</dd>
+            </div>
+          </dl>
+          <a href={inquiryUrl} target="_blank" rel="noopener noreferrer" class="keycap-btn w-full justify-center">
+            Consultar por WhatsApp
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <details class="command-bar-mockup mb-8 p-5 lg:hidden">
+      <summary class="cursor-pointer font-mono text-[11px] uppercase tracking-[0.14em] text-white">Contenido del plan</summary>
+      <nav class="mt-5 border-t border-white/8 pt-4" aria-label="Contenido del plan">
+        <ol class="grid gap-3 sm:grid-cols-2">
+          {navigationSections.map((section, index) => (
+            <li>
+              <a href={`#${section.id}`} class="flex gap-3 text-sm text-[var(--color-muted)] transition-colors hover:text-white">
+                <span class="font-mono text-[10px] text-[var(--color-coral)]">{String(index + 1).padStart(2, '0')}</span>
+                {section.label}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </details>
+
+    <div class="grid gap-12 lg:grid-cols-[220px_minmax(0,1fr)] xl:gap-16">
+      <aside class="hidden lg:block">
+        <nav class="sticky top-32" aria-label="Contenido del plan">
+          <p class="mb-5 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-muted)]">En esta propuesta</p>
+          <ol class="space-y-3.5 border-l border-white/10 pl-4">
+            {navigationSections.map((section, index) => (
+              <li>
+                <a href={`#${section.id}`} class="group flex gap-3 text-[12px] leading-snug text-[var(--color-muted)] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-amber)]">
+                  <span class="font-mono text-[9px] text-[var(--color-coral)]/80">{String(index + 1).padStart(2, '0')}</span>
+                  <span>{section.label}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </aside>
+
+      <article class="min-w-0">
+        <section class="pb-12 md:pb-14" aria-labelledby="propuesta-heading">
+          <span class="mb-4 block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-amber)]">Propuesta de desarrollo web</span>
+          <h2 id="propuesta-heading" class="mb-6 text-3xl font-semibold tracking-tight text-white md:text-4xl">Un alcance claro desde el inicio.</h2>
+          <div class="space-y-4 text-base leading-8 text-[var(--color-muted)] md:text-[17px]">
+            {data.introduction.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+        </section>
+
+        <section id="incluye" class="detail-section scroll-mt-28" aria-labelledby="incluye-heading">
+          <span class="detail-eyebrow">Alcance contratado</span>
+          <h2 id="incluye-heading" class="detail-heading">El proyecto contempla</h2>
+          <ul class="includes-grid">
+            {data.includes.map((item) => (
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6" /></svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section id="inversion" class="detail-section scroll-mt-28" aria-labelledby="inversion-heading">
+          <span class="detail-eyebrow">Desarrollo + hospedaje</span>
+          <h2 id="inversion-heading" class="detail-heading">Inversión</h2>
+          <div class="investment-panel">
+            <div>
+              <span class="mb-2 block font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--color-muted)]">Valor total del proyecto</span>
+              <strong class="text-4xl font-semibold tracking-[-0.035em] text-white md:text-5xl">{formatUsd(data.price)}</strong>
+            </div>
+            <div class="font-mono text-[10px] uppercase tracking-[0.13em] text-[var(--color-amber)]">Hospedaje · 12 meses incluidos</div>
+          </div>
+          <p class="detail-copy mt-6">{data.investmentDescription}</p>
+        </section>
+
+        <section id="dominio" class="detail-section scroll-mt-28" aria-labelledby="dominio-heading">
+          <span class="detail-eyebrow">Contratación independiente</span>
+          <h2 id="dominio-heading" class="detail-heading">Dominio</h2>
+          <div class="detail-copy space-y-4">
+            <p>El dominio no está incluido dentro del valor de desarrollo. Su precio dependerá del nombre y de la extensión seleccionada.</p>
+            <div class="flex flex-wrap gap-2" aria-label="Ejemplos de extensiones de dominio">
+              {['.com', '.com.ec', '.ec', 'Otra extensión disponible'].map((extension) => (
+                <span class="rounded-md border border-white/10 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-white">{extension}</span>
+              ))}
+            </div>
+            <p>Micrudev enviará las opciones disponibles con sus respectivos precios para que el cliente elija la alternativa más conveniente.</p>
+          </div>
+          <p class="detail-note">El dominio deberá ser cancelado por el cliente antes de realizar su registro y configuración.</p>
+        </section>
+
+        <section id="renovaciones" class="detail-section scroll-mt-28" aria-labelledby="renovaciones-heading">
+          <span class="detail-eyebrow">Servicios anuales</span>
+          <h2 id="renovaciones-heading" class="detail-heading">Renovaciones anuales</h2>
+          <p class="detail-copy mb-6">Tanto el hospedaje como el dominio deben renovarse anualmente para mantener el sitio web disponible en Internet.</p>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr><th scope="col">Concepto</th><th scope="col">Renovación</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Hospedaje · primer año</th><td>Incluido sin costo adicional.</td></tr>
+                <tr><th scope="row">Hospedaje · desde el segundo año</th><td>{data.hostingRenewal}</td></tr>
+                <tr><th scope="row">Dominio</th><td>Se cancela por separado según el nombre y la extensión seleccionados.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          {data.hostingNotes.length > 0 && (
+            <div class="detail-copy mt-6 space-y-4">
+              {data.hostingNotes.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+          )}
+          <p class="detail-copy mt-6">Micrudev notificará al cliente antes de las fechas de vencimiento para coordinar las renovaciones correspondientes.</p>
+        </section>
+
+        <section id="forma-pago" class="detail-section scroll-mt-28" aria-labelledby="pago-heading">
+          <span class="detail-eyebrow">Dos etapas</span>
+          <h2 id="pago-heading" class="detail-heading">Forma de pago</h2>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr><th scope="col">Concepto</th><th scope="col">Valor</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">50 % para iniciar el proyecto</th><td>{formatUsd(initialPayment)}</td></tr>
+                <tr><th scope="row">{data.paymentFinalLabel}</th><td>{formatUsd(initialPayment)}</td></tr>
+                <tr><th scope="row">Dominio</th><td>Se cancela adicionalmente antes de su contratación.</td></tr>
+                {data.externalServices && <tr><th scope="row">Servicios externos</th><td>Se cancelan por separado cuando corresponda.</td></tr>}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="tiempo-estimado" class="detail-section scroll-mt-28" aria-labelledby="tiempo-heading">
+          <span class="detail-eyebrow">Cronograma</span>
+          <h2 id="tiempo-heading" class="detail-heading">Tiempo estimado</h2>
+          <p class="detail-copy mb-6">El tiempo estimado de desarrollo es de <strong class="font-semibold text-white">{data.duration}</strong>, contado desde la recepción de:</p>
+          <ul class="detail-list columns-list">
+            {data.timelineInputs.map((item) => <li><span></span>{item}</li>)}
+          </ul>
+          <p class="detail-note">{data.timelineWaitingNote}</p>
+        </section>
+
+        {data.detailSections.map((section) => (
+          <section id={section.id} class="detail-section scroll-mt-28" aria-labelledby={`${section.id}-heading`}>
+            <span class="detail-eyebrow">{section.eyebrow}</span>
+            <h2 id={`${section.id}-heading`} class="detail-heading">{section.title}</h2>
+            {section.paragraphs.length > 0 && (
+              <div class="detail-copy space-y-4">
+                {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              </div>
+            )}
+            {section.items.length > 0 && (
+              <div class="mt-7">
+                {section.listTitle && <h3 class="mb-4 text-sm font-semibold text-white">{section.listTitle}</h3>}
+                <ul class="detail-list columns-list">
+                  {section.items.map((item) => <li><span></span>{item}</li>)}
+                </ul>
+              </div>
+            )}
+            {section.note && <p class="detail-note">{section.note}</p>}
+          </section>
+        ))}
+
+        <section id="validez" class="detail-section scroll-mt-28" aria-labelledby="validez-heading">
+          <span class="detail-eyebrow">Cotización</span>
+          <h2 id="validez-heading" class="detail-heading">Validez de la propuesta</h2>
+          <p class="detail-copy">La presente cotización tiene una validez de <strong class="font-semibold text-white">{data.validity}</strong>.</p>
+        </section>
+
+        <section class="mt-10 overflow-hidden rounded-2xl border border-[var(--color-coral)]/25 bg-[var(--color-coral)]/[0.07] p-7 md:p-10" aria-labelledby="resumen-heading">
+          <span class="mb-3 block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-amber)]">Resumen comercial</span>
+          <h2 id="resumen-heading" class="mb-4 text-3xl font-semibold tracking-tight text-white">{data.name} · {formatUsd(data.price)}</h2>
+          <p class="mb-8 max-w-[680px] leading-relaxed text-[var(--color-muted)]">Pago del 50 % al inicio y 50 % antes de publicar · {data.duration} · hospedaje durante el primer año incluido.</p>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <a href={inquiryUrl} target="_blank" rel="noopener noreferrer" class="keycap-btn justify-center sm:justify-start">Quiero este plan</a>
+            <a href="mailto:hola@micrudev.com" class="ghost-pill justify-center sm:justify-start">hola@micrudev.com</a>
+          </div>
+        </section>
+
+        <section class="mt-16 border-t border-white/8 pt-10" aria-labelledby="otros-planes-heading">
+          <span class="mb-3 block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-muted)]">Otros niveles</span>
+          <h2 id="otros-planes-heading" class="mb-6 text-2xl font-semibold tracking-tight text-white">Compara antes de decidir.</h2>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {otherPlans.map((entry) => (
+              <a href={`/planes/${entry.id}`} class="group rounded-xl border border-white/10 bg-white/[0.025] p-5 transition-colors hover:border-[var(--color-coral)]/40 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[var(--color-amber)]">
+                <span class="mb-2 block font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--color-coral)]">{entry.data.level}</span>
+                <span class="flex items-center justify-between gap-4">
+                  <strong class="text-base font-semibold text-white">{entry.data.name}</strong>
+                  <span class="flex items-center gap-2 text-sm text-[var(--color-muted)] transition-colors group-hover:text-white">
+                    {formatUsd(entry.data.price)}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                  </span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      </article>
+    </div>
+  </div>
+</main>
+
+<style>
+  .detail-section {
+    border-top: 1px solid color-mix(in srgb, var(--color-white) 8%, transparent);
+    padding-block: 3rem;
+  }
+
+  .detail-eyebrow {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: var(--color-amber);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .detail-heading {
+    margin-bottom: 1.5rem;
+    color: var(--color-white);
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+
+  .detail-copy {
+    color: var(--color-muted);
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+
+  .includes-grid {
+    display: grid;
+    gap: 0.85rem 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .includes-grid li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: var(--color-muted);
+    font-size: 0.925rem;
+    line-height: 1.65;
+  }
+
+  .includes-grid svg {
+    flex: 0 0 auto;
+    margin-top: 0.3rem;
+    color: var(--color-amber);
+  }
+
+  .investment-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border: 1px solid color-mix(in srgb, var(--color-coral) 25%, transparent);
+    border-radius: 0.875rem;
+    background: color-mix(in srgb, var(--color-coral) 6%, transparent);
+  }
+
+  .detail-note {
+    margin-top: 1.5rem;
+    padding: 1rem 1.125rem;
+    border-left: 2px solid var(--color-coral);
+    border-radius: 0 0.5rem 0.5rem 0;
+    background: color-mix(in srgb, var(--color-coral) 7%, transparent);
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    line-height: 1.75;
+  }
+
+  .detail-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .detail-list li {
+    break-inside: avoid;
+    display: flex;
+    gap: 0.7rem;
+    margin-bottom: 0.65rem;
+    color: var(--color-muted);
+    font-size: 0.925rem;
+    line-height: 1.6;
+  }
+
+  .detail-list li > span {
+    flex: 0 0 auto;
+    width: 0.35rem;
+    height: 0.35rem;
+    margin-top: 0.58rem;
+    border-radius: 999px;
+    background: var(--color-coral);
+  }
+
+  .table-shell {
+    overflow-x: auto;
+    border: 1px solid color-mix(in srgb, var(--color-white) 9%, transparent);
+    border-radius: 0.75rem;
+  }
+
+  .table-shell table {
+    width: 100%;
+    min-width: 580px;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .table-shell th,
+  .table-shell td {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-white) 7%, transparent);
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    line-height: 1.55;
+    vertical-align: top;
+  }
+
+  .table-shell thead th {
+    background: color-mix(in srgb, var(--color-white) 3%, transparent);
+    color: var(--color-white);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .table-shell tbody th {
+    width: 44%;
+    color: var(--color-white);
+    font-weight: 500;
+  }
+
+  .table-shell tbody tr:last-child th,
+  .table-shell tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  @media (min-width: 640px) {
+    .investment-panel {
+      align-items: flex-end;
+      flex-direction: row;
+    }
+
+    .columns-list {
+      columns: 2;
+      column-gap: 2.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .detail-section {
+      padding-block: 3.5rem;
+    }
+
+    .includes-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
