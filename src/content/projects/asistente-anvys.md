@@ -10,6 +10,7 @@ image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=85
 imageAlt: "Imagen conceptual de inteligencia artificial"
 tech: ["OpenAI API", "Python", "FastAPI"]
 featured: true
+externalUrl: "https://proyecto.com"
 ---
 
 Asistente ANVYS explora el uso de inteligencia artificial dentro del contexto educativo para responder consultas relacionadas con el proceso de admisiones del Colegio ANAVI.
