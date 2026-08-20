@@ -1,0 +1,30 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getProjects, type Project } from '../../lib/projects';
+
+export const getStaticPaths = (async () => {
+  const projects = await getProjects();
+
+  return projects.map((project) => ({
+    params: { project: project.id },
+    props: { project },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<Layout
+  title={`${project.data.title} | Proyectos Micrudev`}
+  description={project.data.excerpt}
+>
+  <ProjectDetail project={project} />
+  <Footer />
+</Layout>

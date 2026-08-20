@@ -42,4 +42,22 @@ const plans = defineCollection({
   }),
 });
 
-export const collections = { plans };
+const projects = defineCollection({
+  loader: glob({ base: './src/content/projects', pattern: '**/*.md' }),
+  schema: z.object({
+    order: z.number().int().positive(),
+    title: z.string(),
+    subtitle: z.string(),
+    excerpt: z.string(),
+    type: z.string(),
+    year: z.number().int().min(2000),
+    client: z.string(),
+    image: z.url(),
+    imageAlt: z.string(),
+    tech: z.array(z.string()).min(1),
+    featured: z.boolean().default(false),
+    externalUrl: z.url().optional(),
+  }),
+});
+
+export const collections = { plans, projects };

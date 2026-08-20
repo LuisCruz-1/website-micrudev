@@ -1,0 +1,109 @@
+---
+import type { Project } from '../lib/projects';
+
+interface Props {
+  project: Project;
+  compact?: boolean;
+}
+
+const { project, compact = false } = Astro.props;
+const { data } = project;
+const excerptClass = compact ? 'line-clamp-2' : 'line-clamp-3';
+---
+
+<a
+  href={`/proyectos/${project.id}`}
+  class="project-card command-bar-mockup group block h-full overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-amber)]"
+  aria-label={`Ver proyecto ${data.title}`}
+>
+  <article class="flex h-full flex-col">
+    <div class="relative h-52 overflow-hidden border-b border-white/8 md:h-56">
+      <img
+        src={data.image}
+        alt={data.imageAlt}
+        class="project-card__image h-full w-full object-cover"
+        loading="lazy"
+      />
+      <div class="project-card__veil absolute inset-0"></div>
+      <div class="absolute inset-x-0 top-0 flex items-start justify-between gap-4 p-4">
+        <span class="rounded-md border border-white/15 bg-[var(--color-canvas)]/75 px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.15em] text-white backdrop-blur-md">
+          {data.type}
+        </span>
+        <span class="rounded-md border border-white/10 bg-[var(--color-canvas)]/65 px-2 py-1.5 font-mono text-[9px] tracking-[0.14em] text-white/80 backdrop-blur-md">
+          {data.year}
+        </span>
+      </div>
+    </div>
+
+    <div class="flex flex-grow flex-col p-6 md:p-7">
+      <span class="mb-3 font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--color-coral)]">{data.client}</span>
+      <h3 class="mb-2 text-[22px] font-semibold tracking-[-0.02em] text-white transition-colors group-hover:text-[var(--color-amber)]">
+        {data.title}
+      </h3>
+      <p class="mb-4 text-[13px] font-medium leading-relaxed text-white/85">{data.subtitle}</p>
+      <p class:list={['mb-6 flex-grow text-sm leading-7 text-[var(--color-muted)]', excerptClass]}>
+        {data.excerpt}
+      </p>
+
+      <ul class="mb-6 flex flex-wrap gap-2" aria-label={`Tecnologías de ${data.title}`}>
+        {data.tech.map((technology) => (
+          <li class="rounded border border-white/8 bg-white/[0.025] px-2 py-1 font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--color-muted)]">
+            {technology}
+          </li>
+        ))}
+      </ul>
+
+      <div class="flex items-center justify-between border-t border-white/8 pt-5">
+        <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-muted)] transition-colors group-hover:text-white">Ver proyecto</span>
+        <span class="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-[var(--color-muted)] transition-all group-hover:border-[var(--color-coral)]/50 group-hover:bg-[var(--color-coral)] group-hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        </span>
+      </div>
+    </div>
+  </article>
+</a>
+
+<style>
+  .project-card {
+    transition: border-color 240ms ease, box-shadow 240ms ease, transform 240ms ease;
+  }
+
+  .project-card__image {
+    filter: saturate(0.65);
+    transform: scale(1.01);
+    transition: filter 500ms ease, transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .project-card__veil {
+    background: linear-gradient(180deg, rgba(4, 11, 31, 0.08) 15%, rgba(4, 11, 31, 0.62) 100%);
+    transition: opacity 400ms ease;
+  }
+
+  .project-card:hover {
+    border-color: color-mix(in srgb, var(--color-coral) 38%, transparent);
+    box-shadow: 0 24px 60px rgba(2, 83, 253, 0.12), var(--theme-cmd-shadow);
+    transform: translateY(-4px);
+  }
+
+  .project-card:hover .project-card__image {
+    filter: saturate(1);
+    transform: scale(1.055);
+  }
+
+  .project-card:hover .project-card__veil {
+    opacity: 0.72;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card,
+    .project-card__image,
+    .project-card__veil {
+      transition: none;
+    }
+
+    .project-card:hover,
+    .project-card:hover .project-card__image {
+      transform: none;
+    }
+  }
+</style>
