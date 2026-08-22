@@ -1,0 +1,81 @@
+---
+import { formatUsd, getPlans } from '../lib/plans';
+
+const plans = await getPlans();
+
+const sharedConditions = [
+  'Hospedaje incluido durante el primer año',
+  'Certificado SSL incluido',
+  'Adaptación para computadora, tablet y celular',
+  'Panel administrable y capacitación básica',
+  'Dominio contratado por separado',
+  'Requerimientos adicionales cotizados previamente',
+];
+---
+
+<section class="command-bar-mockup overflow-hidden" aria-labelledby="plan-comparison-title">
+  <div class="flex flex-col gap-4 border-b border-white/8 px-6 py-7 md:flex-row md:items-end md:justify-between md:px-8">
+    <div>
+      <span class="mb-2 block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-amber)]">Comparativa directa</span>
+      <h2 id="plan-comparison-title" class="text-2xl font-semibold tracking-tight text-white">Los tres planes, sin letra pequeña.</h2>
+    </div>
+    <p class="max-w-[430px] text-sm leading-relaxed text-[var(--color-muted)]">Todos incluyen implementación, configuración, publicación y acompañamiento inicial.</p>
+  </div>
+
+  <div class="flex items-center justify-between border-b border-white/8 px-6 py-3 md:hidden">
+    <span class="font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--color-muted)]">Desliza para comparar</span>
+    <svg class="text-[var(--color-coral)]" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m15 8 4 4-4 4" /></svg>
+  </div>
+
+  <div class="overflow-x-auto focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--color-amber)]" role="region" aria-label="Tabla comparativa de planes" tabindex="0">
+    <table class="w-full min-w-[780px] border-collapse text-left">
+      <caption class="sr-only">Comparación de los planes de desarrollo web de Micrudev</caption>
+      <thead>
+        <tr class="border-b border-white/8">
+          <th scope="col" class="w-[190px] px-8 py-5 font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--color-muted)]">Concepto</th>
+          {plans.map((plan) => (
+            <th scope="col" class="px-6 py-5 text-sm font-semibold text-white">{plan.data.name}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-white/8 text-sm">
+        <tr>
+          <th scope="row" class="px-8 py-5 font-medium text-[var(--color-muted)]">Inversión</th>
+          {plans.map((plan) => <td class="px-6 py-5 font-semibold text-white">{formatUsd(plan.data.price)}</td>)}
+        </tr>
+        <tr>
+          <th scope="row" class="px-8 py-5 font-medium text-[var(--color-muted)]">Modalidad</th>
+          {plans.map((plan) => <td class="px-6 py-5 text-[var(--color-muted)]">{plan.data.modality}</td>)}
+        </tr>
+        <tr>
+          <th scope="row" class="px-8 py-5 font-medium text-[var(--color-muted)]">Alcance principal</th>
+          {plans.map((plan) => <td class="px-6 py-5 text-[var(--color-muted)]">{plan.data.scope}</td>)}
+        </tr>
+        <tr>
+          <th scope="row" class="px-8 py-5 font-medium text-[var(--color-muted)]">Tiempo estimado</th>
+          {plans.map((plan) => <td class="px-6 py-5 text-[var(--color-muted)]">{plan.data.duration}</td>)}
+        </tr>
+        <tr>
+          <th scope="row" class="px-8 py-5 font-medium text-[var(--color-muted)]">Revisiones</th>
+          {plans.map((plan) => <td class="px-6 py-5 text-[var(--color-muted)]">{plan.data.revisions}</td>)}
+        </tr>
+        <tr>
+          <th scope="row" class="px-8 py-5 font-medium text-[var(--color-muted)]">Soporte correctivo</th>
+          {plans.map((plan) => <td class="px-6 py-5 text-[var(--color-muted)]">{plan.data.support}</td>)}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="border-t border-white/8 bg-white/[0.02] px-6 py-7 md:px-8">
+    <p class="mb-5 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-muted)]">Incluido en todos los planes</p>
+    <ul class="grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+      {sharedConditions.map((condition) => (
+        <li class="flex items-start gap-2.5 text-[13px] leading-relaxed text-[var(--color-muted)]">
+          <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-coral)]"></span>
+          {condition}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

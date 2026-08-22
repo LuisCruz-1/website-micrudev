@@ -1,0 +1,99 @@
+---
+import { getPlanInquiryUrl, getPlans } from '../lib/plans';
+
+const plans = await getPlans();
+---
+
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-3" aria-label="Planes de desarrollo web">
+  {plans.map((plan) => {
+    const { data } = plan;
+    const levelNumber = String(data.order).padStart(2, '0');
+    const renewalPrice = data.hostingRenewal.split(',')[0].replace(/\.$/, '');
+
+    return (
+      <article class={`plan-card command-bar-mockup relative flex flex-col overflow-hidden p-7 md:p-8 ${data.featured ? 'plan-card--featured' : ''}`}>
+        {data.featured && (
+          <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-coral)] to-transparent"></div>
+        )}
+
+        <div class="mb-7 flex items-center justify-between gap-4">
+          <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--color-amber)]">
+            {levelNumber} / {data.level}
+          </span>
+          {data.featured && (
+            <span class="rounded-full border border-[var(--color-coral)]/30 bg-[var(--color-coral)]/10 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--color-coral)]">
+              Más elegido
+            </span>
+          )}
+        </div>
+
+        <h3 class="mb-2 text-2xl font-semibold tracking-tight text-white">{data.name}</h3>
+        <p class="mb-4 font-mono text-[9px] uppercase tracking-[0.13em] text-[var(--color-coral)]">{data.modality}</p>
+        <p class="mb-7 min-h-[66px] text-[15px] leading-relaxed text-[var(--color-muted)]">{data.description}</p>
+
+        <div class="mb-2 flex items-end gap-2">
+          <span class="pb-1.5 font-mono text-[11px] uppercase tracking-wider text-[var(--color-muted)]">USD</span>
+          <span class="text-[44px] font-semibold leading-none tracking-[-0.04em] text-white">{data.price}</span>
+        </div>
+        <p class="mb-1 text-xs text-[var(--color-muted)]">Desarrollo + hospedaje durante 12 meses</p>
+        <p class="mb-7 text-[11px] leading-relaxed text-[var(--color-muted)]">Renovación: {renewalPrice} · dominio aparte</p>
+
+        <dl class="mb-7 grid grid-cols-2 border-y border-white/8 py-4">
+          <div class="border-r border-white/8 pr-4">
+            <dt class="mb-1 font-mono text-[9px] uppercase tracking-[0.15em] text-[var(--color-muted)]">Entrega</dt>
+            <dd class="text-sm font-medium text-white">{data.duration.replace(' laborables', '')}</dd>
+          </div>
+          <div class="pl-4">
+            <dt class="mb-1 font-mono text-[9px] uppercase tracking-[0.15em] text-[var(--color-muted)]">Alcance</dt>
+            <dd class="text-sm font-medium text-white">{data.scope}</dd>
+          </div>
+        </dl>
+
+        <ul class="mb-8 flex-grow space-y-3.5" aria-label={`Principales características de ${data.name}`}>
+          {data.highlights.map((highlight) => (
+            <li class="flex items-start gap-3 text-[14px] leading-relaxed text-[var(--color-muted)]">
+              <svg class="mt-0.5 shrink-0 text-[var(--color-amber)]" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6" /></svg>
+              <span>{highlight}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-auto space-y-3">
+          <a href={`/planes/${plan.id}`} class="keycap-btn w-full justify-center">
+            Ver alcance completo
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+          </a>
+          <a href={getPlanInquiryUrl(data.name, data.price)} target="_blank" rel="noopener noreferrer" class="flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium text-[var(--color-muted)] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-amber)]">
+            Consultar este plan
+          </a>
+        </div>
+      </article>
+    );
+  })}
+</div>
+
+<style>
+  .plan-card {
+    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  }
+
+  .plan-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-coral) 34%, transparent);
+  }
+
+  .plan-card--featured {
+    border-color: color-mix(in srgb, var(--color-coral) 45%, transparent);
+    box-shadow: 0 28px 70px rgba(2, 83, 253, 0.14), var(--theme-cmd-shadow);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .plan-card {
+      transition: none;
+    }
+
+    .plan-card:hover {
+      transform: none;
+    }
+  }
+</style>
