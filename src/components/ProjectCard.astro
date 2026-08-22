@@ -8,7 +8,6 @@ interface Props {
 
 const { project, compact = false } = Astro.props;
 const { data } = project;
-const excerptClass = compact ? 'line-clamp-2' : 'line-clamp-3';
 ---
 
 <a
@@ -40,10 +39,12 @@ const excerptClass = compact ? 'line-clamp-2' : 'line-clamp-3';
       <h3 class="mb-2 text-[22px] font-semibold tracking-[-0.02em] text-white transition-colors group-hover:text-[var(--color-amber)]">
         {data.title}
       </h3>
-      <p class="mb-4 text-[13px] font-medium leading-relaxed text-white/85">{data.subtitle}</p>
-      <p class:list={['mb-6 flex-grow text-sm leading-7 text-[var(--color-muted)]', excerptClass]}>
-        {data.excerpt}
-      </p>
+      <p class="mb-4 text-[13px] leading-relaxed text-white/85">{data.subtitle}</p>
+      {!compact && (
+        <p class="mb-6 flex-grow text-sm leading-7 text-[var(--color-muted)] line-clamp-3">
+          {data.excerpt}
+        </p>
+      )}
 
       <ul class="mb-6 flex flex-wrap gap-2" aria-label={`Tecnologías de ${data.title}`}>
         {data.tech.map((technology) => (
@@ -53,7 +54,7 @@ const excerptClass = compact ? 'line-clamp-2' : 'line-clamp-3';
         ))}
       </ul>
 
-      <div class="flex items-center justify-between border-t border-white/8 pt-5">
+      <div class="mt-auto flex items-center justify-between border-t border-white/8 pt-5">
         <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-muted)] transition-colors group-hover:text-white">Ver proyecto</span>
         <span class="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-[var(--color-muted)] transition-all group-hover:border-[var(--color-coral)]/50 group-hover:bg-[var(--color-coral)] group-hover:text-white">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>

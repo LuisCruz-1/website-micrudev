@@ -37,40 +37,118 @@ const services = [
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>`,
   },
 ];
+
+const webService = services[0];
+const customServices = services.slice(1);
+const webFormats = ['Landing page', 'Sitio corporativo', 'Tienda online'];
 ---
 
-<section id="servicios" class="relative z-10 scroll-mt-20 border-t border-white/5 py-24">
-  <div class="container mx-auto max-w-[1000px] px-6">
-    <div class="mb-14 text-center">
-      <div class="mb-6 inline-flex items-center gap-2">
+<section id="servicios" class="relative z-10 scroll-mt-20 border-t border-white/5 py-16 md:py-24">
+  <div class="container mx-auto max-w-[1100px] px-6">
+    <header class="mx-auto mb-8 max-w-[720px] text-center md:mb-12">
+      <div class="mb-4 inline-flex items-center gap-2 md:mb-5">
         <span class="h-2 w-2 rounded-full bg-[var(--color-amber)] animate-pulse"></span>
         <span class="font-mono text-[11px] uppercase tracking-wider text-[var(--color-muted)]">Servicios</span>
       </div>
-      <h2 class="mb-6 text-4xl font-[600] tracking-tight text-white md:text-5xl">
-        Dos formas de <span class="text-warm-gradient">construir.</span>
+      <h2 class="mb-4 text-[36px] font-[600] leading-[1.08] tracking-tight text-white md:mb-5 md:text-5xl">
+        Cuatro capacidades para <span class="text-warm-gradient">construir mejor.</span>
       </h2>
-      <p class="mx-auto max-w-[650px] text-lg leading-relaxed text-[var(--color-muted)]">
-        Elige un plan cerrado para tu sitio web o definimos una solución específica para tus procesos.
+      <p class="mx-auto max-w-[670px] text-base leading-relaxed text-[var(--color-muted)] md:text-lg">
+        Una ruta web con alcance y precio definidos, más tres capacidades a medida para resolver necesidades de operación.
       </p>
-    </div>
+    </header>
 
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-      {services.map((service) => (
-        <article class="command-bar-mockup group flex flex-col p-7 transition-colors hover:border-[var(--color-coral)]/30 md:p-8">
-          <div class="mb-6 flex items-center justify-between">
-            <div class="flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 bg-[var(--color-canvas)] text-[var(--color-amber)] transition-colors group-hover:text-[var(--color-coral)]">
-              <Fragment set:html={service.icon} />
-            </div>
-            <span class="font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--color-muted)]">{service.id} / {service.mode}</span>
+    <div class="service-console command-bar-mockup overflow-hidden md:grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.35fr)]">
+      <article class="service-web relative flex flex-col overflow-hidden border-b border-white/8 p-5 sm:p-6 md:border-b-0 md:border-r md:p-8">
+        <div class="pointer-events-none absolute -left-16 -top-16 h-52 w-52 rounded-full bg-[var(--color-coral)]/10 blur-[70px]"></div>
+
+        <div class="relative mb-6 flex items-center justify-between gap-4 md:mb-8">
+          <span class="font-mono text-[9px] uppercase tracking-[0.15em] text-[var(--color-amber)]">Ruta directa</span>
+          <span class="font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--color-muted)]">{webService.id} / {webService.mode}</span>
+        </div>
+
+        <div class="relative mb-5 flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-[var(--color-canvas)] text-[var(--color-amber)] md:mb-6" aria-hidden="true">
+          <Fragment set:html={webService.icon} />
+        </div>
+
+        <h3 class="relative mb-3 text-2xl font-semibold tracking-tight text-white">{webService.title}</h3>
+        <p class="relative mb-5 text-[15px] leading-relaxed text-[var(--color-muted)] md:mb-6">{webService.desc}</p>
+
+        <ul class="relative mb-8 hidden flex-wrap gap-2 sm:flex" aria-label="Formatos disponibles">
+          {webFormats.map((format) => (
+            <li class="rounded-md border border-white/8 bg-white/[0.025] px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.11em] text-[var(--color-muted)]">{format}</li>
+          ))}
+        </ul>
+
+        <a href={webService.href} class="keycap-btn relative mt-auto w-full justify-center sm:w-fit">
+          {webService.action}
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        </a>
+      </article>
+
+      <div>
+        <div class="border-b border-white/8 px-5 py-5 md:px-7 md:py-6">
+          <div class="mb-2 flex items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.14em]">
+            <span class="text-[var(--color-coral)]">Ruta personalizada</span>
+            <span class="text-[var(--color-muted)]">03 capacidades</span>
           </div>
-          <h3 class="mb-3 text-xl font-semibold text-white">{service.title}</h3>
-          <p class="mb-7 flex-grow leading-relaxed text-[var(--color-muted)]">{service.desc}</p>
-          <a href={service.href} class="inline-flex items-center gap-2 font-mono text-[12px] text-[var(--color-muted)] transition-colors hover:text-white">
-            {service.action}
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-          </a>
-        </article>
-      ))}
+          <h3 class="text-xl font-semibold tracking-tight text-white md:text-2xl">Software conectado a tu operación</h3>
+        </div>
+
+        <div class="divide-y divide-white/8">
+          {customServices.map((service) => (
+            <a
+              href={service.href}
+              class="service-row group grid grid-cols-[42px_minmax(0,1fr)_auto] items-center gap-3 px-4 py-4 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--color-amber)] sm:gap-4 sm:px-5 sm:py-5 md:grid-cols-[46px_minmax(0,1fr)_auto] md:px-7"
+              aria-label={`${service.action}: ${service.title}`}
+            >
+              <span class="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-[var(--color-canvas)] text-[var(--color-muted)] transition-colors group-hover:border-[var(--color-coral)]/35 group-hover:text-[var(--color-amber)] md:h-11 md:w-11" aria-hidden="true">
+                <Fragment set:html={service.icon} />
+              </span>
+
+              <span class="min-w-0">
+                <span class="mb-1 flex items-center gap-3">
+                  <span class="text-base font-semibold text-white md:text-lg">{service.title}</span>
+                  <span class="font-mono text-[8px] uppercase tracking-[0.13em] text-[var(--color-muted)]">{service.id}</span>
+                </span>
+                <span class="line-clamp-2 block text-[13px] leading-relaxed text-[var(--color-muted)] md:text-sm">{service.desc}</span>
+              </span>
+
+              <span class="flex items-center gap-2 text-[var(--color-muted)] transition-colors group-hover:text-white">
+                <span class="hidden font-mono text-[9px] uppercase tracking-[0.12em] xl:inline">Evaluar</span>
+                <span class="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 transition-colors group-hover:border-[var(--color-coral)]/45 group-hover:bg-[var(--color-coral)] group-hover:text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-0.5" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                </span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .service-console {
+    box-shadow: 0 30px 80px rgba(2, 83, 253, 0.08), var(--theme-cmd-shadow);
+  }
+
+  .service-web {
+    background: color-mix(in srgb, var(--color-coral) 3%, transparent);
+  }
+
+  .service-row {
+    transition: background-color 220ms ease;
+  }
+
+  .service-row:hover {
+    background: color-mix(in srgb, var(--color-coral) 5%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-row,
+    .service-row * {
+      transition: none;
+    }
+  }
+</style>
