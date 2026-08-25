@@ -1,7 +1,7 @@
 ---
 import { render } from 'astro:content';
 import type { Project } from '../lib/projects';
-import { getProjects } from '../lib/projects';
+import { getProjectImageSrc, getProjects } from '../lib/projects';
 
 interface Props {
   project: Project;
@@ -46,7 +46,7 @@ const relatedProjects = [
         </header>
 
         <figure class="relative h-[230px] overflow-hidden border-t border-white/8 sm:h-[280px] lg:h-auto lg:min-h-[360px] lg:border-l lg:border-t-0">
-          <img src={data.image} alt={data.imageAlt} class="project-hero-image absolute inset-0 h-full w-full object-cover" fetchpriority="high" />
+          <img src={getProjectImageSrc(data.image)} alt={data.imageAlt} class="project-hero-image absolute inset-0 h-full w-full object-cover" fetchpriority="high" />
           <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-canvas)]/60 via-transparent to-transparent"></div>
           <figcaption class="absolute bottom-4 left-4 rounded-md border border-white/10 bg-[var(--color-canvas)]/75 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-white/75 backdrop-blur-md">
             {data.client} / {data.year}
@@ -82,13 +82,21 @@ const relatedProjects = [
     ]}>
       {sectionHeadings.length > 0 && (
         <aside class="hidden lg:block">
-          <nav aria-label="Contenido del proyecto" class="sticky top-32 border-l border-white/10 pl-4">
+          <nav aria-label="Contenido del proyecto" class="project-toc-nav sticky top-32 max-h-[calc(100vh-9rem)] overflow-y-auto overscroll-contain border-l border-white/10 pl-4">
             <span class="mb-4 block font-mono text-[8px] uppercase tracking-[0.15em] text-[var(--color-muted)]">En este proyecto</span>
             <ol class="space-y-3">
               {sectionHeadings.map((heading, index) => (
                 <li>
-                  <a href={`#${heading.slug}`} class="group flex gap-3 text-[11px] leading-snug text-[var(--color-muted)] transition-colors hover:text-white">
-                    <span class="font-mono text-[8px] text-[var(--color-coral)]">{String(index + 1).padStart(2, '0')}</span>
+                  <a
+                    href={`#${heading.slug}`}
+                    data-project-toc-link={heading.slug}
+                    aria-current={index === 0 ? 'location' : undefined}
+                    class:list={[
+                      'project-toc-link group flex gap-3 text-[11px] leading-snug text-[var(--color-muted)] transition-colors hover:text-white',
+                      { 'project-toc-link--active': index === 0 },
+                    ]}
+                  >
+                    <span class="project-toc-number font-mono text-[8px] text-[var(--color-coral)]">{String(index + 1).padStart(2, '0')}</span>
                     <span>{heading.text}</span>
                   </a>
                 </li>
@@ -117,7 +125,7 @@ const relatedProjects = [
       <div class="grid gap-4 md:grid-cols-2">
         {relatedProjects.map((entry) => (
           <a href={`/proyectos/${entry.id}`} class="group grid min-h-[104px] grid-cols-[92px_minmax(0,1fr)_36px] items-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.025] transition-colors hover:border-[var(--color-coral)]/40 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[var(--color-amber)]">
-            <img src={entry.data.image} alt="" class="h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-100" loading="lazy" />
+            <img src={getProjectImageSrc(entry.data.image)} alt="" class="h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-100" loading="lazy" />
             <div class="min-w-0 px-4 py-3">
               <span class="mb-1.5 block font-mono text-[8px] uppercase tracking-[0.13em] text-[var(--color-coral)]">{entry.data.type} · {entry.data.year}</span>
               <h3 class="truncate text-base font-semibold text-white">{entry.data.title}</h3>
@@ -299,6 +307,106 @@ const relatedProjects = [
     font-weight: 600;
   }
 
+  .project-toc-link.project-toc-link--active {
+    color: var(--color-white);
+    font-weight: 600;
+  }
+
+  .project-toc-link.project-toc-link--active .project-toc-number {
+    color: var(--color-amber);
+  }
+
+  .project-toc-nav {
+    scroll-padding-block: 0.75rem;
+    scrollbar-color: color-mix(in srgb, var(--color-white) 20%, transparent) transparent;
+    scrollbar-width: thin;
+  }
+
+  .project-toc-nav::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .project-toc-nav::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-white) 20%, transparent);
+  }
+
+  .project-prose :global(.project-flow) {
+    counter-reset: project-flow-step;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0 2.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .project-prose :global(.project-flow-node) {
+    counter-increment: project-flow-step;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    width: min(100%, 26rem);
+    min-height: 3.25rem;
+    margin: 0;
+    padding: 0.8rem 1rem;
+    border: 1px solid color-mix(in srgb, var(--color-coral) 24%, transparent);
+    border-radius: 0.7rem;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--color-canvas) 92%, var(--color-coral)), color-mix(in srgb, var(--color-white) 4%, transparent));
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-white) 3%, transparent), 0 10px 24px color-mix(in srgb, var(--color-black) 18%, transparent);
+    color: var(--color-white);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .project-prose :global(.project-flow-node)::before {
+    content: counter(project-flow-step, decimal-leading-zero);
+    display: grid;
+    flex: 0 0 auto;
+    width: 1.7rem;
+    height: 1.7rem;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--color-amber) 36%, transparent);
+    border-radius: 999px;
+    color: var(--color-amber);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+  }
+
+  .project-prose :global(.project-flow-node) :global(code) {
+    min-width: 0;
+    color: inherit;
+    font-size: 0.95em;
+    overflow-wrap: anywhere;
+  }
+
+  .project-prose :global(.project-flow-arrow) {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 2rem;
+    height: 2.25rem;
+    margin: 0;
+    place-items: center;
+    color: var(--color-amber);
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    line-height: 1;
+    text-shadow: 0 0 1rem color-mix(in srgb, var(--color-amber) 45%, transparent);
+  }
+
+  .project-prose :global(.project-flow-arrow)::before {
+    content: '';
+    position: absolute;
+    top: -0.35rem;
+    bottom: -0.35rem;
+    left: 50%;
+    z-index: -1;
+    width: 1px;
+    background: color-mix(in srgb, var(--color-amber) 30%, transparent);
+  }
+
   @media (max-width: 639px) {
     .project-prose :global(p) {
       font-size: 1rem;
@@ -307,6 +415,14 @@ const relatedProjects = [
 
     .project-prose :global(blockquote) {
       padding: 1.25rem;
+    }
+
+    .project-prose :global(.project-flow) {
+      margin: 1.75rem 0 2rem;
+    }
+
+    .project-prose :global(.project-flow-node) {
+      width: 100%;
     }
   }
 
@@ -320,3 +436,128 @@ const relatedProjects = [
     }
   }
 </style>
+
+<script>
+  const projectProse = document.querySelector<HTMLElement>('.project-prose');
+
+  const isStandaloneCodeParagraph = (element: Element | undefined) => {
+    if (!element || element.tagName !== 'P' || element.children.length !== 1) return false;
+
+    const child = element.firstElementChild;
+    return child?.tagName === 'CODE' && element.textContent?.trim() === child.textContent?.trim();
+  };
+
+  const isFlowArrowParagraph = (element: Element | undefined) => {
+    if (!element || element.tagName !== 'P') return false;
+
+    return /^[\s\u2190-\u21ff\uFE0E]+$/u.test(element.textContent ?? '');
+  };
+
+  if (projectProse && !projectProse.dataset.flowsEnhanced) {
+    projectProse.dataset.flowsEnhanced = 'true';
+    const contentChildren = Array.from(projectProse.children);
+
+    contentChildren.forEach((element) => {
+      if (isFlowArrowParagraph(element)) {
+        element.classList.add('project-flow-arrow');
+        element.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    for (let index = 0; index < contentChildren.length;) {
+      if (!isStandaloneCodeParagraph(contentChildren[index])) {
+        index += 1;
+        continue;
+      }
+
+      let end = index;
+      let nodeCount = 1;
+
+      while (
+        isFlowArrowParagraph(contentChildren[end + 1])
+        && isStandaloneCodeParagraph(contentChildren[end + 2])
+      ) {
+        end += 2;
+        nodeCount += 1;
+      }
+
+      if (nodeCount < 2) {
+        index += 1;
+        continue;
+      }
+
+      const flow = document.createElement('div');
+      flow.className = 'project-flow';
+      projectProse.insertBefore(flow, contentChildren[index]);
+
+      for (let current = index; current <= end; current += 1) {
+        const element = contentChildren[current];
+        if (isStandaloneCodeParagraph(element)) element.classList.add('project-flow-node');
+        flow.appendChild(element);
+      }
+
+      index = end + 1;
+    }
+  }
+
+  const projectTocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-project-toc-link]'));
+  const projectHeadings = Array.from(document.querySelectorAll<HTMLElement>('.project-prose h2[id]'));
+
+  if (projectTocLinks.length > 0 && projectHeadings.length > 0) {
+    let activeProjectSectionId = '';
+
+    const activateProjectSection = (id: string) => {
+      if (activeProjectSectionId === id) return;
+
+      activeProjectSectionId = id;
+      let activeLink: HTMLAnchorElement | undefined;
+
+      projectTocLinks.forEach((link) => {
+        const isActive = link.dataset.projectTocLink === id;
+        link.classList.toggle('project-toc-link--active', isActive);
+
+        if (isActive) {
+          activeLink = link;
+          link.setAttribute('aria-current', 'location');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+
+      activeLink?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    };
+
+    const updateProjectSection = () => {
+      const marker = window.scrollY + Math.min(window.innerHeight * 0.3, 260);
+      let activeHeading = projectHeadings[0];
+
+      projectHeadings.forEach((heading) => {
+        const headingTop = heading.getBoundingClientRect().top + window.scrollY;
+        if (headingTop <= marker) activeHeading = heading;
+      });
+
+      activateProjectSection(activeHeading.id);
+    };
+
+    let updateFrame = 0;
+    const scheduleProjectSectionUpdate = () => {
+      if (updateFrame) return;
+
+      updateFrame = requestAnimationFrame(() => {
+        updateFrame = 0;
+        updateProjectSection();
+      });
+    };
+
+    projectTocLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        const targetId = link.dataset.projectTocLink;
+        if (targetId) activateProjectSection(targetId);
+      });
+    });
+
+    window.addEventListener('scroll', scheduleProjectSectionUpdate, { passive: true });
+    window.addEventListener('resize', scheduleProjectSectionUpdate);
+    updateProjectSection();
+  }
+</script>

@@ -1,181 +1,482 @@
-# Micrudev Design System & Prompt Style Guide
+# Micrudev Design System
 
-> **Versión 2.0 — Documentación Exhaustiva**
-> **Estética:** "Premium Dark Developer-Tool" & "Cinematic Deep Space Aurora"
-> Esta guía es un contrato técnico y creativo. Está diseñada para servir como un **prompt maestro** que permite a cualquier desarrollador, diseñador o IA replicar exactamente el mismo estilo visual y componentes sin ambigüedades, garantizando coherencia pixel-perfect en todas las implementaciones.
+> **Versión 3.0 - Especificación canónica**
+> **Dirección visual:** Developer-tool comercial, precisión suiza y atmósfera Deep Space.
+> **Última revisión:** 23 de agosto de 2026.
 
----
+Esta guía documenta el sistema que está implementado actualmente en el sitio. No describe una propuesta futura. Su objetivo es permitir que una persona o una IA extienda Micrudev sin convertirlo en una plantilla genérica ni romper su coherencia visual, comercial o técnica.
 
-## Tabla de Contenidos
+Cuando esta guía y el código no coincidan, las fuentes de verdad tienen este orden:
 
-1. [Filosofía de Diseño](#1-filosofía-de-diseño)
-2. [Sistema de Color (Tokens)](#2-sistema-de-color-tokens)
-3. [Tipografía y Jerarquía](#3-tipografía-y-jerarquía)
-4. [Sistema de Fondo Deep Space Aurora](#4-sistema-de-fondo-deep-space-aurora)
-5. [Componentes Insignia (Signature Elements)](#5-componentes-insignia-signature-elements)
-6. [Espaciado, Layout y Ritmo Visual](#6-espaciado-layout-y-ritmo-visual)
-7. [Iconografía y Recursos Gráficos](#7-iconografía-y-recursos-gráficos)
-8. [Estados, Interacciones y Microanimaciones](#8-estados-interacciones-y-microanimaciones)
-9. [Configuración Técnica (Tailwind v4)](#9-configuración-técnica-tailwind-v4)
-10. [Reglas de Implementación por Pantalla](#10-reglas-de-implementación-por-pantalla)
-11. [Accesibilidad y Performance](#11-accesibilidad-y-performance)
-12. [Checklist de Construcción para la IA](#12-checklist-de-construcción-para-la-ia)
+1. `src/styles/global.css` para tokens y utilidades globales.
+2. `src/layouts/Layout.astro` para tema, fondo y capas globales.
+3. Los componentes activos de `src/components/` para patrones concretos.
+4. Este documento como explicación y contrato de mantenimiento.
 
----
+## Contenido
 
-## 1. Filosofía de Diseño
-
-El diseño encarna el ADN visual de las herramientas para desarrolladores de primer nivel (estilo Vercel, Linear, Stripe). Combina la **precisión técnica del diseño suizo** con **profundidad tridimensional táctil** y una **iluminación cinematográfica profunda tipo espacio exterior**.
-
-### Pilares Fundamentales
-
-| Pilar | Descripción |
-|-------|-------------|
-| **Espacio Profundo Cinematográfico** | El fondo no es plano; es un universo con canvas azul oscuro, luces aurora flotantes, cuadrícula técnica y halo de luz superior. |
-| **Profundidad Táctil** | Los botones simulan teclas físicas de teclado mecánico; los contenedores flotan como cristal esmerilado. |
-| **Precisión Matemática** | Tipografías monoespaciadas para metadatos, cero cursivas, alineación estricta. |
-| **Polaridad Dinámica** | Sistema de tokens que invierten la polaridad del color sin cambiar las clases HTML. |
-| **Performance Invisible** | Todo efecto decorativo debe ser GPU-accelerated o deshabilitarse con `prefers-reduced-motion`. |
-
-### Principios de Uso
-
-1. **Menos es más.** Si un elemento no aporta, se elimina.
-2. **Aire generoso.** El espacio negativo es tan importante como el contenido.
-3. **Jerarquía clara.** Máximo 3 niveles tipográficos por vista.
-4. **Color con propósito.** El azul solo para acciones y acentos clave.
-5. **Consistencia.** Los mismos radios, los mismos espacios, los mismos pesos.
-6. **Sin decoración gratuita.** Nada de ruido, texturas innecesarias o brillos exagerados.
+1. [Identidad y tesis visual](#1-identidad-y-tesis-visual)
+2. [Arquitectura técnica y fuentes de verdad](#2-arquitectura-técnica-y-fuentes-de-verdad)
+3. [Sistema de color](#3-sistema-de-color)
+4. [Tipografía y contenido](#4-tipografía-y-contenido)
+5. [Layout, espaciado y geometría](#5-layout-espaciado-y-geometría)
+6. [Sistema Deep Space](#6-sistema-deep-space)
+7. [Primitivas visuales](#7-primitivas-visuales)
+8. [Navegación y footer](#8-navegación-y-footer)
+9. [Hero y selector de rutas](#9-hero-y-selector-de-rutas)
+10. [Servicios](#10-servicios)
+11. [Proyectos](#11-proyectos)
+12. [Tech Stack y modal](#12-tech-stack-y-modal)
+13. [Planes](#13-planes)
+14. [Páginas de detalle](#14-páginas-de-detalle)
+15. [Composición de páginas](#15-composición-de-páginas)
+16. [Movimiento e interacción](#16-movimiento-e-interacción)
+17. [Responsive](#17-responsive)
+18. [Accesibilidad](#18-accesibilidad)
+19. [Rendimiento](#19-rendimiento)
+20. [Reglas para nuevas implementaciones](#20-reglas-para-nuevas-implementaciones)
+21. [Checklist](#21-checklist)
 
 ---
 
-## 2. Sistema de Color (Tokens)
+## 1. Identidad y tesis visual
 
-Todo el sitio utiliza variables nativas inyectadas en `@theme` de Tailwind CSS v4. **PROHIBIDO** usar colores crudos en el HTML (como `bg-black`, `text-white`, `bg-[#06132F]`). Siempre se recurre a las variables mapeadas.
+### 1.1 Qué comunica el sitio
 
-### 2.1 Paleta Base (Tokens de Marca)
+Micrudev vende dos formas de construir soluciones digitales:
 
-| Token CSS | Modo Oscuro | Modo Claro | RGB (Oscuro) | Rol Principal |
-|-----------|-------------|------------|--------------|---------------|
-| `--color-canvas` | `#040B1F` (Deep Space Navy) | `#F6F8FC` (Soft Gray) | `rgb(4, 11, 31)` | Fondo base del viewport |
-| `--color-white` | `#ffffff` | `#06132F` | `rgb(255, 255, 255)` | Texto principal, iconos, títulos |
-| `--color-black` | `#000000` | `#ffffff` | `rgb(0, 0, 0)` | Sombras, fondos inversos |
-| `--color-muted` | `#8B9BB4` | `#637089` | `rgb(139, 155, 180)` | Texto secundario, subtítulos |
+| Ruta | Promesa | Representación visual |
+|---|---|---|
+| Web con alcance definido | Precio, plazo y entregables claros | Tarjetas comerciales, niveles, tablas y especificaciones |
+| Software a medida | Diagnóstico y solución alrededor de una operación | Consolas, rutas, casos de proyecto y metadatos técnicos |
 
-### 2.2 Aurora Accent Colors (Paleta Corporativa)
+El diseño debe comunicar capacidad técnica sin obligar al cliente a interpretar una interfaz para desarrolladores. La estética técnica organiza información comercial; nunca debe ocultarla.
 
-| Token | HEX | RGB | Uso |
-|-------|-----|-----|-----|
-| `--color-crimson` | `#003DCC` | `rgb(0, 61, 204)` | Azul corporativo profundo, acentos secundarios |
-| `--color-coral` | `#0253FD` | `rgb(2, 83, 253)` | Azul brillante principal, CTAs primarios |
-| `--color-amber` | `#4C84FF` | `rgb(76, 132, 255)` | Azul claro cristalino, hovers, anillos de foco |
+### 1.2 Tesis visual
 
-### 2.3 Aurora Blade Tokens (Para el fondo Deep Space)
+La identidad combina cinco ideas:
 
-| Token | HEX | RGB | Posición en fondo | Intensidad |
-|-------|-----|-----|-------------------|------------|
-| `--theme-aurora-1` | `#0253FD` | `rgb(2, 83, 253)` | Superior izquierda (Blade 1) | 100% |
-| `--theme-aurora-2` | `#4C84FF` | `rgb(76, 132, 255)` | Lateral derecho (Blade 2) | 95% |
-| `--theme-aurora-3` | `#001A66` | `rgb(0, 26, 102)` | Inferior central (Blade 3) | 100% |
-| `--theme-aurora-4` | `#003DCC` | `rgb(0, 61, 204)` | Centro flotante (Blade 4) | 90% |
-| `--theme-aurora-5` | `#6B9DFF` | `rgb(107, 157, 255)` | Superior derecha (Blade 5) | 95% |
+| Pilar | Aplicación |
+|---|---|
+| Deep Space | Canvas azul profundo o gris muy claro, auroras, micro-grid y halo superior |
+| Herramienta técnica | Consolas, labels monoespaciados, índices, estados y divisores de un píxel |
+| Precisión suiza | Alineaciones estrictas, grillas claras, espacios medidos y poca ornamentación |
+| Tacto | Botones tipo keycap, superficies de cristal y respuestas físicas moderadas |
+| Claridad comercial | Precios, modalidades, tiempos y acciones visibles sin lenguaje ambiguo |
 
-### 2.4 Tokens de Componentes (Variables de Estado)
+### 1.3 Firma visual
 
-| Token | Modo Oscuro | Modo Claro | Rol |
-|-------|-------------|------------|-----|
-| `--theme-keycap-bg` | `#E7EFFF` | `#ffffff` | Fondo del botón keycap |
-| `--theme-keycap-text` | `#0F1B37` | `#06132F` | Texto del botón keycap |
-| `--theme-keycap-shadow` | Pila compleja (ver §5.3) | Pila sutil | Sombra exterior + relieves |
-| `--theme-keycap-shadow-active` | Pila comprimida | Pila comprimida | Estado presionado |
-| `--theme-nav-bg` | `rgba(4, 11, 31, 0.7)` | `rgba(255, 255, 255, 0.8)` | Fondo del navbar (glassmorphism) |
-| `--theme-nav-border` | `rgba(255, 255, 255, 0.1)` | `rgba(6, 19, 47, 0.1)` | Borde del navbar |
-| `--theme-nav-shadow` | `inset 0 1px 0 rgba(255,255,255,0.05), 0 10px 30px rgba(0,0,0,0.5)` | `inset 0 1px 0 #fff, 0 10px 30px rgba(6,19,47,0.05)` | Sombra del navbar |
-| `--theme-cmd-bg` | `rgba(7, 12, 28, 0.7)` | `rgba(255, 255, 255, 0.85)` | Fondo del command-bar mockup |
-| `--theme-cmd-border` | `rgba(255, 255, 255, 0.08)` | `rgba(6, 19, 47, 0.08)` | Borde del command-bar |
-| `--theme-cmd-shadow` | `0 30px 60px rgba(2,83,253,0.08), inset 0 1px 0 rgba(255,255,255,0.05)` | `0 30px 60px rgba(2,83,253,0.05), inset 0 1px 0 #fff` | Sombra del command-bar |
-| `--theme-aurora-glow` | `rgba(2, 83, 253, 0.22)` | `rgba(2, 83, 253, 0.18)` | Resplandor base de la aurora |
+La firma del sitio no es un gradiente aislado. Es la combinación de:
 
-### 2.5 Reglas de Polaridad (Dark/Light)
+- Fondo Deep Space extendido a lo largo de toda la página.
+- Micro-grid técnico de `60px`.
+- Superficies translúcidas tipo command bar.
+- Metadatos en Geist Mono, mayúsculas y tracking amplio.
+- Azul brillante reservado para foco, ruta activa, estados y acciones.
+- Botones principales con relieve de tecla física.
+
+### 1.4 Principios
+
+1. La estructura debe explicar el contenido.
+2. El azul tiene función, no es relleno decorativo.
+3. La densidad se controla con jerarquía, no escondiendo información esencial.
+4. Los elementos interactivos deben parecer interactivos.
+5. Las animaciones ambientales pueden ser lentas; las respuestas de UI deben ser rápidas.
+6. El modo claro y el oscuro son dos polaridades del mismo sistema, no dos diseños distintos.
+7. Una pantalla puede ser asimétrica, pero sus líneas, columnas y ritmos deben sentirse calculados.
+
+### 1.5 Lo que no pertenece al sistema
+
+- Gradientes multicolor ajenos a la paleta azul.
+- Glassmorphism intenso en todos los elementos.
+- Cápsulas para cada texto o categoría.
+- Cards grandes e idénticas cuando una lista o consola comunica mejor la jerarquía.
+- Sombras negras pesadas sobre superficies comerciales. El marquee y los backdrops pueden usar negro neutro para dar profundidad.
+- Titulares con serif, cursiva o pesos superiores a 600.
+- Números `01 / 02 / 03` usados solo como decoración. Deben representar nivel, secuencia, índice o conteo real.
+- Animaciones de entrada dispersas en cada sección.
+- Fondos Deep Space fijados al viewport.
+
+---
+
+## 2. Arquitectura técnica y fuentes de verdad
+
+### 2.1 Stack de interfaz
+
+| Tecnología | Versión o regla |
+|---|---|
+| Astro | `^7.0.9` |
+| Tailwind CSS | `^4.3.2` |
+| Integración Tailwind | `@tailwindcss/vite` |
+| Node.js | `>=22.12.0` |
+| JavaScript cliente | Vanilla TypeScript dentro de componentes Astro |
+| Contenido | Astro Content Collections con validación Zod |
+
+No hay framework cliente hidratado. La interacción del menú, tema, FAQ heredado y modal de tecnologías se resuelve con scripts pequeños del navegador.
+
+### 2.2 Archivos canónicos
+
+| Responsabilidad | Archivo |
+|---|---|
+| Tokens, utilidades y auroras | `src/styles/global.css` |
+| Documento HTML, tema y Deep Space | `src/layouts/Layout.astro` |
+| Navegación compartida | `src/lib/navigation.ts` |
+| Navbar desktop y móvil | `src/components/Navbar.astro` |
+| Footer | `src/components/Footer.astro` |
+| Hero | `src/components/Hero.astro` |
+| Servicios | `src/components/Services.astro` |
+| Proyectos | `ProjectCard.astro`, `ProjectsPreview.astro`, `ProjectDetail.astro` |
+| Tecnologías | `src/components/TechStack.astro` |
+| Planes | `Pricing.astro`, `PlanCards.astro`, `PlanComparison.astro`, `PlanDetail.astro` |
+| CTA de diagnóstico | `src/components/CustomQuote.astro` |
+| Contenido de proyectos y planes | `src/content/projects/`, `src/content/plans/` |
+| Esquemas de contenido | `src/content.config.ts` |
+| Consultas y formato de planes | `src/lib/plans.ts` |
+| Consultas de proyectos | `src/lib/projects.ts` |
+| Enlaces de contacto | `src/lib/contact.ts` |
+
+### 2.3 Componentes heredados no canónicos
+
+Los siguientes archivos no se importan desde páginas activas y conservan nombres de tokens anteriores como `--color-blue`, `glass-panel` o `font-heading`:
+
+| Archivo | Estado |
+|---|---|
+| `src/components/Button.astro` | Heredado. No usar como base para botones nuevos. |
+| `src/components/CTA.astro` | Heredado. `CustomQuote.astro` es el CTA activo. |
+| `src/components/FAQ.astro` | Heredado y fuera de la composición actual. |
+| `src/components/Stats.astro` | Heredado y fuera de la composición actual. |
+
+Si alguno vuelve a utilizarse, debe migrarse primero a los tokens y patrones descritos aquí.
+
+### 2.4 Datos antes que markup duplicado
+
+- Los planes se guardan como JSON y se validan con la colección `plans`.
+- Los proyectos se guardan como Markdown y se validan con la colección `projects`.
+- `getPlans()` y `getProjects()` ordenan por `data.order`.
+- `getFeaturedProjects()` alimenta el home y usa un límite predeterminado de tres.
+- `PlanCards.astro` se reutiliza en home y `/planes`.
+- Navbar y footer comparten `navigationItems`.
+- Los enlaces de WhatsApp se construyen mediante `getWhatsAppUrl()` o `getPlanInquiryUrl()`.
+
+No copiar listas de planes, proyectos o navegación dentro de una página nueva.
+
+---
+
+## 3. Sistema de color
+
+### 3.1 Mapeo semántico de Tailwind v4
+
+El sistema redefine nombres de color de Tailwind para que clases como `text-white` respondan al tema:
 
 ```css
-/* En :root → valores para Modo Claro */
-/* En :root.dark → valores para Modo Oscuro */
-/* La clase .dark se inyecta vía JavaScript en <html> */
+@theme {
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+
+  --color-canvas: var(--theme-canvas);
+  --color-white: var(--theme-white);
+  --color-black: var(--theme-black);
+  --color-muted: var(--theme-muted);
+
+  --color-crimson: var(--theme-crimson);
+  --color-coral: var(--theme-coral);
+  --color-amber: var(--theme-amber);
+
+  --color-keycap-bg: var(--theme-keycap-bg);
+  --color-keycap-text: var(--theme-keycap-text);
+}
 ```
 
-**Regla:** Ningún color crudo en el HTML. Usar siempre `var(--color-X)`.
+`text-white` significa "texto principal". En modo claro produce navy, no blanco literal. Lo mismo aplica a `bg-white/5`, `border-white/10` y variantes con opacidad.
+
+### 3.2 Tokens base
+
+| Token semántico | Claro | Oscuro | Función |
+|---|---|---|---|
+| `--color-canvas` | `#F6F8FC` | `#040B1F` | Canvas global y fondo interno de celdas |
+| `--color-white` | `#06132F` | `#FFFFFF` | Texto principal, títulos e iconos |
+| `--color-black` | `#FFFFFF` | `#000000` | Polaridad inversa y fondos de código |
+| `--color-muted` | `#637089` | `#8B9BB4` | Texto secundario y metadata |
+| `--color-crimson` | `#003DCC` | `#003DCC` | Extremo profundo del gradiente |
+| `--color-coral` | `#0253FD` | `#0253FD` | Azul de acción y selección |
+| `--color-amber` | `#4C84FF` | `#4C84FF` | Azul claro, foco y acento luminoso |
+
+Los nombres `crimson`, `coral` y `amber` son nombres históricos de la API. Actualmente los tres representan intensidades de azul. No deben reinterpretarse como rojo, coral o amarillo.
+
+### 3.3 Tokens de aurora
+
+| Token | Valor | Papel |
+|---|---|---|
+| `--theme-aurora-1` | `#0253FD` | Luz principal y letterbox |
+| `--theme-aurora-2` | `#4C84FF` | Luz lateral clara |
+| `--theme-aurora-3` | `#001A66` | Profundidad navy |
+| `--theme-aurora-4` | `#003DCC` | Luz central profunda |
+| `--theme-aurora-5` | `#6B9DFF` | Luz superior secundaria |
+| `--theme-aurora-glow` | `rgba(2,83,253,0.18)` claro / `0.22` oscuro | Glow semántico disponible |
+
+### 3.4 Tokens de superficie
+
+| Token | Claro | Oscuro |
+|---|---|---|
+| `--theme-nav-bg` | `rgba(255,255,255,0.8)` | `rgba(4,11,31,0.7)` |
+| `--theme-nav-border` | `rgba(6,19,47,0.1)` | `rgba(255,255,255,0.1)` |
+| `--theme-nav-shadow` | Highlight blanco + sombra navy sutil | Highlight blanco tenue + sombra negra |
+| `--theme-cmd-bg` | `rgba(255,255,255,0.85)` | `rgba(7,12,28,0.7)` |
+| `--theme-cmd-border` | `rgba(6,19,47,0.08)` | `rgba(255,255,255,0.08)` |
+| `--theme-cmd-shadow` | Glow azul `0.05` + highlight interior | Glow azul `0.08` + highlight interior |
+
+### 3.5 Tokens del botón keycap
+
+| Token | Claro | Oscuro |
+|---|---|---|
+| `--theme-keycap-bg` | `#FFFFFF` | `#E7EFFF` |
+| `--theme-keycap-text` | `#06132F` | `#0F1B37` |
+| `--theme-keycap-shadow` | Borde navy, sombra corta, relieve inferior | Anillo negro, glow blanco, highlights internos |
+| `--theme-keycap-shadow-active` | Versión comprimida | Versión comprimida |
+
+### 3.6 Convenciones de opacidad
+
+| Patrón | Uso típico |
+|---|---|
+| `border-white/5` | División entre secciones |
+| `border-white/8` | División interna de cards y consolas |
+| `border-white/10` | Contorno visible de controles o celdas |
+| `bg-white/[0.018]` a `bg-white/[0.025]` | Superficie apenas elevada |
+| `bg-[var(--color-coral)]/10` | Badge o selección activa |
+| `color-mix(... var(--color-coral) 5-8% ...)` | Hover o superficie enfatizada |
+
+Los valores RGBA directos se reservan para luces, sombras, velos fotográficos y el fondo Deep Space. Texto, bordes y superficies funcionales deben usar tokens.
+
+### 3.7 Gradiente de marca
+
+```css
+.text-warm-gradient {
+  background-image: linear-gradient(
+    to right,
+    var(--color-amber),
+    var(--color-coral),
+    var(--color-crimson)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+```
+
+Usarlo para una frase corta dentro del titular. No aplicar el gradiente a párrafos completos, cards ni iconos funcionales.
 
 ---
 
-## 3. Tipografía y Jerarquía
+## 4. Tipografía y contenido
 
-### 3.1 Familias Tipográficas
+### 4.1 Familias
 
-| Familia | CSS Variable | Pesos Cargados | Uso |
-|---------|--------------|----------------|-----|
-| **Inter** | `--font-body` | 400, 500, 600 | Títulos, párrafos, botones, UI general |
-| **Geist Mono** | `--font-mono` | 400, 500 | Eyebrows, comandos CLI, atajos, footer, datos técnicos |
+| Rol | Familia | Pesos cargados |
+|---|---|---|
+| Cuerpo, títulos y controles | Inter | 400, 500, 600 |
+| Metadatos, estados e índices | Geist Mono | 400, 500 |
 
-**Cargadas vía Google Fonts:**
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap">
+<link
+  href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap"
+  rel="stylesheet"
+>
 ```
 
-### 3.2 Escala Tipográfica
+No agregar una tercera familia sin redefinir la dirección de marca.
 
-| Nivel | Tamaño | Peso | Uso |
-|-------|--------|------|-----|
-| **Display (H1)** | `text-[40px] md:text-[64px]` | 600 | Solo Hero principal |
-| **H2 (Sección)** | `text-4xl md:text-5xl` | 600 | Títulos de sección (UNIFORME en todo el sitio) |
-| **H3 (Card)** | `text-xl` (20px) | 600 | Títulos dentro de cards |
-| **Subtítulo** | `text-lg` (18px) | 400 | Subtítulos de sección |
-| **Body** | `text-base` (16px) | 400 | Texto general |
-| **Small** | `text-sm` (14px) | 400 | Metadata, links, botones pequeños |
-| **Eyebrow** | `text-[11px]` | 500 | Etiquetas de sección (uppercase, tracking-wider) |
-| **Caption (Mono)** | `text-[10-12px]` | 400 | Comandos, atajos, footer |
+### 4.2 Escala real
 
-### 3.3 Reglas Estrictas
+| Nivel | Implementación habitual | Uso |
+|---|---|---|
+| Hero H1 | `46px`, `56px`, `68px`; `1.02`; tracking `-0.045em` | Home |
+| H1 de índice | `40px` a `64px` o `48px` a `60px` | `/proyectos`, `/planes` |
+| H1 de detalle | `38px` a `50-52px`; tracking `-0.04em` | Plan o proyecto individual |
+| H2 de sección | `36px` móvil, `48px` desktop; peso 600 | Secciones del home |
+| H2 interno | `27px` a `35px` mediante `clamp()` | Detalles extensos |
+| H3 principal | `20px` a `24px`; peso 600 | Cards y módulos |
+| Body destacado | `17px` a `18px` | Introducciones |
+| Body | `14px` a `16px`; line-height `1.6-1.8` | Descripciones |
+| Metadata mono | `8px` a `11px`; uppercase | Estados, niveles, conteos |
 
-- 🚫 **PROHIBIDO EL USO DE CURSIVAS** (`italic`): Ningún elemento debe usar la clase `italic`.
-- **Títulos de Sección:** Uniformes en todo el sitio: `text-4xl md:text-5xl font-[600] tracking-tight`.
-- **Subtítulos de Sección:** `text-lg font-[400] text-[var(--color-muted)] max-w-[640px] leading-relaxed`.
-- **Tracking:** `tracking-tight` en titulares, `tracking-wider` en eyebrows (uppercase).
-- **Leading:** `leading-tight` en headings, `leading-relaxed` en body.
+### 4.3 Reglas tipográficas
+
+- Peso máximo habitual: 600.
+- Subtítulos y descripciones usan peso 400. No ponerlos en negrita.
+- `font-medium` se reserva para valores, enlaces y labels con función.
+- No usar cursiva.
+- Los títulos usan `tracking-tight` o tracking negativo explícito.
+- El cuerpo usa `leading-relaxed`; el contenido editorial puede llegar a `line-height: 1.8`.
+- Geist Mono siempre usa mayúsculas cuando actúa como metadata.
+- El tracking de metadata se mueve entre `0.05em` (`tracking-wider`) y `0.18em`.
+- Las frases de marca pueden terminar en punto; los labels técnicos normalmente no.
+
+### 4.4 Eyebrow estándar
+
+El eyebrow normal no es una cápsula. Es una fila mínima con punto vivo y texto mono:
+
+```astro
+<div class="mb-6 inline-flex items-center gap-2">
+  <span class="h-2 w-2 rounded-full bg-[var(--color-amber)] animate-pulse"></span>
+  <span class="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--color-muted)]">
+    Nombre de sección
+  </span>
+</div>
+```
+
+El hero sí usa una variante encapsulada con borde, fondo translúcido y shimmer. No trasladar esa cápsula a todas las secciones.
+
+### 4.5 Voz y microcopy
+
+| Contexto | Regla |
+|---|---|
+| Titulares | Beneficio específico, una idea por título |
+| CTAs | Verbo + resultado: `Ver planes web`, `Cotizar proyecto`, `Comparar todos los planes` |
+| Metadata | Descriptiva, breve y verificable |
+| Planes | Precio, alcance, tiempos y condiciones sin eufemismos |
+| Proyectos | Problema, operación y solución antes que adjetivos promocionales |
+| Tecnología | Nombrar herramientas reales, no conceptos vagos |
 
 ---
 
-## 4. Sistema de Fondo Deep Space Aurora
+## 5. Layout, espaciado y geometría
 
-### 4.1 Arquitectura General
+### 5.1 Breakpoints
 
-El fondo del sitio es un **ecosistema de 6 capas** apiladas con aislamiento propio (`isolation: isolate`). Es la pieza visual más importante del proyecto.
+Se usan los breakpoints estándar de Tailwind:
 
-**Estructura HTML obligatoria:**
+| Nombre | Inicio | Papel principal |
+|---|---:|---|
+| `sm` | 640px | CTAs en fila, grids de dos, detalles secundarios |
+| `md` | 768px | Secciones de dos columnas, paddings mayores, tablas |
+| `lg` | 1024px | Navbar desktop, hero dividido, grids de tres |
+| `xl` | 1280px | Labels complementarios y gaps más amplios |
+
+El navbar desktop empieza en `lg`, no en `md`, para evitar colisiones en tablets.
+
+### 5.2 Anchos de contenedor
+
+| Ancho | Uso |
+|---|---|
+| `max-w-[1200px]` | Índices, grids de cards, footer y comparativas |
+| `max-w-[1180px]` | Hero |
+| `max-w-[1100px]` | Servicios y páginas de detalle |
+| `max-w-[1000px]` | CTA de diagnóstico |
+| `max-w-[720-780px]` | Encabezados y prosa principal |
+
+Patrón general:
+
+```astro
+<div class="container mx-auto max-w-[1200px] px-6">
+  <!-- contenido -->
+</div>
+```
+
+El padding lateral base es `24px` (`px-6`) incluso en móvil.
+
+### 5.3 Ritmo vertical
+
+| Contexto | Valor habitual |
+|---|---|
+| Sección estándar | `py-24` |
+| Sección compacta en móvil | `py-16 md:py-24` |
+| CTA final | `py-20 md:py-24` |
+| Footer | `py-12 md:py-14` |
+| Páginas índice bajo navbar | `pt-40 pb-24` |
+| Detalles bajo navbar | `pt-32 md:pt-36` |
+| Separación intro/contenido | `mb-12` a `mb-14` |
+| Gap de cards | `gap-6` |
+
+El sistema no exige `py-24` de forma ciega. Las secciones densas pueden reducir el espacio móvil si mantienen respiración y claridad.
+
+### 5.4 Radios
+
+| Radio | Uso |
+|---|---|
+| `8px` | Keycaps y controles compactos |
+| `12px` | Filas, details, chips grandes |
+| `14px` | `.command-bar-mockup` |
+| `16-18px` | CTAs destacados y modal |
+| `9999px` | Pills, estados, botones circulares |
+
+No convertir todas las superficies en pills. Las pills indican control, estado o categoría breve.
+
+### 5.5 Divisores y grillas internas
+
+- Toda sección principal comienza normalmente con `border-t border-white/5`.
+- Dentro de una consola se usa `border-white/8`.
+- Las cuadrículas de celdas usan `gap-px` y un fondo de borde compartido.
+- Evitar sombras entre filas internas; usar líneas.
+- Preferir `minmax(0, 1fr)` en columnas con texto para evitar overflow.
+
+---
+
+## 6. Sistema Deep Space
+
+### 6.1 Invariante principal
+
+La clase del contenedor debe mantenerse exactamente así:
+
 ```html
-<body>
-  <!-- Contenedor de fondo (Layers 1-4) -->
-  <div class="deep-space-bg absolute inset-0 overflow-hidden pointer-events-none z-0" style="isolation: isolate;">
-    <div class="deep-space-base absolute inset-0"></div>            <!-- Layer 1 -->
-    <div class="absolute inset-0">                                    <!-- Layer 2 wrapper -->
-      <div class="aurora-blade blade-1"></div>
-      <div class="aurora-blade blade-2"></div>
-      <div class="aurora-blade blade-3"></div>
-      <div class="aurora-blade blade-4"></div>
-      <div class="aurora-blade blade-5"></div>
-    </div>
-    <svg class="deep-space-grid absolute inset-0 w-full h-full">...</svg> <!-- Layer 3 -->
-    <div class="deep-space-vignette absolute inset-0"></div>          <!-- Layer 4 -->
+class="deep-space-bg absolute inset-0 overflow-hidden pointer-events-none z-0"
+```
+
+No sustituir `absolute` por `fixed`. El fondo debe cubrir la altura completa del documento y sus fuentes de luz deben distribuirse según la altura de cada página. Solo la línea superior es `fixed`.
+
+### 6.2 Estructura exacta
+
+Esta es la estructura activa de `Layout.astro`:
+
+```astro
+<!-- Deep Space Background System -->
+<div
+  class="deep-space-bg absolute inset-0 overflow-hidden pointer-events-none z-0"
+  style="isolation: isolate;"
+>
+  <!-- Layer 1: Base Canvas with radial depth gradients -->
+  <div class="deep-space-base absolute inset-0"></div>
+
+  <!-- Layer 2: Aurora Blades (5 layered light sources) -->
+  <div class="absolute inset-0">
+    <div class="aurora-blade blade-1"></div>
+    <div class="aurora-blade blade-2"></div>
+    <div class="aurora-blade blade-3"></div>
+    <div class="aurora-blade blade-4"></div>
+    <div class="aurora-blade blade-5"></div>
   </div>
-  <!-- Layer 5 (sibling, fixed al viewport) -->
-  <div class="deep-space-letterbox fixed top-0 left-0 right-0 z-[60] pointer-events-none"></div>
-  <Navbar />                                                          <!-- z-50 -->
-  <div class="relative z-10"><slot /></div>                           <!-- Contenido -->
-</body>
+
+  <!-- Layer 3: Subtle Grid Overlay -->
+  <svg
+    class="deep-space-grid absolute inset-0 w-full h-full"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+  >
+    <defs>
+      <pattern id="microGrid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path
+          d="M 60 0 L 0 0 0 60"
+          fill="none"
+          stroke="#003DCC"
+          stroke-width="0.6"
+          class="grid-stroke"
+        />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#microGrid)" />
+  </svg>
+
+  <!-- Layer 4: Vignette Overlay -->
+  <div class="deep-space-vignette absolute inset-0"></div>
+</div>
+
+<!-- Layer 5: Top Edge Highlight -->
+<div class="deep-space-letterbox fixed top-0 left-0 right-0 z-[60] pointer-events-none"></div>
 ```
 
-### 4.2 Layer 1: Base Canvas (`.deep-space-base`)
+No retirar ninguna de las cinco blades, el SVG, la vignette ni `isolation: isolate`.
 
-**Propósito:** Establecer el color base + 3 gradientes radiales de profundidad ambiental.
+### 6.3 Canvas base
 
 ```css
 .deep-space-base {
@@ -187,24 +488,20 @@ El fondo del sitio es un **ecosistema de 6 capas** apiladas con aislamiento prop
 }
 ```
 
-| Gradiente | Posición | Color | Opacidad | Radio |
-|-----------|----------|-------|----------|-------|
-| #1 | `50% 0%` (superior centro) | `rgba(2, 83, 253, ...)` | 0.4 | ellipse 80% 60% |
-| #2 | `100% 100%` (inferior derecho) | `rgba(76, 132, 255, ...)` | 0.3 | ellipse 60% 50% |
-| #3 | `0% 80%` (inferior izquierdo) | `rgba(0, 26, 102, ...)` | 0.5 | ellipse 50% 50% |
-| Base | Capa final | `var(--color-canvas)` | 100% | — |
+| Fuente | Posición | Función |
+|---|---|---|
+| Azul principal | `50% 0%` | Halo superior central |
+| Azul claro | `100% 100%` | Profundidad inferior derecha |
+| Navy | `0% 80%` | Contrapeso inferior izquierdo |
 
-**Resultado visual:** Un fondo que respira color azul en los bordes, dejando el centro más limpio para el contenido.
+### 6.4 Aurora blades
 
-### 4.3 Layer 2: Aurora Blades (5 luces difuminadas)
+Base compartida:
 
-**Propósito:** Generar profundidad cinemática con luces radiales en movimiento perpetuo.
-
-**Estilos base:**
 ```css
 .aurora-blade {
   position: absolute;
-  filter: blur(100px);             /* 70px en móvil */
+  filter: blur(100px);
   border-radius: 50%;
   will-change: transform, opacity;
   contain: layout style paint;
@@ -212,96 +509,53 @@ El fondo del sitio es un **ecosistema de 6 capas** apiladas con aislamiento prop
 }
 ```
 
-**Especificaciones por Blade:**
+| Blade | Tamaño desktop | Posición | Duración | Token |
+|---|---|---|---:|---|
+| 1 | `55vw` | `top: -15%; left: -10%` | 24s | `aurora-1` |
+| 2 | `50vw` | `top: 25%; right: -15%` | 30s | `aurora-2` |
+| 3 | `60vw` | `bottom: -20%; left: 15%` | 20s | `aurora-3` |
+| 4 | `35vw` | `top: 50%; left: 40%` | 35s | `aurora-4` |
+| 5 | `40vw` | `top: 5%; right: 20%` | 28s | `aurora-5` |
 
-| # | Color | Posición Desktop | Dimensiones | Rotación | Animación | Opacidad |
-|---|-------|------------------|-------------|----------|-----------|----------|
-| **blade-1** | `var(--theme-aurora-1)` `#0253FD` | `top: -15%, left: -10%` | `55vw × 55vw` | `-15deg` | `drift-1 24s` | 1.0 |
-| **blade-2** | `var(--theme-aurora-2)` `#4C84FF` | `top: 25%, right: -15%` | `50vw × 50vw` | `+20deg` | `drift-2 30s` | 0.95 |
-| **blade-3** | `var(--theme-aurora-3)` `#001A66` | `bottom: -20%, left: 15%` | `60vw × 60vw` | `-5deg` | `drift-3 20s` | 1.0 |
-| **blade-4** | `var(--theme-aurora-4)` `#003DCC` | `top: 50%, left: 40%` | `35vw × 35vw` | `+10deg` | `drift-4 35s` | 0.9 |
-| **blade-5** | `var(--theme-aurora-5)` `#6B9DFF` | `top: 5%, right: 20%` | `40vw × 40vw` | `-25deg` | `drift-5 28s` | 0.95 |
+Todas usan gradiente radial hacia transparente y `infinite alternate ease-in-out`. Los keyframes varían traslación, rotación, escala y opacidad. No sincronizar sus tiempos: la irregularidad evita un movimiento mecánico.
 
-**Mobile (max-width: 768px):**
-| # | Dimensiones Móvil |
-|---|-------------------|
-| blade-1 | `80vw × 80vw` |
-| blade-2 | `70vw × 70vw` |
-| blade-3 | `85vw × 85vw` |
-| blade-4 | `50vw × 50vw` |
-| blade-5 | `55vw × 55vw` |
+En `max-width: 768px`, el blur baja a `70px` y los tamaños pasan a `80vw`, `70vw`, `85vw`, `50vw` y `55vw` respectivamente.
 
-**Animaciones (Keyframes):**
-- Todas usan `infinite alternate ease-in-out`.
-- Varían `transform: translate(X%, Y%) rotate(deg) scale(value)` y `opacity`.
-- Estructura de cada `@keyframes drift-N`: `0%` (estado inicial) → `100%` (estado final), excepto `drift-4` que tiene un punto medio al 50%.
+### 6.5 Micro-grid
 
-### 4.4 Layer 3: Micro-Grid (Cuadrícula Técnica)
+```css
+.deep-space-grid {
+  opacity: 0.2;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 30%, #000 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 30%, #000 0%, transparent 75%);
+}
 
-**Propósito:** Añadir la "precisión suiza" del diseño. Es la capa de identidad técnica.
+html:not(.dark) .deep-space-grid {
+  opacity: 0.2;
+}
 
-**Implementación SVG inline:**
-```html
-<svg class="deep-space-grid absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice">
-  <defs>
-    <pattern id="microGrid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#003DCC" stroke-width="0.6" class="grid-stroke"/>
-    </pattern>
-  </defs>
-  <rect width="100%" height="100%" fill="url(#microGrid)"/>
-</svg>
+html:not(.dark) .grid-stroke { stroke: #003DCC; }
+html.dark .grid-stroke { stroke: #4C84FF; }
 ```
 
-**Parámetros:**
+La opacidad vigente es `0.2` en ambos temas. La celda mide `60px`, el stroke `0.6px` y la máscara concentra la cuadrícula alrededor del centro superior.
 
-| Parámetro | Valor | Notas |
-|-----------|-------|-------|
-| Tamaño de celda | `60px × 60px` | Constante en todos los viewports |
-| Stroke width | `0.6px` | Línea técnica fina |
-| Color Modo Oscuro | `#4C84FF` (controlado por `.grid-stroke` con `html.dark`) | Azul claro cristalino |
-| Color Modo Claro | `#003DCC` (controlado por `.grid-stroke` con `html:not(.dark)`) | Azul corporativo profundo |
-| Opacidad contenedor | `0.6` (dark) / `0.6` (light) | Controlada por `.deep-space-grid` |
-| Forma | Solo bordes superior e izquierdo (`M 60 0 L 0 0 0 60`) | Estilo blueprint |
-| Máscara | `radial-gradient(ellipse 80% 80% at 50% 30%, #000 0%, transparent 75%)` | Difumina los bordes |
-
-**Reglas de uso:**
-- El grid debe ser visible en todas las páginas (es la identidad técnica).
-- En modo claro, el `opacity` del contenedor puede reducirse a `0.4-0.6` para no competir con el contenido.
-- La máscara radial debe respetarse para mantener la sensación de profundidad (no quitar la máscara).
-
-### 4.5 Layer 4: Vignette (`.deep-space-vignette`)
-
-**Propósito:** Oscurecer sutilmente los bordes para enfocar la atención al centro.
+### 6.6 Vignette y letterbox
 
 ```css
 .deep-space-vignette {
   background: radial-gradient(circle at center, transparent 0%, var(--color-canvas) 100%);
   opacity: 0.7;
 }
-```
 
-| Parámetro | Valor |
-|-----------|-------|
-| Tipo | `radial-gradient` |
-| Centro | `circle at center` |
-| Inicio | `transparent 0%` |
-| Final | `var(--color-canvas) 100%` |
-| Opacidad | `0.7` |
-
-### 4.6 Layer 5: Cinematic Letterbox (`.deep-space-letterbox`)
-
-**Propósito:** Línea de luz superior con resplandor triple que permanece fija al viewport durante el scroll.
-
-**Estructura HTML (sibling de `.deep-space-bg`):**
-```html
-<div class="deep-space-letterbox fixed top-0 left-0 right-0 z-[60] pointer-events-none"></div>
-```
-
-**Estilos:**
-```css
 .deep-space-letterbox {
   height: 3px;
-  background: linear-gradient(to right, transparent 0%, var(--theme-aurora-1) 50%, transparent 100%);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--theme-aurora-1) 50%,
+    transparent 100%
+  );
   opacity: 1;
   box-shadow:
     0 0 20px var(--theme-aurora-1),
@@ -310,74 +564,47 @@ El fondo del sitio es un **ecosistema de 6 capas** apiladas con aislamiento prop
 }
 ```
 
-| Parámetro | Valor |
-|-----------|-------|
-| Altura | `3px` |
-| Gradiente | `linear-gradient(to right, transparent → aurora-1 → transparent)` |
-| Color | `var(--theme-aurora-1)` `#0253FD` |
-| Posición | `fixed top-0` (viewport-relative) |
-| Z-index | `z-[60]` (sobre el contenido, bajo modales) |
-| Resplandor | Triple: `20px + 40px + 80px` |
-| Pointer events | `none` (no interfiere con interactividad) |
+La letterbox es hermana del fondo para no quedar recortada por `overflow-hidden`.
 
-**Importante:** Este elemento debe ser **sibling** de `.deep-space-bg`, no hijo, para evitar conflictos con `overflow-hidden` y `isolation: isolate` del padre.
+### 6.7 Orden de capas
 
-### 4.7 Capas y Z-Index Global
-
-| Capa | Z-Index | Contexto |
-|------|---------|----------|
-| Background Layers 1-4 | `z-0` | Contenedor con `isolation: isolate` |
-| Letterbox | `z-[60]` | `fixed` al viewport |
-| Navbar | `z-50` | `fixed` al viewport |
-| Contenido principal | `z-10` | Relativo al body |
-| Modales/Overlays | `z-[70+]` | Solo si existen |
+| Elemento | Capa |
+|---|---:|
+| Deep Space base, blades, grid, vignette | `z-0` aislado |
+| Contenido principal | `z-10` |
+| Backdrop del menú móvil | `z-30` |
+| Panel del menú móvil | `z-40` |
+| Navbar | `z-50` |
+| Letterbox superior | `z-[60]`, sin pointer events |
+| Skip link | `z-[100]` |
+| `<dialog>` | Top layer nativo del navegador |
 
 ---
 
-## 5. Componentes Insignia (Signature Elements)
+## 7. Primitivas visuales
 
-### 5.1 Standardized Eyebrows (Etiquetas Superiores)
+### 7.1 Command-bar surface
 
-Toda sección principal debe estar precedida por un "Eyebrow" sobre el título principal.
-
-**Estructura HTML:**
-```html
-<div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 mb-8 relative overflow-hidden">
-  <span class="w-2 h-2 rounded-full bg-[var(--color-amber)] animate-pulse"></span>
-  <span class="font-mono text-[11px] text-[var(--color-white)] uppercase tracking-wider">ETIQUETA</span>
-</div>
+```css
+.command-bar-mockup {
+  background: var(--theme-cmd-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--theme-cmd-border);
+  border-radius: 14px;
+  box-shadow: var(--theme-cmd-shadow);
+}
 ```
 
-**Parámetros:**
+Esta es la superficie principal para cards, comparativas, hero selector, CTA y encabezados de detalle. Su anatomía habitual incluye:
 
-| Elemento | Clase | Valor |
-|----------|-------|-------|
-| Contenedor | `inline-flex items-center gap-2 rounded-full` | — |
-| Borde | `border border-white/10` | Borde sutil 1px |
-| Fondo | `bg-white/5` | Glassmorphism muy sutil |
-| Padding | `px-4 py-1.5` | Compacto |
-| Margen inferior | `mb-8` | Separación del título |
-| Punto pulsante | `w-2 h-2 rounded-full bg-[var(--color-amber)] animate-pulse` | Indicador vivo |
-| Texto | `font-mono text-[11px] uppercase tracking-wider` | Geist Mono |
+- Header con `border-b border-white/8`.
+- Body dividido por líneas, no por cards anidadas innecesarias.
+- Footer técnico con `bg-white/[0.02]`.
+- Glow azul localizado, nunca sobre toda la superficie.
 
-**Variante Hero (con shimmer):** Añadir un pseudo-elemento con gradiente animado:
-```html
-<div class="absolute inset-0 bg-gradient-to-r from-transparent via-[var(--color-amber)]/10 to-transparent -translate-x-full animate-[shimmer_2.5s_infinite]"></div>
-```
+### 7.2 Keycap button
 
-### 5.2 Tactile Keycap Buttons (Botones Principales)
-
-**Clase:** `.keycap-btn`
-
-**Estructura HTML:**
-```html
-<a href="..." class="keycap-btn">
-  <svg>...</svg>
-  Texto del botón
-</a>
-```
-
-**Estilos base:**
 ```css
 .keycap-btn {
   background-color: var(--color-keycap-bg);
@@ -391,37 +618,25 @@ Toda sección principal debe estar precedida por un "Eyebrow" sobre el título p
   gap: 10px;
   padding: 12px 20px;
   box-shadow: var(--theme-keycap-shadow);
-  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    transform 0.1s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .keycap-btn:active {
   transform: translateY(2px);
   box-shadow: var(--theme-keycap-shadow-active);
 }
 ```
 
-**Sombras (El Secreto del Relieve):**
+Uso: acción primaria de una vista o de una card comercial. En móvil puede ocupar todo el ancho con `w-full justify-center`.
 
-| Modo | Sombra Completa |
-|------|-----------------|
-| **Oscuro** | `0 0 0 2px #000, 0 0 14px rgba(255,255,255,0.19), inset 0 1px 1px rgba(255,255,255,1), inset 0 -1px 1px rgba(0,0,0,0.2)` |
-| **Claro** | `0 0 0 2px rgba(6,19,47,0.1), 0 4px 14px rgba(6,19,47,0.05), inset 0 -2px 1px rgba(6,19,47,0.05)` |
-| **Active Oscuro** | `0 0 0 2px #000, 0 0 6px rgba(255,255,255,0.1), inset 0 1px 1px rgba(255,255,255,0.5), inset 0 -1px 1px rgba(0,0,0,0.4)` |
-| **Active Claro** | `0 0 0 2px rgba(6,19,47,0.1), 0 2px 6px rgba(6,19,47,0.05), inset 0 -1px 1px rgba(6,19,47,0.1)` |
-
-**Anatomía de la sombra (4 capas):**
-1. Anillo oscuro exterior (`0 0 0 2px`).
-2. Resplandor exterior suave.
-3. Highlight superior interno (`inset 0 1px`).
-4. Sombra inferior interna (`inset 0 -1px`).
-
-### 5.3 Ghost Pill (Botón Secundario)
-
-**Clase:** `.ghost-pill`
+### 7.3 Ghost pill
 
 ```css
 .ghost-pill {
   background: transparent;
-  border: 1px solid rgba(var(--color-white), 0.15);
+  border: 1px solid color-mix(in srgb, var(--color-white) 15%, transparent);
   color: var(--color-muted);
   border-radius: 9999px;
   padding: 8px 16px;
@@ -431,38 +646,11 @@ Toda sección principal debe estar precedida por un "Eyebrow" sobre el título p
   gap: 8px;
   transition: all 0.2s;
 }
-.ghost-pill:hover {
-  border-color: rgba(var(--color-white), 0.3);
-  color: var(--color-white);
-}
 ```
 
-### 5.4 Command-Bar Mockup (Glassmorphism)
+Uso: acción secundaria, correo, exploración o navegación complementaria. No debe competir visualmente con un keycap.
 
-**Clase:** `.command-bar-mockup`
-
-**Estilos:**
-```css
-.command-bar-mockup {
-  background: var(--theme-cmd-bg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--theme-cmd-border);
-  border-radius: 14px;
-  box-shadow: var(--theme-cmd-shadow);
-}
-```
-
-**Anatomía interna:**
-- Fila superior (input): `flex items-center px-4 py-4 border-b border-white/5`.
-- Filas de resultados: `flex flex-col py-2`.
-- Fila activa: `bg-[var(--color-crimson)]/15 border-l-2 border-[var(--color-crimson)]`.
-- Filas inactivas: `hover:bg-white/5 border-l-2 border-transparent`.
-- Footer hints: `bg-black/30 px-4 py-2 border-t border-white/5`.
-
-### 5.5 Navbar (Píldora Flotante)
-
-**Clase:** `.nav-pill`
+### 7.4 Nav pill
 
 ```css
 .nav-pill {
@@ -474,341 +662,766 @@ Toda sección principal debe estar precedida por un "Eyebrow" sobre el título p
 }
 ```
 
-**Estructura HTML:**
+Se usa en el navbar principal y en el panel móvil para mantener continuidad material.
+
+### 7.5 Chips y metadata
+
+Los chips usan:
+
+- Borde `white/8` a `white/10`.
+- Fondo `white/[0.025]` o canvas translúcido.
+- Radio de `0.35rem` a `0.5rem`.
+- Geist Mono de `8px` a `10px`.
+- Uppercase y tracking entre `0.05em` y `0.15em`.
+
+No usar un chip cuando el texto necesita más de una línea.
+
+### 7.6 Filas interactivas
+
+Para opciones de consola, servicios relacionados o tarjetas compactas:
+
+- Toda la fila es el enlace.
+- El icono vive en una celda cuadrada con borde.
+- El texto usa `min-w-0`.
+- La flecha está dentro de un círculo de `28-32px`.
+- Hover: fondo azul al `5-8%`, borde azul y traslado de flecha de `2-4px`.
+- Focus: outline interior con offset negativo cuando la fila ocupa todo el ancho.
+
+### 7.7 Foco visible
+
+Patrón general:
+
 ```html
-<nav class="fixed top-8 left-1/2 -translate-x-1/2 z-50 nav-pill rounded-full px-4 py-2.5 flex items-center justify-between w-[90%] max-w-[800px]">
-  <!-- Logo (dual dark/light) -->
-  <a href="/">
-    <img src="...White.svg" class="h-5 hidden dark:block" />
-    <img src="...Primary.svg" class="h-5 block dark:hidden" />
-  </a>
-  <!-- Links desktop (hidden md:flex) -->
-  <!-- Right actions (theme toggle + CTA) -->
-</nav>
+class="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-amber)]"
 ```
 
-### 5.6 Infinite Tech Marquee (Carrusel de Stack)
-
-- **Estructura:** Contenedor ancho con filas que se desplazan infinitamente (`animate-marquee`).
-- **Máscara de Difuminado:** `mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent)`.
-- **Interacción:** Hover pausa el contenedor (`group-hover:[animation-play-state:paused]`).
-
-### 5.7 Mobile Menu Overlay (Menú Desplegable)
-
-- **Botón hamburguesa:** Visible solo en `md:hidden`, con icono dinámico (menú ↔ X).
-- **Overlay:** `fixed inset-x-0 top-0 z-40` con `backdrop-blur-2xl` y `transition-all duration-300 ease-in-out`.
-- **Animación de entrada:** `translate-y-0 opacity-100 pointer-events-auto`.
-- **Animación de salida:** `-translate-y-full opacity-0 pointer-events-none`.
-- **Cierre automático:** Click fuera, click en enlace, o tecla `Escape`.
+Keycap y ghost pill reciben el foco globalmente con `outline-offset: 3px`. Otros controles pueden usar un cambio explícito de fondo y texto, como `plan-nav-link`, pero todo foco debe ser perceptible.
 
 ---
 
-## 6. Espaciado, Layout y Ritmo Visual
+## 8. Navegación y footer
 
-### 6.1 Reglas de Espaciado
+### 8.1 Fuente compartida
 
-| Elemento | Valor | Notas |
-|----------|-------|-------|
-| Padding vertical de sección | `py-24` (96px) | RIGUROSO en todo el sitio |
-| Padding lateral móvil | `px-6` (24px) | Mínimo para evitar bordes pegados |
-| Padding lateral desktop | `px-6` (24px) | Contenido centrado con `max-w-[1200px]` |
-| Separación título/grid | `mb-16` (64px) | Constante |
-| Margen inferior de eyebrow | `mb-8` (32px) | Antes del título |
-| Gap entre cards | `gap-8` (32px) o `gap-12` (48px) | Bento grids |
-| Separación entre secciones | `border-t border-white/5` | Línea divisoria sutil obligatoria |
+Navbar y footer leen la misma lista:
 
-### 6.2 Contenedor Principal
-
-```html
-<div class="container mx-auto px-6 max-w-[1200px]">
-  <!-- contenido -->
-</div>
+```ts
+export const navigationItems = [
+  { label: 'Servicios', href: '/#servicios' },
+  { label: 'Proyectos', href: '/proyectos', activePath: '/proyectos' },
+  { label: 'Planes', href: '/planes', activePath: '/planes' },
+  { label: 'Stack', href: '/#stack' },
+  { label: 'Contacto', href: '/#contacto' },
+];
 ```
 
-**Regla:** Todo el contenido principal debe estar dentro de este contenedor. Nunca debe exceder `max-w-[1200px]`.
+Agregar, renombrar o quitar una ruta se hace en `src/lib/navigation.ts`.
 
-### 6.3 Líneas Divisorias Entre Secciones
+### 8.2 Navbar desktop
 
-**Regla obligatoria:** TODA sección del sitio debe iniciar con una línea divisoria superior sutil.
+| Propiedad | Valor actual |
+|---|---|
+| Posición móvil/tablet | `top-4` |
+| Posición desktop | `lg:top-8` |
+| Ancho | `w-[90%]` |
+| Máximo móvil/tablet | `640px` |
+| Máximo desktop | `840px` |
+| Breakpoint desktop | `lg` / 1024px |
+| Altura de controles de icono y navegación | `44px` |
+
+La ruta activa usa `aria-current="page"`, texto principal y un punto azul de `4px` bajo el enlace. Actualmente el estado activo aplica a las familias `/proyectos` y `/planes`.
+
+### 8.3 Menú móvil
+
+- Navbar principal en `z-50`.
+- Backdrop con canvas al `45%`, blur de `2px` y `z-30`.
+- Panel `nav-pill` en `z-40`, debajo de la cápsula principal.
+- Ancho `90%`, máximo `640px`.
+- Entrada con `translateY(-12px)` a `0` y opacidad.
+- El panel cerrado usa `inert`, `aria-hidden="true"` y `pointer-events-none`.
+- El body recibe `mobile-menu-open` para bloquear scroll.
+- Cierra por botón, enlace, backdrop, click externo o `Escape`.
+- Al cerrar con backdrop o Escape, el foco regresa al botón hamburguesa.
+- Al cruzar a `min-width: 1024px`, el menú se cierra automáticamente.
+
+### 8.4 Tema
+
+`Layout.astro` carga `<html class="dark">` y ejecuta un script inline antes del render visible:
+
+1. Lee `localStorage.theme` si existe.
+2. Si no existe, consulta `prefers-color-scheme`.
+3. Agrega o retira `.dark` en `<html>`.
+4. El toggle guarda `dark` o `light` en `localStorage`.
+
+Esto evita FOUC y hace que `dark:` dependa de clase mediante:
+
+```css
+@custom-variant dark (&:where(.dark, .dark *));
+```
+
+### 8.5 Footer
+
+El footer no es una sola fila comprimida. Tiene dos niveles:
+
+| Nivel | Contenido |
+|---|---|
+| Superior | Logo, descripción breve y correo directo |
+| Inferior | Navegación, copyright y `Volver arriba` |
+
+En móvil, la navegación usa dos columnas; desde `sm`, se vuelve una fila flexible. Las rutas activas cambian el slash a azul claro. Todos los targets mantienen `min-h-11`.
+
+---
+
+## 9. Hero y selector de rutas
+
+### 9.1 Estructura
+
+El hero es la tesis comercial del sitio:
+
+| Columna | Contenido |
+|---|---|
+| Izquierda | Estado, H1, propuesta, dos CTAs y tres beneficios |
+| Derecha | Selector tipo command bar con las dos rutas comerciales |
+
+En móvil se apila. En `lg` usa:
 
 ```html
-<section class="py-24 border-t border-white/5">
-  <div class="container mx-auto px-6 max-w-[1200px]">
-    <!-- contenido -->
+grid-cols-[minmax(0,1fr)_450px]
+```
+
+El contenedor tiene `min-h-[580px]`, `max-w-[1180px]`, `pt-28` y padding inferior responsive.
+
+### 9.2 Eyebrow del hero
+
+Es la única variante con cápsula y shimmer:
+
+- Borde `white/10`.
+- Fondo `white/5`.
+- Punto pulsante.
+- Barrido de `2.5s` con `via amber/10`.
+
+### 9.3 Selector de rutas
+
+El selector presenta una decisión real:
+
+| Ruta | Destino | Estado visual |
+|---|---|---|
+| Web / alcance cerrado | `/planes` | Borde y fondo azul enfatizados |
+| Custom / a medida | `#contacto` | Superficie neutra |
+
+Las tarjetas internas suben solo `2px` en hover. Los chips contienen precio, plazo, hosting o modalidad. El footer de consola resume `Análisis → desarrollo → publicación`.
+
+### 9.4 CTA de exploración
+
+`Explorar servicios` está centrado mediante un contenedor `flex justify-center`; no depender de `mx-auto` sobre un elemento `inline-flex`.
+
+---
+
+## 10. Servicios
+
+### 10.1 Narrativa
+
+El título vigente es `Cuatro capacidades para construir mejor.`. La sección no presenta cuatro tarjetas equivalentes: explica cuatro capacidades dentro de dos modalidades.
+
+| Modalidad | Capacidades |
+|---|---|
+| Ruta directa | Desarrollo web con plan definido |
+| Ruta personalizada | Aplicaciones web, automatizaciones e integraciones de IA |
+
+### 10.2 Service console
+
+La sección usa una sola `.command-bar-mockup`:
+
+- En móvil se apila.
+- Desde `md` usa columnas `0.9fr / 1.35fr`.
+- Desarrollo Web ocupa la columna destacada con glow localizado y keycap.
+- Las tres capacidades a medida son filas completas e interactivas.
+- Las descripciones de fila se limitan a dos líneas.
+- Los formatos web se ocultan por debajo de `sm` para reducir altura.
+- El CTA web ocupa el ancho completo en móvil y vuelve a `w-fit` desde `sm`.
+
+La sección usa `py-16 md:py-24`, no cuatro cards de gran altura.
+
+---
+
+## 11. Proyectos
+
+### 11.1 ProjectCard
+
+`ProjectCard.astro` tiene una única prop de variante:
+
+```ts
+interface Props {
+  project: Project;
+  compact?: boolean;
+}
+```
+
+| Variante | Contexto | Extracto |
+|---|---|---|
+| `compact` | Home | No se renderiza |
+| Completa | `/proyectos` | Se muestra con `line-clamp-3` |
+
+El subtítulo siempre usa peso regular.
+
+### 11.2 Anatomía de card
+
+1. Imagen de `208px` móvil y `224px` desde `md`.
+2. Badge de tipo y año sobre la imagen.
+3. Cliente en mono azul.
+4. Título, subtítulo regular y extracto opcional.
+5. Chips de tecnología.
+6. Footer con `Ver proyecto` y flecha circular.
+
+### 11.3 Movimiento de card
+
+- Imagen inicia con saturación `0.65` y escala `1.01`.
+- Hover recupera saturación, escala imagen a `1.055` y card a `translateY(-4px)`.
+- El velo fotográfico mantiene legibilidad de badges.
+- En reduced motion se eliminan las transformaciones.
+
+### 11.4 Preview del home
+
+- Obtiene hasta tres proyectos destacados.
+- Grid de una, dos y tres columnas en base, `md` y `lg`.
+- Usa la variante compacta.
+- Cierra con ghost pill hacia `/proyectos`.
+
+### 11.5 Índice de proyectos
+
+`/proyectos` usa H1 de `40px` a `64px`, introducción centrada y cards completas. El contenido proviene de Markdown validado, no de arrays locales.
+
+---
+
+## 12. Tech Stack y modal
+
+### 12.1 Marquee
+
+La vista ambiental mantiene dos filas en sentidos opuestos:
+
+- 21 tecnologías en `stackData`.
+- Primera fila: elementos `0-10`.
+- Segunda fila: elementos `11-20`.
+- Tres copias para continuidad visual.
+- Duración `30s linear infinite`.
+- Segunda fila usa dirección inversa.
+- Hover pausa cada fila.
+- Máscara horizontal desvanece los extremos.
+- Iconos en grayscale y opacidad `0.55`; hover recupera color y escala.
+- En móvil los nombres permanecen visibles; en desktop aparecen con hover.
+- Las copias adicionales usan `aria-hidden="true"`.
+
+### 12.2 Botón `Ver todas`
+
+El footer técnico muestra el total de nodos y un botón con:
+
+- `min-h-11`.
+- Borde y fondo tenue.
+- `aria-haspopup="dialog"`.
+- `aria-controls="tech-stack-dialog"`.
+- `aria-expanded` sincronizado.
+
+### 12.3 Modal
+
+El modal usa `<dialog>` nativo, no una capa improvisada:
+
+| Propiedad | Valor |
+|---|---|
+| Ancho | `calc(100% - 2rem)` |
+| Máximo | `960px` |
+| Altura máxima | `calc(100dvh - 2rem)` |
+| Radio | `18px` |
+| Backdrop | Navy `0.7` + blur `8px` |
+| Grid | 2 columnas, 3 desde `sm`, 5 desde `md` |
+| Celdas | Mínimo `112px` |
+
+El modal presenta las 21 tecnologías en una sola cuadrícula. No separarlas en grupos arbitrarios.
+
+### 12.4 Deep link e historial
+
+La URL canónica del modal es:
+
+```text
+/#tecnologias
+```
+
+Comportamiento requerido:
+
+1. Acceder directamente a `/#tecnologias` abre el modal.
+2. Abrirlo con el botón agrega `#tecnologias` mediante `history.pushState()`.
+3. Cerrar limpia el hash.
+4. Atrás cierra el modal.
+5. Adelante vuelve a abrirlo.
+6. Escape, botón y click exterior cierran el modal.
+7. El body bloquea scroll con `tech-stack-modal-open`.
+8. El foco entra al botón de cierre y vuelve al trigger.
+
+### 12.5 Reduced motion
+
+Con `prefers-reduced-motion: reduce`, ambos marquees quedan estáticos y la animación de entrada del dialog se elimina.
+
+---
+
+## 13. Planes
+
+### 13.1 Arquitectura reutilizable
+
+| Componente | Función | Dónde se usa |
+|---|---|---|
+| `PlanCards.astro` | Las tres cards comerciales | Home y `/planes` |
+| `Pricing.astro` | Encabezado del resumen + cards + CTA | Home |
+| `PlanComparison.astro` | Tabla y condiciones compartidas | `/planes` |
+| `PlanDetail.astro` | Ficha comercial completa | `/planes/[plan]` |
+
+El home no duplica la comparativa extensa. Remite a `/planes`.
+
+### 13.2 PlanCard
+
+Anatomía:
+
+1. Nivel e indicador `Más elegido` opcional.
+2. Nombre, modalidad y descripción.
+3. Precio con USD en metadata mono.
+4. Renovación y dominio.
+5. Especificaciones de entrega y alcance.
+6. Lista de highlights.
+7. Keycap a detalle y consulta secundaria.
+
+La card destacada usa borde azul al `45%`, glow azul y línea superior en gradiente. Todas las cards suben `4px` en hover salvo reduced motion.
+
+### 13.3 Comparativa
+
+- Vive dentro de `command-bar-mockup`.
+- Tabla mínima de `780px`.
+- En móvil se desplaza horizontalmente dentro de un `role="region"` enfocable.
+- Muestra la indicación `Desliza para comparar` por debajo de `md`.
+- Condiciones comunes usan grid de una, dos o tres columnas.
+
+### 13.4 Página `/planes`
+
+Orden:
+
+1. Header centrado.
+2. `PlanCards`.
+3. `PlanComparison` con `mt-20`.
+4. `CustomQuote`.
+5. Footer.
+
+### 13.5 Detalle de plan
+
+El detalle es una ficha comercial compacta, no una landing duplicada:
+
+- Header tipo command bar con título, código, nivel y modalidad.
+- Columna de inversión y forma de pago.
+- Barra de cinco especificaciones.
+- Navegación horizontal por anclas.
+- Secciones con bordes superiores, no cards gigantes.
+- `<details>` para alcance completo y términos extensos.
+- Cards comerciales solo donde comparar información económica lo exige.
+- CTA final y dos planes relacionados.
+
+Las clases locales `section-eyebrow`, `section-heading`, `body-copy`, `commercial-card`, `detail-note` y `plan-nav-link` pertenecen a esta ficha. No promoverlas a globales hasta que exista un segundo consumidor real.
+
+---
+
+## 14. Páginas de detalle
+
+### 14.1 Patrón compartido
+
+Planes y proyectos individuales comparten:
+
+- `max-w-[1100px]`.
+- `pt-32 md:pt-36`.
+- Enlace de regreso en Geist Mono.
+- Header `command-bar-mockup`.
+- Metadata técnica separada por líneas.
+- Contenido principal de ancho controlado.
+- Dos elementos relacionados al final.
+
+### 14.2 Detalle de proyecto
+
+El encabezado divide contenido e imagen desde `lg`:
+
+```text
+minmax(0, 1fr) | 400px
+```
+
+Incluye tipo, título, subtítulo, extracto, CTA externo opcional, imagen, cliente, año y tecnologías.
+
+### 14.3 Prosa editorial
+
+`ProjectDetail.astro` estiliza el Markdown dentro de `.project-prose`:
+
+| Elemento | Tratamiento |
+|---|---|
+| `h2` | `clamp(1.75rem, 4vw, 2.25rem)`, scroll margin de 7rem |
+| Párrafo | `1.05rem`, line-height `1.8`, color muted |
+| Lista simple | Punto coral de `0.4rem` |
+| Lista ordenada | Contador `01`, `02`, Geist Mono |
+| Blockquote | Borde coral de 2px y fondo coral al 7% |
+| Imagen | Ancho completo, borde y radio `0.875rem` |
+| Código | Geist Mono y bloque con overflow horizontal |
+| Secuencia vertical | Nodos numerados, tarjetas compactas y conectores amber |
+| Tabla | Display block y overflow horizontal |
+
+Si el Markdown contiene H2, aparece una tabla de contenido sticky en desktop. No se muestra en móvil. El índice tiene scroll interno cuando supera la altura visible y revela automáticamente el enlace activo. Un scrollspy cliente calcula el H2 cuya posición ya alcanzó el marcador de lectura, aplica `project-toc-link--active`, eleva el peso a `600`, cambia el número a `--color-amber` y sincroniza `aria-current="location"`. El estado también se actualiza al hacer click en un enlace del índice.
+
+---
+
+## 15. Composición de páginas
+
+### 15.1 Home `/`
+
+Orden vigente:
+
+1. `Hero`
+2. `Services`
+3. `ProjectsPreview`
+4. `TechStack`
+5. `Pricing`
+6. `CustomQuote`
+7. `Footer`
+
+### 15.2 Proyectos
+
+| Ruta | Composición |
+|---|---|
+| `/proyectos` | Header + grid completo + footer |
+| `/proyectos/[project]` | `ProjectDetail` + footer |
+
+### 15.3 Planes
+
+| Ruta | Composición |
+|---|---|
+| `/planes` | Header + cards + comparativa + diagnóstico + footer |
+| `/planes/[plan]` | `PlanDetail` + footer |
+
+### 15.4 Layout global
+
+Todas las rutas pasan por `Layout.astro`, que aporta:
+
+- `lang="es"`.
+- Meta viewport, favicon, generator y description.
+- Fuentes.
+- Inicialización de tema.
+- Skip link.
+- Deep Space.
+- Letterbox.
+- Navbar.
+- Wrapper `#contenido-principal` con `tabindex="-1"`.
+
+---
+
+## 16. Movimiento e interacción
+
+### 16.1 Escala temporal
+
+| Tipo | Duración |
+|---|---:|
+| Presión keycap | 100ms |
+| Estado activo de navegación | 180ms |
+| Dialog | 180ms |
+| Hover de filas y cards | 180-240ms |
+| Menú móvil | 300ms |
+| Imagen de proyecto | 500-700ms |
+| Shimmer hero | 2.5s |
+| Marquee | 30s |
+| Aurora | 20-35s |
+
+### 16.2 Curvas y desplazamientos
+
+- UI general: `ease` o `ease-out`.
+- Imágenes y dialog: `cubic-bezier(0.22, 1, 0.36, 1)`.
+- Keycap: `cubic-bezier(0.4, 0, 0.2, 1)`.
+- Cards: máximo `translateY(-4px)`.
+- Rutas internas: máximo `translateY(-2px)`.
+- Flechas: `2-4px` según jerarquía.
+
+La respuesta debe sentirse precisa, no elástica.
+
+### 16.3 Regla de movimiento reducido
+
+El fallback global fuerza:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .aurora-blade {
+    animation: none !important;
+  }
+}
+```
+
+Las cards principales neutralizan explícitamente sus transformaciones. El fallback global vuelve casi instantáneas las transiciones restantes, aunque un icono puede resolver inmediatamente en su estado transformado.
+
+---
+
+## 17. Responsive
+
+### 17.1 Móvil, hasta 639px
+
+- Padding lateral de `24px`.
+- Navbar a `top-4`, ancho `90%`.
+- CTAs principales a ancho completo cuando la decisión lo requiere.
+- Headers centrados.
+- Grids de una columna, salvo modal de tecnologías con dos.
+- Tabla de planes con scroll horizontal contenido.
+- Servicios apilados y sin chips secundarios.
+- Tech labels visibles sin hover.
+- Footer en dos columnas de enlaces.
+
+### 17.2 Tablet, 640px a 1023px
+
+- Menú móvil permanece activo.
+- Servicios cambia a dos columnas desde `md`.
+- Proyectos usa dos columnas desde `md`.
+- Modal de tecnologías usa tres columnas desde `sm`.
+- No forzar navbar desktop en 768px.
+
+### 17.3 Desktop, desde 1024px
+
+- Navbar completo.
+- Hero dividido.
+- Planes y proyectos en tres columnas.
+- Servicios en dos modalidades laterales.
+- Sidebars sticky de detalle disponibles.
+- Labels secundarios de acciones pueden aparecer.
+
+### 17.4 Viewports de validación
+
+Toda modificación visual significativa debe comprobarse al menos en:
+
+| Ancho | Caso |
+|---:|---|
+| 390px | Teléfono |
+| 800px | Tablet |
+| 1024px | Inicio exacto de navbar desktop |
+| 1440px | Desktop amplio |
+
+Validar claro y oscuro, contenido corto y largo, y ausencia de overflow en `documentElement`.
+
+---
+
+## 18. Accesibilidad
+
+### 18.1 Reglas obligatorias
+
+- Todos los controles de icono tienen `aria-label`.
+- Los SVG decorativos usan `aria-hidden="true"`.
+- Los controles de icono y navegación principal miden al menos `44px`; los enlaces de texto conservan padding suficiente.
+- El foco usa outline de `2px` en `--color-amber` o un cambio de superficie igualmente perceptible.
+- La ruta activa usa `aria-current="page"`.
+- El menú cerrado usa `inert`.
+- El modal usa `<dialog>` y devuelve foco.
+- El contenido tiene skip link a `#contenido-principal`.
+- Las regiones con overflow horizontal son enfocables y tienen nombre accesible.
+- Los `<details>` conservan `<summary>` nativo.
+- Las tablas usan `caption`, `th scope="col"` y `th scope="row"`.
+- Las imágenes informativas reciben `alt`; las miniaturas redundantes usan `alt=""`.
+
+### 18.2 Scroll y anclas
+
+- `html` usa smooth scroll.
+- Reduced motion lo desactiva.
+- Secciones bajo navbar usan `scroll-mt-20`, `scroll-mt-24` o `scroll-mt-28` según contexto.
+- `#tecnologias` es a la vez ancla semántica y estado de modal.
+
+### 18.3 Contraste
+
+El texto principal se resuelve por polaridad mediante `--color-white`. El texto muted no debe usarse por debajo de `8px`, ni para información crítica sin una señal visual adicional.
+
+---
+
+## 19. Rendimiento
+
+### 19.1 Fondo
+
+- `will-change` solo en aurora blades.
+- `contain: layout style paint` aísla su repintado.
+- El fondo usa `pointer-events: none`.
+- El SVG de grid es inline y no genera request.
+- En móvil se reduce blur.
+- Reduced motion detiene animaciones.
+
+### 19.2 Imágenes
+
+- Cards usan `loading="lazy"`.
+- Iconos externos del stack usan `loading="lazy"` y `decoding="async"`.
+- Los iconos de tecnologías conservan sus colores oficiales al pasar el cursor; son una excepción controlada a la paleta de la interfaz.
+- La imagen principal de un proyecto usa `fetchpriority="high"`.
+- Mantener dimensiones de contenedor para evitar layout shift.
+
+### 19.3 JavaScript
+
+- No añadir framework cliente para interacciones pequeñas.
+- Mantener scripts junto al componente que controlan.
+- Evitar listeners duplicados globales.
+- Bloquear scroll solo durante menú o modal abierto.
+- Preferir APIs nativas: `<dialog>`, `<details>`, `matchMedia`, History API.
+
+### 19.4 Contenido estático
+
+Astro genera actualmente 11 páginas estáticas. Los datos se resuelven en build y no requieren solicitudes cliente para planes o proyectos.
+
+---
+
+## 20. Reglas para nuevas implementaciones
+
+### 20.1 Receta de sección estándar
+
+```astro
+<section class="relative z-10 border-t border-white/5 py-20 md:py-24">
+  <div class="container mx-auto max-w-[1200px] px-6">
+    <header class="mx-auto mb-12 max-w-[720px] text-center">
+      <div class="mb-5 inline-flex items-center gap-2">
+        <span class="h-2 w-2 rounded-full bg-[var(--color-amber)] animate-pulse"></span>
+        <span class="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--color-muted)]">
+          Etiqueta
+        </span>
+      </div>
+
+      <h2 class="mb-5 text-4xl font-[600] tracking-tight text-white md:text-5xl">
+        Mensaje específico con <span class="text-warm-gradient">un solo acento.</span>
+      </h2>
+
+      <p class="mx-auto max-w-[650px] text-lg leading-relaxed text-[var(--color-muted)]">
+        Explicación concreta del contenido que sigue.
+      </p>
+    </header>
+
+    <!-- Módulo elegido según la jerarquía real -->
   </div>
 </section>
 ```
 
----
+### 20.2 Cómo elegir estructura
 
-## 7. Iconografía y Recursos Gráficos
+| Contenido | Patrón correcto |
+|---|---|
+| Opciones equivalentes | Grid de cards |
+| Una opción principal y varias secundarias | Consola asimétrica |
+| Comparación tabular | Tabla con overflow contenido |
+| Texto contractual extenso | `<details>` |
+| Secuencia editorial | Lista numerada real |
+| Metadatos | `dl` o celdas técnicas |
+| Contenido ambiental difícil de inspeccionar | Vista dinámica + modal estático |
 
-### 7.1 Identidad de Logos
+No empezar automáticamente con cards.
 
-| Versión | Archivo | Modo | Clase Tailwind |
-|---------|---------|------|----------------|
-| Logo Monochrome White | `public/logos/Micrudev_Logo_Monochrome_White.svg` | Oscuro | `hidden dark:block` |
-| Logo Primary | `public/logos/Micrudev_Logo_Primary.svg` | Claro | `block dark:hidden` |
-| Icon Monochrome White | `public/logos/Micrudev_Icon_Monochrome_White.svg` | Oscuro | `hidden dark:block` |
-| Icon Primary | `public/logos/Micrudev_Icon_Primary.svg` | Claro | `block dark:hidden` |
-| Icon Monochrome Navy | `public/logos/Micrudev_Icon_Monochrome_Navy.svg` | Favicon | Media query interna |
+### 20.3 Reutilización
 
-**Implementación dual (obligatoria):**
-```html
-<img src="logo-white.svg" alt="..." class="h-5 hidden dark:block" />
-<img src="logo-primary.svg" alt="..." class="h-5 block dark:hidden" />
-```
+- Extraer un componente cuando dos páginas rendericen el mismo markup o comportamiento.
+- Mantener estilos locales si solo pertenecen a una ficha compleja.
+- No añadir props de compatibilidad sin consumidor real.
+- Obtener contenido de colecciones o helpers, no copiar arrays entre páginas.
+- Reutilizar `navigationItems`, `PlanCards` y helpers de contacto.
 
-### 7.2 Favicon Dinámico
+### 20.4 Reglas de color
 
-**Archivo:** `public/favicon.svg` (basado en `Micrudev_Icon_Monochrome_Navy.svg`)
+- Usar `text-white` como texto principal semántico.
+- Usar `text-[var(--color-muted)]` para contenido secundario.
+- Usar coral para acción y amber para foco/luz.
+- Limitar el gradiente a fragmentos de titulares.
+- Usar RGBA directo solo en efectos sistémicos bien justificados.
 
-**Implementación interna con CSS:**
-```html
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 337 162">
-  <style>
-    path { fill: #06132F; }
-    @media (prefers-color-scheme: dark) {
-      path { fill: #ffffff; }
-    }
-  </style>
-  <path d="..." fill-rule="evenodd"/>
-</svg>
-```
+### 20.5 Reglas de densidad
 
-**Comportamiento:**
-- Modo claro del sistema: relleno `#06132F` (navy oscuro).
-- Modo oscuro del sistema: relleno `#ffffff` (blanco).
-
-### 7.3 Iconografía UI
-
-**Librería:** Lucide-style SVG inline.
-- **Stroke width:** 2px (líneas técnicas limpias).
-- **Colores:** `currentColor` para heredar el color del texto.
-- **Tamaños estándar:** `14px` (inline), `16px` (botones), `18px` (CTAs), `20px` (mobile menu).
+- Si cuatro cards repiten el mismo CTA, considerar filas dentro de una consola.
+- Si el contenido detallado existe en otra ruta, el home debe resumirlo.
+- Ocultar metadata no esencial en móvil antes de reducir tipografía por debajo de lo legible.
+- Usar `line-clamp` solo en previews, nunca en contenido contractual.
+- Mantener títulos y CTAs visibles sin hover.
 
 ---
 
-## 8. Estados, Interacciones y Microanimaciones
+## 21. Checklist
 
-### 8.1 Sistema de Animación
+### Identidad
 
-| Tipo | Duración | Curva | Uso |
-|------|----------|-------|-----|
-| Hover general | 200ms | `ease` | Transiciones de color, opacidad |
-| Transición componentes | 300ms | `ease-in-out` | Aparición de menús, modales |
-| Keycap press | 100ms | `cubic-bezier(0.4, 0, 0.2, 1)` | Active state de botones |
-| Aurora drift | 20-35s | `ease-in-out infinite alternate` | Luces de fondo |
-| Shimmer (Hero) | 2.5s | `infinite` | Brillo en eyebrow del Hero |
+- [ ] El fondo conserva `deep-space-bg absolute inset-0`.
+- [ ] Siguen presentes base, cinco blades, grid, vignette y letterbox.
+- [ ] El micro-grid mantiene `60px`, stroke `0.6px` y opacidad `0.2`.
+- [ ] La interfaz usa la familia de azules definida; logos, fotografías e iconos de tecnologías pueden conservar colores de marca.
+- [ ] El modo claro y oscuro comparten estructura.
 
-### 8.2 Estados de Botones
+### Tipografía
 
-| Estado | Modificación |
-|--------|--------------|
-| **Default** | Sombra completa, sin transformación |
-| **Hover** | (Opcional) brillo intensificado |
-| **Active** | `transform: translateY(2px)` + sombra comprimida |
-| **Focus** | (Opcional) ring azul con `focus-visible:ring-2 focus-visible:ring-[var(--color-amber)]` |
+- [ ] Solo se usan Inter y Geist Mono.
+- [ ] Los títulos no superan peso 600.
+- [ ] Subtítulos y descripciones usan peso regular.
+- [ ] No hay cursivas.
+- [ ] La metadata mono representa información real.
 
-### 8.3 Animaciones de la Aurora
+### Layout
 
-Cada blade tiene su propio `@keyframes drift-N` con:
-- `0%`: posición inicial, opacidad baja-media.
-- `100%`: posición final con traslación, opacidad diferente.
+- [ ] El contenido usa un ancho máximo intencional.
+- [ ] El padding lateral móvil es al menos `24px`.
+- [ ] La sección tiene divisor superior si corresponde.
+- [ ] La estructura elegida refleja la jerarquía, no una cuadrícula por defecto.
+- [ ] No existe overflow horizontal del documento.
 
-**Importante:** Todas respetan `prefers-reduced-motion: reduce` desactivándose automáticamente.
+### Componentes
 
-### 8.4 Transición de Tema (Dark/Light)
+- [ ] La acción primaria usa keycap.
+- [ ] La secundaria usa ghost pill o enlace discreto.
+- [ ] Las superficies principales usan command-bar cuando corresponde.
+- [ ] Los planes reutilizan `PlanCards`.
+- [ ] Navbar y footer leen `navigationItems`.
+- [ ] No se copiaron componentes heredados sin migrarlos.
 
-**Sin animaciones bruscas.** El cambio de tema es instantáneo al toggle, aprovechando las variables CSS. Esto es intencional para evitar flashes distractores.
+### Interacción
 
----
+- [ ] Todo control tiene hover, active o focus según corresponda.
+- [ ] Los controles de icono y navegación principal miden al menos `44px`.
+- [ ] Escape cierra overlays.
+- [ ] El foco se restaura al cerrar menú o modal.
+- [ ] El body solo se bloquea mientras un overlay está abierto.
+- [ ] Reduced motion detiene loops ambientales y vuelve inmediatas las transiciones restantes.
 
-## 9. Configuración Técnica (Tailwind v4)
+### Responsive
 
-### 9.1 Inversión Mapeada
+- [ ] Validado a 390px.
+- [ ] Validado a 800px.
+- [ ] Validado a 1024px.
+- [ ] Validado a 1440px.
+- [ ] Validado en claro y oscuro.
 
-```css
-@theme {
-  --color-canvas: var(--theme-canvas);
-  --color-white: var(--theme-white);
-  /* ... */
-}
-@layer base {
-  :root { --theme-canvas: #F6F8FC; /* ... */ }
-  :root.dark { --theme-canvas: #040B1F; /* ... */ }
-}
-```
+### Código y contenido
 
-**Resultado:** Las clases como `bg-[var(--color-canvas)]` se adaptan automáticamente al tema sin necesidad de `dark:bg-X`.
-
-### 9.2 Fijación del Modo Dark
-
-```css
-@import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
-```
-
-**Propósito:** Que el modificador `dark:` de Tailwind obedezca a la clase `.dark` del HTML (controlada por JS) y no a la preferencia del sistema operativo.
-
-### 9.3 JavaScript del Theme Toggle
-
-```javascript
-// Inicialización síncrona en <head> (previene FOUC)
-const theme = (() => {
-  if (localStorage.getItem('theme')) return localStorage.getItem('theme');
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
-  return 'light';
-})();
-document.documentElement.classList.toggle('dark', theme === 'dark');
-
-// Toggle
-document.querySelectorAll('.theme-toggle').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme',
-      document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-    );
-  });
-});
-```
-
-### 9.4 Contacto Universal (WhatsApp)
-
-**Regla:** Todos los botones de contacto (`href`) apuntan a:
-```html
-<a href="https://wa.me/593998081684" target="_blank" rel="noopener noreferrer">...</a>
-```
+- [ ] Los datos viven en la colección o helper correcto.
+- [ ] Los iconos inline usan `currentColor`.
+- [ ] Las imágenes tienen `alt`, lazy loading o prioridad apropiada.
+- [ ] Los enlaces externos usan `target="_blank" rel="noopener noreferrer"`.
+- [ ] `npm run build` termina correctamente.
 
 ---
 
-## 10. Reglas de Implementación por Pantalla
-
-### 10.1 Página de Inicio (`/`)
-
-**Secciones obligatorias en orden:**
-1. Hero (eyebrow + título gigante + subtítulo + keycap buttons + install caption + command-bar mockup + ghost pill).
-2. Servicios (eyebrow + título + grid de 3-4 cards).
-3. Stack / Tech (eyebrow + título + marquee infinito + marquee inverso).
-4. Proyectos Preview (eyebrow + título + grid 3 columnas + CTA "Ver más").
-5. Pricing (eyebrow + título + grid 3 columnas).
-6. Custom Quote / CTA Final (eyebrow + título + keycap button).
-7. Footer.
-
-### 10.2 Página de Proyectos (`/proyectos`)
-
-- Hero con título "Proyectos" + grid completo de proyectos.
-- Cada proyecto: card con imagen, tags, fecha, título, descripción.
-- Diseño consistente con el resto del sitio.
-
-### 10.3 Componentes Reutilizables
-
-- `<Navbar />` — Siempre presente en `Layout.astro`.
-- `<Footer />` — Siempre presente al final.
-- `<Hero />` — Solo en home.
-- `<Services />`, `<TechStack />`, `<ProjectsPreview />`, `<Pricing />`, `<CustomQuote />` — Solo en home.
-
----
-
-## 11. Accesibilidad y Performance
-
-### 11.1 Accesibilidad
-
-| Regla | Implementación |
-|-------|----------------|
-| Contraste WCAG | Texto blanco sobre fondo `#040B1F` excede WCAG AAA (21:1). |
-| Navegación por teclado | Todos los botones y links son `tab`-navegables. |
-| `prefers-reduced-motion` | Aurora y shimmer se desactivan automáticamente. |
-| `aria-label` | Botones de íconos (tema, menú) tienen `aria-label` descriptivo. |
-| Foco visible | (Opcional) `focus-visible:ring-2 focus-visible:ring-[var(--color-amber)]`. |
-
-### 11.2 Performance
-
-| Técnica | Propósito |
-|---------|-----------|
-| `will-change: transform, opacity` | GPU acceleration para animaciones. |
-| `contain: layout style paint` | Aísla repintados de cada blade. |
-| `pointer-events: none` en fondo | No interfiere con interactividad. |
-| `isolation: isolate` | Crea contexto de apilamiento propio. |
-| SVG inline (no external) | Sin requests adicionales para grid. |
-| Dimensiones en `vw` | Escalado fluido sin media queries excesivas. |
-| Media query `max-width: 768px` | Reduce blur a 70px en móvil. |
-
-### 11.3 Compatibilidad de Navegadores
-
-| Feature | Soporte |
-|---------|---------|
-| `backdrop-filter` | Chrome, Firefox, Safari, Edge (modernos). |
-| `mask-image` | Chrome, Firefox, Safari (con `-webkit-`), Edge. |
-| `radial-gradient` | Universal. |
-| `@keyframes` | Universal. |
-| CSS Variables | Universal. |
-| `isolation: isolate` | Universal (modernos). |
-
----
-
-## 12. Checklist de Construcción para la IA
-
-Si estás generando una nueva página, componente o sección basada en esta guía, **DEBES** cumplir obligatoriamente lo siguiente:
-
-### 12.1 Identidad y Marca
-
-- [ ] ¿El fondo Deep Space se mantiene con sus 5 capas (base + 5 blades + grid + vignette + letterbox)?
-- [ ] ¿Los logos implementan la lógica dual con `hidden dark:block` y `block dark:hidden`?
-- [ ] ¿Los enlaces de contacto apuntan a `https://wa.me/593998081684` con `target="_blank" rel="noopener noreferrer"`?
-- [ ] ¿El favicon dinámico está configurado en `public/favicon.svg`?
-
-### 12.2 Tipografía y Jerarquía
-
-- [ ] ¿Tiene el Eyebrow estándar con su punto pulsante azul y fuente monoespaciada mayúscula?
-- [ ] ¿El título es `text-4xl md:text-5xl font-[600]` y está **totalmente libre de cursivas (`italic`)**?
-- [ ] ¿El subtítulo usa `text-lg font-[400] text-[var(--color-muted)] max-w-[640px] leading-relaxed`?
-- [ ] ¿No se usan más de 2 familias tipográficas (Inter + Geist Mono)?
-
-### 12.3 Layout y Espaciado
-
-- [ ] ¿El contenedor principal usa `container mx-auto px-6 max-w-[1200px]`?
-- [ ] ¿La sección tiene `py-24` y la línea divisoria superior `border-t border-white/5`?
-- [ ] ¿El espacio entre el texto introductorio y la primera fila de tarjetas es de al menos `mb-16`?
-- [ ] ¿El gap entre cards es consistente (`gap-8` o `gap-12`)?
-
-### 12.4 Color y Tokens
-
-- [ ] ¿El componente respeta las variables del tema (`var(--color-white)`, `var(--color-canvas)`) y evita codificar colores crudos (`text-white`, `bg-black`)?
-- [ ] ¿Los botones principales usan `.keycap-btn` o `.ghost-pill`?
-- [ ] ¿El modo dark se controla solo con la clase `.dark` en `<html>` (no con `@media (prefers-color-scheme)`)?
-
-### 12.5 Interactividad y Estados
-
-- [ ] ¿Los botones keycap tienen el estado `:active` con `translateY(2px)` y sombra comprimida?
-- [ ] ¿El theme toggle funciona en desktop y mobile?
-- [ ] ¿El menú móvil se cierra al hacer clic fuera, en un enlace, o con Escape?
-- [ ] ¿Los SVGs de iconos usan `currentColor` para heredar el color del texto?
-
-### 12.6 Calidad del Código
-
-- [ ] ¿El código no contiene clases sobrantes, genéricas o estilos bootstrap?
-- [ ] ¿Se mantiene la elegancia, oscuridad y precisión técnica del sistema?
-- [ ] ¿El responsive está validado (mobile, tablet, desktop)?
-
----
-
-## Glosario de Términos
+## Glosario
 
 | Término | Definición |
-|---------|------------|
-| **Blade** | Cada una de las 5 luces difuminadas que forman la aurora del fondo. |
-| **Aurora** | Sistema de luces radiales animadas que dan profundidad al fondo. |
-| **Deep Space** | El sistema completo de fondo del sitio (todas las capas). |
-| **Keycap** | Estilo de botón que simula una tecla física de teclado mecánico. |
-| **Letterbox** | Línea de luz superior con resplandor que enmarca el viewport. |
-| **Eyebrow** | Etiqueta pequeña sobre los títulos de sección, con punto pulsante. |
-| **FOUC** | Flash of Unstyled Content; se previene con scripts `is:inline` en `<head>`. |
-| **Polaridad** | Inversión de colores dark/light mediante variables CSS. |
-| **Marquee** | Carrusel infinito horizontal de elementos (usado en Stack). |
+|---|---|
+| Deep Space | Sistema completo de canvas, auroras, grid, vignette y letterbox |
+| Blade | Cada fuente de luz radial animada del fondo |
+| Letterbox | Línea fija de luz azul en el borde superior del viewport |
+| Command bar | Superficie translúcida inspirada en una paleta de comandos |
+| Keycap | Botón primario con relieve de tecla física |
+| Ghost pill | Botón secundario transparente y redondeado |
+| Eyebrow | Label corto que contextualiza una sección |
+| Route chip | Metadata compacta que describe una ruta o modalidad |
+| Polaridad | Cambio claro/oscuro mediante tokens semánticos |
+| Marquee | Fila infinita de tecnologías en movimiento horizontal |
+| Node | Unidad visual individual del stack tecnológico |
+| FOUC | Flash de contenido con tema incorrecto antes de inicializar estilos |
 
 ---
 
-> **Última actualización:** Sistema de fondo Deep Space v2.0 con Letterbox fixed.
-> **Mantenedor:** Equipo Micrudev.
-> **Contacto:** hola@micrudev.com / WhatsApp +593 99 808 1684.
+> **Mantenimiento:** toda modificación estructural del fondo, tokens, navegación, cards, modal, breakpoints o composición de páginas debe actualizar este documento en el mismo cambio.
+> **Contacto de marca:** `hola@micrudev.com`.

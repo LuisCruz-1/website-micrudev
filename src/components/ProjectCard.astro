@@ -1,5 +1,5 @@
 ---
-import type { Project } from '../lib/projects';
+import { getProjectImageSrc, type Project } from '../lib/projects';
 
 interface Props {
   project: Project;
@@ -18,7 +18,7 @@ const { data } = project;
   <article class="flex h-full flex-col">
     <div class="relative h-52 overflow-hidden border-b border-white/8 md:h-56">
       <img
-        src={data.image}
+        src={getProjectImageSrc(data.image)}
         alt={data.imageAlt}
         class="project-card__image h-full w-full object-cover"
         loading="lazy"

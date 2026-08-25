@@ -44,7 +44,7 @@ const plans = defineCollection({
 
 const projects = defineCollection({
   loader: glob({ base: './src/content/projects', pattern: '**/*.md' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     order: z.number().int().positive(),
     title: z.string(),
     subtitle: z.string(),
@@ -52,7 +52,7 @@ const projects = defineCollection({
     type: z.string(),
     year: z.number().int().min(2000),
     client: z.string(),
-    image: z.url(),
+    image: z.union([image(), z.url()]),
     imageAlt: z.string(),
     tech: z.array(z.string()).min(1),
     featured: z.boolean().default(false),
