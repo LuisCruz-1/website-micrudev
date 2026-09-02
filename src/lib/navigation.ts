@@ -1,15 +1,16 @@
 export interface NavigationItem {
   label: string;
   href: string;
+  homeHref?: string;
+  sectionId?: string;
   activePath?: string;
 }
 
 export const navigationItems: readonly NavigationItem[] = [
-  { label: 'Servicios', href: '/#servicios' },
-  { label: 'Proyectos', href: '/proyectos', activePath: '/proyectos' },
-  { label: 'Planes', href: '/planes', activePath: '/planes' },
-  { label: 'Stack', href: '/#stack' },
-  { label: 'Contacto', href: '/#contacto' },
+  { label: 'Servicios', href: '/#servicios', homeHref: '#servicios', sectionId: 'servicios' },
+  { label: 'Proyectos', href: '/proyectos', homeHref: '#projects-preview', sectionId: 'projects-preview', activePath: '/proyectos' },
+  { label: 'Stack', href: '/#stack', homeHref: '#stack', sectionId: 'stack' },
+  { label: 'Planes', href: '/planes', homeHref: '#precios', sectionId: 'precios', activePath: '/planes' }
 ];
 
 export function isNavigationItemCurrent(item: NavigationItem, pathname: string) {

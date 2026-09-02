@@ -710,8 +710,7 @@ export const navigationItems = [
   { label: 'Servicios', href: '/#servicios' },
   { label: 'Proyectos', href: '/proyectos', activePath: '/proyectos' },
   { label: 'Planes', href: '/planes', activePath: '/planes' },
-  { label: 'Stack', href: '/#stack' },
-  { label: 'Contacto', href: '/#contacto' },
+  { label: 'Tecnología', href: '/#stack' },
 ];
 ```
 
@@ -721,24 +720,25 @@ Agregar, renombrar o quitar una ruta se hace en `src/lib/navigation.ts`.
 
 | Propiedad | Valor actual |
 |---|---|
-| Posición móvil/tablet | `top-4` |
-| Posición desktop | `lg:top-8` |
-| Ancho | `w-[90%]` |
-| Máximo móvil/tablet | `640px` |
-| Máximo desktop | `840px` |
+| Posición móvil/tablet | `top-3` |
+| Posición desktop | `lg:top-5` |
+| Ancho | `calc(100% - 1.5rem)` |
+| Máximo | `1160px` |
 | Breakpoint desktop | `lg` / 1024px |
-| Altura de controles de icono y navegación | `44px` |
+| Altura total aproximada | `62px` |
 
-La ruta activa usa `aria-current="page"`, texto principal y un punto azul de `4px` bajo el enlace. Actualmente el estado activo aplica a las familias `/proyectos` y `/planes`.
+El navbar es un dock rectangular de radio `16px`, no una cápsula. La ruta activa usa una superficie tenue y `aria-current`; en el home, `IntersectionObserver` sincroniza Servicios y Tecnología con la sección visible. Al desplazarse, el borde y la sombra ganan definición.
 
 ### 8.3 Menú móvil
 
 - Navbar principal en `z-50`.
 - Backdrop con canvas al `45%`, blur de `2px` y `z-30`.
-- Panel `nav-pill` en `z-40`, debajo de la cápsula principal.
-- Ancho `90%`, máximo `640px`.
+- Panel rectangular en `z-40`, debajo del dock principal.
+- El selector de tema vive directamente en el dock, junto al botón del menú.
+- Ancho `calc(100% - 1.5rem)`, máximo `640px`.
 - Entrada con `translateY(-12px)` a `0` y opacidad.
 - El panel cerrado usa `inert`, `aria-hidden="true"` y `pointer-events-none`.
+- El panel no repite controles de apariencia; termina con el CTA `Cotizar proyecto`.
 - El body recibe `mobile-menu-open` para bloquear scroll.
 - Cierra por botón, enlace, backdrop, click externo o `Escape`.
 - Al cerrar con backdrop o Escape, el foco regresa al botón hamburguesa.
@@ -761,59 +761,36 @@ Esto evita FOUC y hace que `dark:` dependa de clase mediante:
 
 ### 8.5 Footer
 
-El footer no es una sola fila comprimida. Tiene dos niveles:
+El footer vive en una superficie única con tres columnas y una barra inferior:
 
 | Nivel | Contenido |
 |---|---|
-| Superior | Logo, descripción breve y correo directo |
-| Inferior | Navegación, copyright y `Volver arriba` |
+| Principal | Marca y disponibilidad, navegación, contacto directo |
+| Inferior | Copyright y `Volver arriba` |
 
-En móvil, la navegación usa dos columnas; desde `sm`, se vuelve una fila flexible. Las rutas activas cambian el slash a azul claro. Todos los targets mantienen `min-h-11`.
+En móvil las tres columnas se apilan. Todos los targets mantienen altura táctil suficiente.
 
 ---
 
-## 9. Hero y selector de rutas
+## 9. Hero
 
 ### 9.1 Estructura
 
-El hero es la tesis comercial del sitio:
+El hero es una composición centrada y deliberadamente breve: eyebrow descriptivo, H1, una explicación, dos acciones y una sola línea comercial verificable. No incluye mockups, tarjetas de ruta, estados técnicos ni repite proyectos que ya aparecen en la sección siguiente.
 
-| Columna | Contenido |
-|---|---|
-| Izquierda | Estado, H1, propuesta, dos CTAs y tres beneficios |
-| Derecha | Selector tipo command bar con las dos rutas comerciales |
-
-En móvil se apila. En `lg` usa:
-
-```html
-grid-cols-[minmax(0,1fr)_450px]
-```
-
-El contenedor tiene `min-h-[580px]`, `max-w-[1180px]`, `pt-28` y padding inferior responsive.
+La sección usa `min-h-[100svh]` y `items-center` para ocupar el viewport y centrar el contenido. En móvil aplica `pt-20` para separarlo del dock y desplazar ligeramente su centro visual; desde `lg` vuelve a `pt-0`. El contenido mantiene `max-w-[1040px]` y `px-6`.
 
 ### 9.2 Eyebrow del hero
 
-Es la única variante con cápsula y shimmer:
+Usa texto mono de `9px` entre dos líneas amber de `32px`. Describe el servicio sin lenguaje técnico interno.
 
-- Borde `white/10`.
-- Fondo `white/5`.
-- Punto pulsante.
-- Barrido de `2.5s` con `via amber/10`.
+### 9.3 Acciones
 
-### 9.3 Selector de rutas
-
-El selector presenta una decisión real:
-
-| Ruta | Destino | Estado visual |
-|---|---|---|
-| Web / alcance cerrado | `/planes` | Borde y fondo azul enfatizados |
-| Custom / a medida | `#contacto` | Superficie neutra |
-
-Las tarjetas internas suben solo `2px` en hover. Los chips contienen precio, plazo, hosting o modalidad. El footer de consola resume `Análisis → desarrollo → publicación`.
+La acción primaria lleva a `#servicios`; la secundaria a `#contacto`. Debajo se muestra únicamente información comercial útil: precio inicial de planes y disponibilidad de diagnóstico.
 
 ### 9.4 CTA de exploración
 
-`Explorar servicios` está centrado mediante un contenedor `flex justify-center`; no depender de `mx-auto` sobre un elemento `inline-flex`.
+Los CTAs se apilan en móvil y vuelven a una fila desde `sm`.
 
 ---
 
@@ -821,7 +798,7 @@ Las tarjetas internas suben solo `2px` en hover. Los chips contienen precio, pla
 
 ### 10.1 Narrativa
 
-El título vigente es `Cuatro capacidades para construir mejor.`. La sección no presenta cuatro tarjetas equivalentes: explica cuatro capacidades dentro de dos modalidades.
+El título vigente es `Dos formas de llevar una idea a producción.`. La sección explica cuatro capacidades dentro de dos modalidades.
 
 | Modalidad | Capacidades |
 |---|---|
@@ -830,17 +807,17 @@ El título vigente es `Cuatro capacidades para construir mejor.`. La sección no
 
 ### 10.2 Service console
 
-La sección usa una sola `.command-bar-mockup`:
+La sección usa un solo panel compacto:
 
 - En móvil se apila.
-- Desde `md` usa columnas `0.9fr / 1.35fr`.
+- Desde `lg` usa columnas `0.78fr / 1.22fr`.
 - Desarrollo Web ocupa la columna destacada con glow localizado y keycap.
 - Las tres capacidades a medida son filas completas e interactivas.
-- Las descripciones de fila se limitan a dos líneas.
+- En móvil las filas a medida muestran solo el título; desde `sm` recuperan la descripción.
 - Los formatos web se ocultan por debajo de `sm` para reducir altura.
 - El CTA web ocupa el ancho completo en móvil y vuelve a `w-fit` desde `sm`.
 
-La sección usa `py-16 md:py-24`, no cuatro cards de gran altura.
+La sección usa `py-12 md:py-16`, no cuatro cards de gran altura.
 
 ---
 
@@ -883,9 +860,10 @@ El subtítulo siempre usa peso regular.
 ### 11.4 Preview del home
 
 - Obtiene hasta tres proyectos destacados.
-- Grid de una, dos y tres columnas en base, `md` y `lg`.
-- Usa la variante compacta.
-- Cierra con ghost pill hacia `/proyectos`.
+- Presenta un caso dominante y dos casos secundarios apilados desde `sm`.
+- En móvil muestra solo el caso dominante y el enlace a la colección para evitar una lista larga.
+- Renderiza la composición editorial directamente; `ProjectCard` permanece para el índice.
+- Alturas: `350-430px` para el caso principal y `225px` para secundarios.
 
 ### 11.5 Índice de proyectos
 
@@ -907,7 +885,7 @@ La vista ambiental mantiene dos filas en sentidos opuestos:
 - Segunda fila usa dirección inversa.
 - Hover pausa cada fila.
 - Máscara horizontal desvanece los extremos.
-- Iconos en grayscale y opacidad `0.55`; hover recupera color y escala.
+- Celdas compactas de `84px`; iconos en grayscale y opacidad `0.55`, hover recupera color y escala.
 - En móvil los nombres permanecen visibles; en desktop aparecen con hover.
 - Las copias adicionales usan `aria-hidden="true"`.
 
@@ -968,12 +946,12 @@ Con `prefers-reduced-motion: reduce`, ambos marquees quedan estáticos y la anim
 
 | Componente | Función | Dónde se usa |
 |---|---|---|
-| `PlanCards.astro` | Las tres cards comerciales | Home y `/planes` |
-| `Pricing.astro` | Encabezado del resumen + cards + CTA | Home |
+| `PlanCards.astro` | Cards comerciales extensas | `/planes` |
+| `Pricing.astro` | Tres resúmenes compactos | Home |
 | `PlanComparison.astro` | Tabla y condiciones compartidas | `/planes` |
 | `PlanDetail.astro` | Ficha comercial completa | `/planes/[plan]` |
 
-El home no duplica la comparativa extensa. Remite a `/planes`.
+El home no duplica las cards extensas ni la comparativa. En móvil, los resúmenes se recorren en un carrusel horizontal con snap; en desktop forman tres columnas.
 
 ### 13.2 PlanCard
 
@@ -1124,7 +1102,6 @@ Todas las rutas pasan por `Layout.astro`, que aporta:
 | Hover de filas y cards | 180-240ms |
 | Menú móvil | 300ms |
 | Imagen de proyecto | 500-700ms |
-| Shimmer hero | 2.5s |
 | Marquee | 30s |
 | Aurora | 20-35s |
 
@@ -1169,28 +1146,28 @@ Las cards principales neutralizan explícitamente sus transformaciones. El fallb
 ### 17.1 Móvil, hasta 639px
 
 - Padding lateral de `24px`.
-- Navbar a `top-4`, ancho `90%`.
+- Navbar a `top-3`, ancho `calc(100% - 1.5rem)`.
 - CTAs principales a ancho completo cuando la decisión lo requiere.
-- Headers centrados.
-- Grids de una columna, salvo modal de tecnologías con dos.
-- Tabla de planes con scroll horizontal contenido.
-- Servicios apilados y sin chips secundarios.
+- Solo hero y stack usan headers centrados; el resto conserva lectura editorial a la izquierda.
+- El preview muestra un solo proyecto principal y remite a la colección.
+- Los resúmenes de planes usan scroll horizontal con snap.
+- Servicios se apila, oculta chips y reduce las descripciones secundarias.
 - Tech labels visibles sin hover.
-- Footer en dos columnas de enlaces.
+- Footer apilado.
 
 ### 17.2 Tablet, 640px a 1023px
 
 - Menú móvil permanece activo.
-- Servicios cambia a dos columnas desde `md`.
-- Proyectos usa dos columnas desde `md`.
-- Modal de tecnologías usa tres columnas desde `sm`.
+- Servicios cambia a dos columnas desde `lg`.
+- Proyectos muestra dos secundarios desde `sm` y adopta layout asimétrico desde `lg`.
+- Modal de tecnologías usa tres columnas desde `sm` y siete desde `md`.
 - No forzar navbar desktop en 768px.
 
 ### 17.3 Desktop, desde 1024px
 
 - Navbar completo.
-- Hero dividido.
-- Planes y proyectos en tres columnas.
+- Hero centrado y de una sola columna.
+- Planes usa tres columnas; proyectos usa un caso dominante y dos secundarios.
 - Servicios en dos modalidades laterales.
 - Sidebars sticky de detalle disponibles.
 - Labels secundarios de acciones pueden aparecer.

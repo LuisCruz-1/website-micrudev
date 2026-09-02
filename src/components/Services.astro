@@ -1,124 +1,71 @@
 ---
-const services = [
+const customServices = [
   {
-    id: '01',
-    mode: 'Plan definido',
-    title: 'Desarrollo Web',
-    desc: 'Landing pages, sitios corporativos y tiendas en WordPress con alcance, tiempos y precios establecidos desde el inicio.',
-    href: '/planes',
-    action: 'Ver planes web',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>`,
+    title: 'Aplicaciones web',
+    desc: 'CRMs, plataformas y herramientas internas adaptadas a tu operación.',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>`,
   },
   {
-    id: '02',
-    mode: 'A medida',
-    title: 'Aplicaciones Web',
-    desc: 'CRMs, plataformas y herramientas internas diseñadas alrededor de la operación diaria de tu organización.',
-    href: '#contacto',
-    action: 'Evaluar proyecto',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 15h18"/><path d="M15 3v18"/></svg>`,
-  },
-  {
-    id: '03',
-    mode: 'A medida',
     title: 'Automatizaciones',
-    desc: 'Conexión de herramientas y flujos empresariales para reducir tareas repetitivas y errores manuales.',
-    href: '#contacto',
-    action: 'Evaluar proyecto',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 7 3 5-3 5"/><path d="m19 7-3 5 3 5"/></svg>`,
+    desc: 'Conexión de herramientas para reducir tareas repetitivas y errores.',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 18h16"/><path d="M8 6v12"/><circle cx="8" cy="12" r="2"/><path d="m14 9 3 3-3 3"/></svg>`,
   },
   {
-    id: '04',
-    mode: 'A medida',
     title: 'Integraciones de IA',
-    desc: 'Asistentes, chatbots y funciones inteligentes conectadas con la información y los sistemas de tu negocio.',
-    href: '#contacto',
-    action: 'Evaluar proyecto',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>`,
+    desc: 'Asistentes y funciones inteligentes conectados con tus datos.',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-3 4 4 4 0 0 0 4 4h1"/><path d="M12 3a4 4 0 0 1 4 4v1a4 4 0 0 1 3 4 4 4 0 0 1-4 4h-1"/><path d="M9 20h6"/><path d="M12 12v8"/></svg>`,
   },
 ];
-
-const webService = services[0];
-const customServices = services.slice(1);
-const webFormats = ['Landing page', 'Sitio corporativo', 'Tienda online'];
 ---
 
-<section id="servicios" class="relative z-10 scroll-mt-20 border-t border-white/5 py-16 md:py-24">
-  <div class="container mx-auto max-w-[1100px] px-6">
-    <header class="mx-auto mb-8 max-w-[720px] text-center md:mb-12">
-      <div class="mb-4 inline-flex items-center gap-2 md:mb-5">
-        <span class="h-2 w-2 rounded-full bg-[var(--color-amber)] animate-pulse"></span>
-        <span class="font-mono text-[11px] uppercase tracking-wider text-[var(--color-muted)]">Servicios</span>
+<section id="servicios" class="relative z-10 scroll-mt-24 border-t border-white/5 py-12 md:py-16">
+  <div class="mx-auto max-w-[1120px] px-6">
+    <header class="mb-6 grid gap-3 md:grid-cols-[minmax(0,1fr)_400px] md:items-end">
+      <div>
+        <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-amber)]">Servicios</span>
+        <h2 class="mt-2 max-w-[650px] text-[34px] font-semibold leading-[1.06] tracking-[-0.035em] text-white md:text-[44px]">
+          Dos formas de llevar una idea <span class="text-warm-gradient">a producción.</span>
+        </h2>
       </div>
-      <h2 class="mb-4 text-[36px] font-[600] leading-[1.08] tracking-tight text-white md:mb-5 md:text-5xl">
-        Cuatro capacidades para <span class="text-warm-gradient">construir mejor.</span>
-      </h2>
-      <p class="mx-auto max-w-[670px] text-base leading-relaxed text-[var(--color-muted)] md:text-lg">
-        Una ruta web con alcance y precio definidos, más tres capacidades a medida para resolver necesidades de operación.
+      <p class="text-[14px] leading-[1.7] text-[var(--color-muted)] md:text-[15px]">
+        Elige un plan web con alcance definido o cuéntanos el problema para diseñar una solución a medida.
       </p>
     </header>
 
-    <div class="service-console command-bar-mockup overflow-hidden md:grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.35fr)]">
-      <article class="service-web relative flex flex-col overflow-hidden border-b border-white/8 p-5 sm:p-6 md:border-b-0 md:border-r md:p-8">
-        <div class="pointer-events-none absolute -left-16 -top-16 h-52 w-52 rounded-full bg-[var(--color-coral)]/10 blur-[70px]"></div>
-
-        <div class="relative mb-6 flex items-center justify-between gap-4 md:mb-8">
-          <span class="font-mono text-[9px] uppercase tracking-[0.15em] text-[var(--color-amber)]">Ruta directa</span>
-          <span class="font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--color-muted)]">{webService.id} / {webService.mode}</span>
+    <div class="service-panel grid overflow-hidden rounded-[18px] border border-white/10 lg:grid-cols-[minmax(300px,0.78fr)_minmax(0,1.22fr)]">
+      <article class="relative flex flex-col border-b border-white/8 bg-[var(--color-coral)]/[0.035] p-4 sm:p-5 lg:border-b-0 lg:border-r md:p-6">
+        <div class="mb-4 flex items-center justify-between gap-4">
+          <span class="rounded-md border border-[var(--color-coral)]/25 bg-[var(--color-coral)]/8 px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--color-amber)]">Alcance definido</span>
+          <span class="font-mono text-[9px] uppercase tracking-[0.11em] text-[var(--color-muted)]">Desde USD 120</span>
         </div>
-
-        <div class="relative mb-5 flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-[var(--color-canvas)] text-[var(--color-amber)] md:mb-6" aria-hidden="true">
-          <Fragment set:html={webService.icon} />
-        </div>
-
-        <h3 class="relative mb-3 text-2xl font-semibold tracking-tight text-white">{webService.title}</h3>
-        <p class="relative mb-5 text-[15px] leading-relaxed text-[var(--color-muted)] md:mb-6">{webService.desc}</p>
-
-        <ul class="relative mb-8 hidden flex-wrap gap-2 sm:flex" aria-label="Formatos disponibles">
-          {webFormats.map((format) => (
-            <li class="rounded-md border border-white/8 bg-white/[0.025] px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.11em] text-[var(--color-muted)]">{format}</li>
+        <h3 class="text-[24px] font-semibold tracking-[-0.025em] text-white sm:text-[27px]">Desarrollo web</h3>
+        <p class="mt-2 text-[13px] leading-[1.65] text-[var(--color-muted)] sm:mt-3 sm:text-[14px]">Landing pages, sitios corporativos y tiendas online en WordPress con precio y tiempo establecidos.</p>
+        <ul class="mt-5 hidden flex-wrap gap-2 sm:flex" aria-label="Tipos de sitios disponibles">
+          {['Landing page', 'Sitio corporativo', 'Tienda online'].map((item) => (
+            <li class="rounded-md border border-white/8 px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.09em] text-[var(--color-muted)]">{item}</li>
           ))}
         </ul>
-
-        <a href={webService.href} class="keycap-btn relative mt-auto w-full justify-center sm:w-fit">
-          {webService.action}
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+        <a href="/planes" class="keycap-btn mt-4 w-full justify-center sm:mt-5 sm:w-fit">
+          Ver planes web
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
       </article>
 
       <div>
-        <div class="border-b border-white/8 px-5 py-5 md:px-7 md:py-6">
-          <div class="mb-2 flex items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.14em]">
-            <span class="text-[var(--color-coral)]">Ruta personalizada</span>
-            <span class="text-[var(--color-muted)]">03 capacidades</span>
-          </div>
-          <h3 class="text-xl font-semibold tracking-tight text-white md:text-2xl">Software conectado a tu operación</h3>
+        <div class="border-b border-white/8 px-4 py-3 sm:px-5 md:px-6 md:py-3.5">
+          <span class="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--color-coral)]">Soluciones a medida</span>
+          <p class="mt-1 text-sm text-[var(--color-muted)]">Para procesos que no caben en un plan estándar.</p>
         </div>
-
         <div class="divide-y divide-white/8">
           {customServices.map((service) => (
-            <a
-              href={service.href}
-              class="service-row group grid grid-cols-[42px_minmax(0,1fr)_auto] items-center gap-3 px-4 py-4 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--color-amber)] sm:gap-4 sm:px-5 sm:py-5 md:grid-cols-[46px_minmax(0,1fr)_auto] md:px-7"
-              aria-label={`${service.action}: ${service.title}`}
-            >
-              <span class="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-[var(--color-canvas)] text-[var(--color-muted)] transition-colors group-hover:border-[var(--color-coral)]/35 group-hover:text-[var(--color-amber)] md:h-11 md:w-11" aria-hidden="true">
-                <Fragment set:html={service.icon} />
-              </span>
-
+            <a href="#contacto" class="service-row group grid grid-cols-[38px_minmax(0,1fr)_32px] items-center gap-3 px-4 py-2.5 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--color-amber)] sm:grid-cols-[42px_minmax(0,1fr)_36px] sm:px-5 sm:py-3.5 md:px-6 md:py-4">
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-[var(--color-canvas)] text-[var(--color-muted)] transition-colors group-hover:border-[var(--color-coral)]/35 group-hover:text-[var(--color-amber)] sm:h-10 sm:w-10" aria-hidden="true"><Fragment set:html={service.icon} /></span>
               <span class="min-w-0">
-                <span class="mb-1 flex items-center gap-3">
-                  <span class="text-base font-semibold text-white md:text-lg">{service.title}</span>
-                  <span class="font-mono text-[8px] uppercase tracking-[0.13em] text-[var(--color-muted)]">{service.id}</span>
-                </span>
-                <span class="line-clamp-2 block text-[13px] leading-relaxed text-[var(--color-muted)] md:text-sm">{service.desc}</span>
+                <strong class="block text-base font-semibold text-white">{service.title}</strong>
+                <span class="mt-1 hidden text-[14px] leading-relaxed text-[var(--color-muted)] sm:block">{service.desc}</span>
               </span>
-
-              <span class="flex items-center gap-2 text-[var(--color-muted)] transition-colors group-hover:text-white">
-                <span class="hidden font-mono text-[9px] uppercase tracking-[0.12em] xl:inline">Evaluar</span>
-                <span class="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 transition-colors group-hover:border-[var(--color-coral)]/45 group-hover:bg-[var(--color-coral)] group-hover:text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-0.5" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-                </span>
+              <span class="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-[var(--color-muted)] transition-all group-hover:border-[var(--color-coral)]/40 group-hover:bg-[var(--color-coral)] group-hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </span>
             </a>
           ))}
@@ -129,16 +76,15 @@ const webFormats = ['Landing page', 'Sitio corporativo', 'Tienda online'];
 </section>
 
 <style>
-  .service-console {
-    box-shadow: 0 30px 80px rgba(2, 83, 253, 0.08), var(--theme-cmd-shadow);
-  }
-
-  .service-web {
-    background: color-mix(in srgb, var(--color-coral) 3%, transparent);
+  .service-panel {
+    background: color-mix(in srgb, var(--theme-cmd-bg) 92%, transparent);
+    box-shadow: 0 26px 80px color-mix(in srgb, var(--color-coral) 8%, transparent), var(--theme-cmd-shadow);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
   }
 
   .service-row {
-    transition: background-color 220ms ease;
+    transition: background-color 180ms ease;
   }
 
   .service-row:hover {

@@ -1,141 +1,36 @@
-<section class="relative overflow-hidden px-6 pb-16 pt-28 md:pb-20" aria-labelledby="hero-title">
-  <div class="container mx-auto grid min-h-[580px] max-w-[1180px] items-center gap-14 lg:grid-cols-[minmax(0,1fr)_450px] lg:gap-16">
-    <div class="text-center lg:text-left">
-      <div class="group relative mb-7 inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/10 bg-white/5 px-4 py-1.5 shadow-sm">
-        <div class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-[var(--color-amber)]/10 to-transparent animate-[shimmer_2.5s_infinite]"></div>
-        <span class="h-2 w-2 rounded-full bg-[var(--color-amber)] animate-pulse"></span>
-        <span class="font-mono text-[10px] uppercase tracking-[0.15em] text-white">Tecnología que simplifica.</span>
-      </div>
-
-      <h1 id="hero-title" class="mx-auto max-w-[720px] text-[46px] font-[600] leading-[1.02] tracking-[-0.045em] text-white sm:text-[56px] lg:mx-0 lg:text-[68px]">
-        Todo tu ecosistema digital,
-        <span class="text-warm-gradient">a un clic</span> de distancia.
-      </h1>
-
-      <p class="mx-auto mt-6 max-w-[650px] text-[17px] leading-relaxed tracking-[0.1px] text-[var(--color-muted)] lg:mx-0 lg:text-[18px]">
-        Sitios WordPress con alcance definido y soluciones a medida para conectar tus procesos, aplicaciones e inteligencia artificial.
-      </p>
-
-      <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-        <a href="/planes" class="keycap-btn justify-center">
-          Ver planes web
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-        </a>
-        <a href="#contacto" class="ghost-pill justify-center !px-5 !py-3">
-          Proyecto a medida
-        </a>
-      </div>
-
-      <ul class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 font-mono text-[9px] uppercase tracking-[0.13em] text-[var(--color-muted)] lg:justify-start" aria-label="Beneficios del servicio">
-        <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[var(--color-coral)]"></span>Alcance claro</li>
-        <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[var(--color-coral)]"></span>Publicación acompañada</li>
-        <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-[var(--color-coral)]"></span>Soporte posterior</li>
-      </ul>
+<section class="relative flex min-h-[100svh] items-center overflow-hidden px-6 pt-20 lg:pt-0" aria-labelledby="hero-title">
+  <div class="mx-auto max-w-[1040px] text-center">
+    <div class="mb-5 inline-flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
+      <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-amber)] shadow-[0_0_12px_var(--color-amber)]"></span>
+      Desarrollo web y software a medida
     </div>
 
-    <aside class="hero-selector command-bar-mockup relative mx-auto w-full max-w-[470px] overflow-hidden text-left" aria-label="Elige cómo iniciar tu proyecto">
-      <div class="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[var(--color-coral)]/15 blur-[80px]"></div>
+    <h1 id="hero-title" class="mx-auto max-w-[940px] text-[43px] font-semibold leading-[1] tracking-[-0.05em] text-white sm:text-[58px] lg:text-[72px]">
+      Tecnología que simplifica cómo <span class="hero-title-accent">trabaja tu negocio.</span>
+    </h1>
 
-      <div class="relative flex items-center justify-between gap-4 border-b border-white/8 px-5 py-4">
-        <div class="flex items-center gap-3">
-          <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-[var(--color-canvas)] text-[var(--color-amber)]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 16 4-4-4-4" /><path d="m6 8-4 4 4 4" /><path d="m14.5 4-5 16" /></svg>
-          </span>
-          <div>
-            <span class="block font-mono text-[9px] uppercase tracking-[0.15em] text-[var(--color-muted)]">Micrudev / iniciar</span>
-            <span class="block text-xs font-medium text-white">Selecciona una ruta</span>
-          </div>
-        </div>
-        <span class="flex items-center gap-2 font-mono text-[8px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
-          <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-amber)] animate-pulse"></span>
-          Disponible
-        </span>
-      </div>
+    <p class="mx-auto mt-5 max-w-[680px] text-[16px] leading-[1.65] text-[var(--color-muted)] md:text-[18px]">
+      Creamos sitios web para publicar y vender, además de aplicaciones, automatizaciones e integraciones de IA para conectar tu operación.
+    </p>
 
-      <nav class="relative space-y-2 p-3" aria-label="Rutas de proyecto">
-        <a href="/planes" class="route-card route-card--primary group block rounded-xl border p-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-amber)]">
-          <div class="mb-4 flex items-center justify-between gap-4">
-            <span class="font-mono text-[9px] uppercase tracking-[0.15em] text-[var(--color-amber)]">Web / Alcance cerrado</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--color-muted)] transition-transform group-hover:translate-x-1 group-hover:text-white" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-          </div>
-          <strong class="block text-xl font-semibold tracking-tight text-white">Sitio listo para publicar</strong>
-          <p class="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">Landing, sitio corporativo o tienda en WordPress.</p>
-          <div class="mt-5 flex flex-wrap gap-2">
-            <span class="route-chip">Desde USD 120</span>
-            <span class="route-chip">3–15 días</span>
-            <span class="route-chip">Hosting incluido</span>
-          </div>
-        </a>
+    <div class="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+      <a href="#servicios" class="keycap-btn min-h-12 justify-center !px-6">
+        Ver soluciones
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="#contacto" class="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/10 px-5 text-sm font-medium text-[var(--color-muted)] transition-colors hover:border-[var(--color-coral)]/35 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-amber)]">
+        Hablar de un proyecto
+      </a>
+    </div>
 
-        <a href="#contacto" class="route-card group block rounded-xl border p-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-amber)]">
-          <div class="mb-4 flex items-center justify-between gap-4">
-            <span class="font-mono text-[9px] uppercase tracking-[0.15em] text-[var(--color-coral)]">Custom / A medida</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--color-muted)] transition-transform group-hover:translate-x-1 group-hover:text-white" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-          </div>
-          <strong class="block text-xl font-semibold tracking-tight text-white">Software para tu operación</strong>
-          <p class="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">Aplicaciones, automatizaciones e integraciones de IA.</p>
-          <div class="mt-5 flex flex-wrap gap-2">
-            <span class="route-chip">Diagnóstico inicial</span>
-            <span class="route-chip">Alcance personalizado</span>
-          </div>
-        </a>
-      </nav>
-
-      <div class="relative flex items-center justify-between gap-4 border-t border-white/8 bg-white/[0.02] px-5 py-3 font-mono text-[8px] uppercase tracking-[0.13em] text-[var(--color-muted)]">
-        <span>Análisis → desarrollo → publicación</span>
-        <span>MIC / 01</span>
-      </div>
-    </aside>
-  </div>
-
-  <div class="mt-10 flex justify-center">
-    <a href="#servicios" class="ghost-pill group">
-      Explorar servicios
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-y-1" aria-hidden="true"><path d="M12 5v14" /><path d="m19 12-7 7-7-7" /></svg>
-    </a>
   </div>
 </section>
 
 <style>
-  .hero-selector {
-    box-shadow: 0 34px 90px rgba(2, 83, 253, 0.14), var(--theme-cmd-shadow);
-  }
-
-  .route-card {
-    border-color: color-mix(in srgb, var(--color-white) 8%, transparent);
-    background: color-mix(in srgb, var(--color-white) 1.5%, transparent);
-    transition: border-color 220ms ease, background-color 220ms ease, transform 220ms ease;
-  }
-
-  .route-card--primary {
-    border-color: color-mix(in srgb, var(--color-coral) 30%, transparent);
-    background: color-mix(in srgb, var(--color-coral) 7%, transparent);
-  }
-
-  .route-card:hover {
-    border-color: color-mix(in srgb, var(--color-coral) 45%, transparent);
-    background: color-mix(in srgb, var(--color-coral) 8%, transparent);
-    transform: translateY(-2px);
-  }
-
-  .route-chip {
-    padding: 0.35rem 0.55rem;
-    border: 1px solid color-mix(in srgb, var(--color-white) 9%, transparent);
-    border-radius: 0.35rem;
-    color: var(--color-muted);
-    font-family: var(--font-mono);
-    font-size: 0.5rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .route-card {
-      transition: none;
-    }
-
-    .route-card:hover {
-      transform: none;
-    }
+  .hero-title-accent {
+    color: transparent;
+    background: linear-gradient(105deg, var(--color-white) 2%, var(--color-amber) 48%, var(--color-coral) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
   }
 </style>

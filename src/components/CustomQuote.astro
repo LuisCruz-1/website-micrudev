@@ -4,33 +4,34 @@ import { getWhatsAppUrl } from '../lib/contact';
 const customProjectUrl = getWhatsAppUrl('Hola Micrudev, tengo un proyecto a medida y quisiera realizar un diagnóstico inicial de mis requerimientos.');
 ---
 
-<section id="contacto" class="relative z-10 scroll-mt-20 border-t border-white/5 py-20 md:py-24">
-  <div class="container mx-auto max-w-[1000px] px-6">
-    <div class="command-bar-mockup relative overflow-hidden p-8 text-center md:p-14">
-      <div class="pointer-events-none absolute left-1/2 top-1/2 h-[60%] w-[60%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-coral)]/10 blur-[100px]"></div>
-
-      <div class="relative z-10">
-        <div class="mb-6 inline-flex items-center gap-2">
-          <span class="h-2 w-2 rounded-full bg-[var(--color-amber)] animate-pulse"></span>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-[var(--color-muted)]">Diagnóstico inicial</span>
-        </div>
-
-        <h2 class="mb-6 text-4xl font-[600] tracking-tight text-white md:text-5xl">
-          ¿Necesitas un sistema <span class="text-warm-gradient">a medida?</span>
+<section id="contacto" class="relative z-10 scroll-mt-24 border-t border-white/5 py-12 md:py-16">
+  <div class="mx-auto max-w-[1120px] px-6">
+    <div class="contact-panel relative overflow-hidden rounded-[18px] border border-white/10 p-5 sm:p-7 md:grid md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-10 md:p-8">
+      <div class="pointer-events-none absolute -left-20 -top-24 h-64 w-64 rounded-full bg-[var(--color-coral)]/12 blur-[90px]"></div>
+      <div class="relative">
+        <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-amber)]">Proyecto a medida</span>
+        <h2 class="mt-2 max-w-[700px] text-[32px] font-semibold leading-[1.06] tracking-[-0.035em] text-white md:text-[40px]">
+          Cuéntanos el problema. Nosotros te ayudamos a definir <span class="text-warm-gradient">el siguiente paso.</span>
         </h2>
+        <p class="mt-4 max-w-[650px] text-[14px] leading-[1.7] text-[var(--color-muted)] md:text-[15px]">Revisamos tu objetivo, proceso actual e integraciones necesarias antes de preparar una propuesta.</p>
+      </div>
 
-        <p class="mx-auto mb-9 max-w-[620px] text-lg leading-relaxed text-[var(--color-muted)]">
-          Revisamos tu operación, objetivos e integraciones necesarias antes de definir el alcance y preparar una cotización.
-        </p>
-
-        <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a href={customProjectUrl} target="_blank" rel="noopener noreferrer" class="keycap-btn !px-7 !py-3.5 !text-base">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
-            Hablar sobre mi proyecto
-          </a>
-          <a href="mailto:hola@micrudev.com" class="ghost-pill !px-6 !py-3.5">hola@micrudev.com</a>
-        </div>
+      <div class="relative mt-7 flex flex-col gap-3 md:mt-0 md:min-w-[220px]">
+        <a href={customProjectUrl} target="_blank" rel="noopener noreferrer" class="keycap-btn min-h-12 justify-center !px-6">
+          Hablar del proyecto
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="mailto:hola@micrudev.com" class="inline-flex min-h-11 items-center justify-center rounded-lg text-sm text-[var(--color-muted)] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-amber)]">hola@micrudev.com</a>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .contact-panel {
+    background: color-mix(in srgb, var(--theme-cmd-bg) 94%, transparent);
+    box-shadow: 0 30px 90px color-mix(in srgb, var(--color-coral) 10%, transparent), var(--theme-cmd-shadow);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+</style>

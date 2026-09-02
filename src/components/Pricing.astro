@@ -1,29 +1,91 @@
 ---
-import PlanCards from './PlanCards.astro';
+import { getPlans } from '../lib/plans';
+
+const plans = await getPlans();
 ---
 
-<section id="precios" class="relative z-10 border-t border-white/5 py-24 scroll-mt-20">
-  <div class="container mx-auto max-w-[1200px] px-6">
-    <div class="mx-auto mb-14 max-w-[720px] text-center">
-      <div class="mb-6 inline-flex items-center gap-2">
-        <span class="h-2 w-2 rounded-full bg-[var(--color-amber)] animate-pulse"></span>
-        <span class="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--color-muted)]">Planes de desarrollo web</span>
+<section id="precios" class="relative z-10 scroll-mt-24 border-t border-white/5 py-12 md:py-16">
+  <div class="mx-auto max-w-[1120px] px-6">
+    <header class="mb-6 grid gap-3 md:grid-cols-[minmax(0,1fr)_400px] md:items-end">
+      <div>
+        <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-amber)]">Planes web</span>
+        <h2 class="mt-2 max-w-[650px] text-[34px] font-semibold leading-[1.06] tracking-[-0.035em] text-white md:text-[44px]">
+          Precio y alcance claros <span class="text-warm-gradient">desde el inicio.</span>
+        </h2>
       </div>
-      <h2 class="mb-6 text-4xl font-[600] tracking-tight text-white md:text-5xl">
-        Elige el nivel que tu negocio <span class="text-warm-gradient">necesita hoy.</span>
-      </h2>
-      <p class="text-lg leading-relaxed text-[var(--color-muted)]">
-        Tres alcances definidos e inversión transparente. Revisa el resumen aquí o consulta todos los detalles en la página de planes.
-      </p>
-    </div>
+      <div>
+        <p class="text-[14px] leading-[1.7] text-[var(--color-muted)] md:text-[15px]">Todos los planes incluyen hospedaje durante el primer año, publicación y soporte posterior.</p>
+        <a href="/planes" class="mt-3 inline-flex items-center gap-2 text-sm font-medium text-white transition-colors hover:text-[var(--color-amber)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-amber)]">Comparar detalles <span aria-hidden="true">→</span></a>
+      </div>
+    </header>
 
-    <PlanCards />
+    <div class="-mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-amber)] lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0 lg:pb-0" role="region" tabindex="0" aria-label="Resumen de planes web, desliza horizontalmente para comparar">
+      {plans.map((plan) => (
+        <article class:list={['compact-plan relative flex min-w-[280px] snap-start flex-col rounded-[16px] border p-5 sm:min-w-[320px] lg:min-w-0 md:p-6', { 'compact-plan--featured': plan.data.featured }]}>
+          {plan.data.featured && <span class="absolute right-4 top-4 rounded-full border border-[var(--color-coral)]/25 bg-[var(--color-coral)]/8 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--color-coral)]">Más elegido</span>}
+          <span class="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--color-amber)]">{plan.data.level}</span>
+          <h3 class="mt-3 pr-20 text-xl font-semibold tracking-[-0.02em] text-white">{plan.data.name}</h3>
+          <p class="mt-2 min-h-[64px] text-[14px] leading-relaxed text-[var(--color-muted)]">{plan.data.description}</p>
 
-    <div class="mt-12 text-center">
-      <a href="/planes" class="keycap-btn">
-        Comparar todos los planes
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-      </a>
+          <div class="mt-5 flex items-end gap-2 border-t border-white/8 pt-4">
+            <span class="text-[32px] font-semibold leading-none tracking-[-0.04em] text-white"><small class="mr-1 font-mono text-[9px] font-normal tracking-normal text-[var(--color-muted)]">USD</small>{plan.data.price}</span>
+            <span class="pb-0.5 text-[10px] text-[var(--color-muted)]">+ dominio</span>
+          </div>
+
+          <dl class="mt-4 grid grid-cols-2 gap-3 text-xs">
+            <div><dt class="font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--color-muted)]">Entrega</dt><dd class="mt-1 text-[13px] text-white">{plan.data.duration.replace(' laborables', '')}</dd></div>
+            <div><dt class="font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--color-muted)]">Alcance</dt><dd class="mt-1 line-clamp-2 text-[13px] text-white">{plan.data.scope}</dd></div>
+          </dl>
+
+          <a href={`/planes/${plan.id}`} class:list={['compact-plan__link mt-5 inline-flex min-h-11 items-center justify-between rounded-lg border border-white/10 px-4 text-sm font-medium text-white transition-colors hover:border-[var(--color-coral)]/40 hover:bg-white/[0.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-amber)]', { 'compact-plan__link--featured': plan.data.featured }]}>
+            Ver alcance
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </article>
+      ))}
     </div>
   </div>
 </section>
+
+<style>
+  .compact-plan {
+    background: color-mix(in srgb, var(--theme-cmd-bg) 90%, transparent);
+    border-color: color-mix(in srgb, var(--color-white) 9%, transparent);
+    box-shadow: var(--theme-cmd-shadow);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: border-color 200ms ease, transform 200ms ease;
+  }
+
+  .compact-plan--featured {
+    border-color: color-mix(in srgb, var(--color-coral) 38%, transparent);
+    background: color-mix(in srgb, var(--color-coral) 4%, var(--theme-cmd-bg));
+  }
+
+  .compact-plan__link--featured {
+    border-color: var(--color-white);
+    background: var(--color-white);
+    color: var(--color-canvas);
+  }
+
+  .compact-plan__link--featured:hover {
+    border-color: var(--color-white);
+    background: color-mix(in srgb, var(--color-white) 90%, var(--color-coral));
+  }
+
+  .compact-plan:hover {
+    border-color: color-mix(in srgb, var(--color-coral) 45%, transparent);
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .compact-plan,
+    .compact-plan * {
+      transition: none;
+    }
+
+    .compact-plan:hover {
+      transform: none;
+    }
+  }
+</style>
